@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  passed: false
+  ticket_number: 1
+  internal_check: 
+
+two:
+  name: MyString
+  passed: false
+  ticket_number: 1
+  internal_check: 

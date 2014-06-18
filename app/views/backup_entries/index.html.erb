@@ -1,0 +1,23 @@
+<h1>Listing backup_entries</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @backup_entries.each do |backup_entry| %>
+  <tr>
+    <td><%= backup_entry.name %></td>
+    <td><%= link_to 'Show', backup_entry %></td>
+    <td><%= link_to 'Edit', edit_backup_entry_path(backup_entry) %></td>
+    <td><%= link_to 'Destroy', backup_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Backup entry', new_backup_entry_path %>

@@ -15,13 +15,24 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
 	</a>
-	<a class="brand" href="#">Infrastructure Checks</a>
+	<a class="brand" href="/">Infrastructure Checks</a>
 	<div class="nav-collapse collapse">
           <ul class="nav">
-	    <li class="active"><a href="#">Home</a></li>
-	    <li><a href="#">Operations</a></li>
-	    <li><a href="#">Internal</a></li>
-	    <li><a href="#">Schedule</a></li>
+	    <li class="<%= 'active' if params[:controller] == 'admin' %>">
+	      <a href="/admin_tools">Admin Tools</a>
+	    </li>
+	    <li class="<%= 'active' if params[:controller] == 'welcome' %>">
+	      <a href="/">Home</a>
+	    </li>
+	    <li class="<%= 'active' if params[:controller] == 'operations_checks' %>">
+	      <a href="#">Operations</a>
+	    </li>
+	    <li class="<%= 'active' if params[:controller] == 'internal_checks' %>">
+	      <a href="/internal_checks">Internal</a>
+	    </li>
+	    <li class="<%= 'active' if params[:controller] == 'schedule' %>">
+	      <a href="#">Schedule</a>
+	    </li>
 	  </ul>
 	</div>
       </div>
@@ -31,26 +42,7 @@
   <body>
     <div class="container-fluid">
       <div class="row-fluid">
-	
-	<!--sidebar-->
-	<div class="span2">
-	  <div class="sidebar-nav-fixed" data-spy="affix" data-offset-top="140">
-	    <ul class="nav nav-list">
-	      <li><a href="#">Home</a></li>
-              <li><a href="#">Responsive</a></li>
-              <li><a href="#">Layouts</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Bootstrap</a></li>
-              <li><a href="#">Resources</a></li>
-              <li><a href="#">Modal</a></li>
-              <li><a href="#">Carousel</a></li>
-	    </ul>
-	  </div>
-	</div>
-	
-	<div class="span10">
-	  <%= yield %>
-	</div>
+	<%= yield %>
       </div>
     </div>
   </body>

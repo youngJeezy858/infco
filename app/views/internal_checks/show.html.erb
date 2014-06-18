@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @internal_check.date %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @internal_check.owner %>
+</p>
+
+<p>
+  <b>Passed:</b>
+  <%= @internal_check.passed %>
+</p>
+
+
+<%= link_to 'Edit', edit_internal_check_path(@internal_check) %> |
+<%= link_to 'Back', internal_checks_path %>

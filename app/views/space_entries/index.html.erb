@@ -1,0 +1,23 @@
+<h1>Listing space_entries</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @space_entries.each do |space_entry| %>
+  <tr>
+    <td><%= space_entry.name %></td>
+    <td><%= link_to 'Show', space_entry %></td>
+    <td><%= link_to 'Edit', edit_space_entry_path(space_entry) %></td>
+    <td><%= link_to 'Destroy', space_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Space entry', new_space_entry_path %>

@@ -1,0 +1,2 @@
+module SpaceChecksHelper
+end

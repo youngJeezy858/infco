@@ -1,0 +1,29 @@
+<h1>Listing space_checks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Passed</th>
+    <th>Ticket number</th>
+    <th>Internal check</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @space_checks.each do |space_check| %>
+  <tr>
+    <td><%= space_check.name %></td>
+    <td><%= space_check.passed %></td>
+    <td><%= space_check.ticket_number %></td>
+    <td><%= space_check.internal_check %></td>
+    <td><%= link_to 'Show', space_check %></td>
+    <td><%= link_to 'Edit', edit_space_check_path(space_check) %></td>
+    <td><%= link_to 'Destroy', space_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Space check', new_space_check_path %>

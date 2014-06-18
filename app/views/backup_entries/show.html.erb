@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @backup_entry.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_backup_entry_path(@backup_entry) %> |
+<%= link_to 'Back', backup_entries_path %>

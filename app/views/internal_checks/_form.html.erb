@@ -1,0 +1,29 @@
+<%= form_for(@internal_check) do |f| %>
+  <% if @internal_check.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@internal_check.errors.count, "error") %> prohibited this internal_check from being saved:</h2>
+
+      <ul>
+      <% @internal_check.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.datetime_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :owner %><br />
+    <%= f.text_field :owner %>
+  </div>
+  <div class="field">
+    <%= f.label :passed %><br />
+    <%= f.check_box :passed %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

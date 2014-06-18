@@ -1,0 +1,29 @@
+<h1>Listing backup_checks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Passed</th>
+    <th>Ticket number</th>
+    <th>Internal check</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @backup_checks.each do |backup_check| %>
+  <tr>
+    <td><%= backup_check.name %></td>
+    <td><%= backup_check.passed %></td>
+    <td><%= backup_check.ticket_number %></td>
+    <td><%= backup_check.internal_check %></td>
+    <td><%= link_to 'Show', backup_check %></td>
+    <td><%= link_to 'Edit', edit_backup_check_path(backup_check) %></td>
+    <td><%= link_to 'Destroy', backup_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Backup check', new_backup_check_path %>

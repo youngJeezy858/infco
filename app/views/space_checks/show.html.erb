@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @space_check.name %>
+</p>
+
+<p>
+  <b>Passed:</b>
+  <%= @space_check.passed %>
+</p>
+
+<p>
+  <b>Ticket number:</b>
+  <%= @space_check.ticket_number %>
+</p>
+
+<p>
+  <b>Internal check:</b>
+  <%= @space_check.internal_check %>
+</p>
+
+
+<%= link_to 'Edit', edit_space_check_path(@space_check) %> |
+<%= link_to 'Back', space_checks_path %>

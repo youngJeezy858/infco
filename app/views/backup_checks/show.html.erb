@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @backup_check.name %>
+</p>
+
+<p>
+  <b>Passed:</b>
+  <%= @backup_check.passed %>
+</p>
+
+<p>
+  <b>Ticket number:</b>
+  <%= @backup_check.ticket_number %>
+</p>
+
+<p>
+  <b>Internal check:</b>
+  <%= @backup_check.internal_check %>
+</p>
+
+
+<%= link_to 'Edit', edit_backup_check_path(@backup_check) %> |
+<%= link_to 'Back', backup_checks_path %>
