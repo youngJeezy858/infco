@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Infco</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+	</a>
+	<a class="brand" href="#">Infrastructure Checks</a>
+	<div class="nav-collapse collapse">
+          <ul class="nav">
+	    <li class="active"><a href="#">Home</a></li>
+	    <li><a href="#">Operations</a></li>
+	    <li><a href="#">Internal</a></li>
+	    <li><a href="#">Schedule</a></li>
+	  </ul>
+	</div>
+      </div>
+    </div>
+  </div>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row-fluid">
+	
+	<!--sidebar-->
+	<div class="span2">
+	  <div class="sidebar-nav-fixed" data-spy="affix" data-offset-top="140">
+	    <ul class="nav nav-list">
+	      <li><a href="#">Home</a></li>
+              <li><a href="#">Responsive</a></li>
+              <li><a href="#">Layouts</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Bootstrap</a></li>
+              <li><a href="#">Resources</a></li>
+              <li><a href="#">Modal</a></li>
+              <li><a href="#">Carousel</a></li>
+	    </ul>
+	  </div>
+	</div>
+	
+	<div class="span10">
+	  <%= yield %>
+	</div>
+      </div>
+    </div>
+  </body>
+
+</html>
