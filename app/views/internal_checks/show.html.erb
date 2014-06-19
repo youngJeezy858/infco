@@ -1,20 +1,22 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = InternalCheck -%>
 
-<p>
-  <b>Date:</b>
-  <%= @internal_check.date %>
-</p>
+<div class="span12">
+  <% unless notice.nil? %>
+  <div class="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+  <% end %>
 
-<p>
-  <b>Owner:</b>
-  <%= @internal_check.owner %>
-</p>
+  <div class="page-header">
+    <h1><%= @internal_check.date %> : <%= @internal_check.owner %></h1>
+  </div>
 
-<p>
-  <b>Passed:</b>
-  <%= @internal_check.passed %>
-</p>
-
-
-<%= link_to 'Edit', edit_internal_check_path(@internal_check) %> |
-<%= link_to 'Back', internal_checks_path %>
+  <div class="form-actions"> 
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+    internal_checks_path, :class => 'btn' %>
+    <%= link_to "Report Backup Failure",
+    internal_checks_path, :class => 'btn' %>
+    <%= link_to "Report Space Failure",
+    internal_checks_path, :class => 'btn' %>
+  </div>
+</div>
