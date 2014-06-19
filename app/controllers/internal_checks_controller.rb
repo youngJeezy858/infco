@@ -50,7 +50,7 @@ class InternalChecksController < ApplicationController
     @internal_check = InternalCheck.new
     @internal_check.date = Time.now
     @internal_check.owner = "kfrank"
-
+    
     @internal_check.save
     redirect_to @internal_check, notice: 'Internal check was successfully created.' 
       
@@ -76,6 +76,12 @@ class InternalChecksController < ApplicationController
   # DELETE /internal_checks/1.json
   def destroy
     @internal_check = InternalCheck.find(params[:id])
+    @internal_check.backup_checks.each do |backup_check|
+      backup_check.destroy
+    end
+    @internal_check.space_checks.each do |space_check|
+      space_check.destroy
+    end
     @internal_check.destroy
 
     respond_to do |format|

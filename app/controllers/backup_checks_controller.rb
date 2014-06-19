@@ -40,11 +40,19 @@ class BackupChecksController < ApplicationController
   # POST /backup_checks
   # POST /backup_checks.json
   def create
-    @backup_check = BackupCheck.new(params[:backup_check])
+    @internal_check = InternalCheck.find(params[:internal_check_id])
+    @backup_check = @internal_check.backup_checks.create(params[:backup_check])
+
+    unless @backup_check.name.present?
+      @backup_check.destroy
+      redirect_to @internal_check,
+      notice: 'Please provide the name of the instance you are reporting.'
+      return
+    end
 
     respond_to do |format|
       if @backup_check.save
-        format.html { redirect_to @backup_check, notice: 'Backup check was successfully created.' }
+        format.html { redirect_to @internal_check, notice: 'Backup failure successfully reported.' }
         format.json { render json: @backup_check, status: :created, location: @backup_check }
       else
         format.html { render action: "new" }
@@ -73,11 +81,13 @@ class BackupChecksController < ApplicationController
   # DELETE /backup_checks/1.json
   def destroy
     @backup_check = BackupCheck.find(params[:id])
+    internal_check = InternalCheck.find(params[:internal_check_id])
     @backup_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to backup_checks_url }
+      format.html { redirect_to internal_check }
       format.json { head :no_content }
     end
   end
+
 end
