@@ -52,6 +52,8 @@ class BackupChecksController < ApplicationController
 
     respond_to do |format|
       if @backup_check.save
+        @internal_check.passed = "false"
+        @internal_check.save
         format.html { redirect_to @internal_check, notice: 'Backup failure successfully reported.' }
         format.json { render json: @backup_check, status: :created, location: @backup_check }
       else

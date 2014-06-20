@@ -44,7 +44,7 @@ class SpaceEntriesController < ApplicationController
 
     respond_to do |format|
       if @space_entry.save
-        format.html { redirect_to @space_entry, notice: 'Space entry was successfully created.' }
+        format.html { redirect_to space_entries_path, notice: 'Space entry was successfully created.' }
         format.json { render json: @space_entry, status: :created, location: @space_entry }
       else
         format.html { render action: "new" }

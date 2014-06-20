@@ -1,5 +1,31 @@
-<h1>New space_entry</h1>
+<div class="span2">
+  <div class="sidebar-nav-fixed" data-spy="affix" data-offset-top="140">
+    <ul class="nav nav-list">
+      <li><%= link_to "Admin Home", admin_tools_path %></li>
+      <li class="divider"></li>
+      <h5>OPERATIONS</h5>
+      <li><a href="#">Labs</a></li>
+      <li><a href="#">Printers</a></li>
+      <li><a href="#">Automounts</a></li>
+      <li><a href="#">Nagios</a></li>
+      <li><a href="#">Request Tracker</a></li>
+      <li><a href="#">Packages</a></li>
+      <li><a href="#">Load Balancers</a></li>
+      <li><a href="#">LDAP</a></li>
+      <li class="divider"></li>
+      <h5>INTERNAL</h5>
+      <li><%= link_to "Backups", backup_entries_path %></li>
+      <li><%= link_to "Disk Space", space_entries_path %></li>
+      <li><a href="#">Relouds</a></li>
+    </ul>
+  </div>
+</div>
 
-<%= render 'form' %>
+<div class="span6">
+  <div class="page-header">
+    <h1>New Space Entry</h1>
+  </div>
 
-<%= link_to 'Back', space_entries_path %>
+  <%= render 'form' %>
+
+</div>

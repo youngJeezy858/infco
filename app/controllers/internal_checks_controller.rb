@@ -14,6 +14,8 @@ class InternalChecksController < ApplicationController
   # GET /internal_checks/1.json
   def show
     @internal_check = InternalCheck.find(params[:id])
+    @backup_entries = BackupEntry.all
+    @space_entries = SpaceEntry.all
 
     respond_to do |format|
       format.html # show.html.erb

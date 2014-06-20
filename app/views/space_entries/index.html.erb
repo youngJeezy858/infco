@@ -1,23 +1,53 @@
-<h1>Listing space_entries</h1>
+<div class="span2">
+  <div class="sidebar-nav-fixed" data-spy="affix" data-offset-top="140">
+    <ul class="nav nav-list">
+      <li><%= link_to "Admin Home", admin_tools_path %></li>
+      <li class="divider"></li>
+      <h5>OPERATIONS</h5>
+      <li><a href="#">Labs</a></li>
+      <li><a href="#">Printers</a></li>
+      <li><a href="#">Automounts</a></li>
+      <li><a href="#">Nagios</a></li>
+      <li><a href="#">Request Tracker</a></li>
+      <li><a href="#">Packages</a></li>
+      <li><a href="#">Load Balancers</a></li>
+      <li><a href="#">LDAP</a></li>
+      <li class="divider"></li>
+      <h5>INTERNAL</h5>
+      <li><%= link_to "Backups", backup_entries_path %></li>
+      <li><%= link_to "Disk Space", space_entries_path %></li>
+      <li><a href="#">Relouds</a></li>
+    </ul>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="span6">
+  <div class="page-header">
+    <h1>Disk Space Checks</h1>
+  </div>
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @space_entries.each do |space_entry| %>
+    <tr>
+      <td><%= space_entry.name %></td>
+      <td><%= link_to 'Edit', edit_space_entry_path(space_entry), :class => 'btn btn-mini' %></td>
+      <td>
+        <%= link_to 'Delete', space_entry,
+            method: :delete, data: { confirm: 'Are you sure?' },
+            :class => 'btn btn-mini btn-danger' %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
 
-<% @space_entries.each do |space_entry| %>
-  <tr>
-    <td><%= space_entry.name %></td>
-    <td><%= link_to 'Show', space_entry %></td>
-    <td><%= link_to 'Edit', edit_space_entry_path(space_entry) %></td>
-    <td><%= link_to 'Destroy', space_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+  <br />
 
-<br />
+  <div class="form-actions">
+    <%= link_to 'New Space entry', new_space_entry_path, :class => 'btn btn-primary' %>
+  </div>
 
-<%= link_to 'New Space entry', new_space_entry_path %>
+</div>

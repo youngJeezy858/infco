@@ -21,7 +21,7 @@
       <div class="control-group">
 	<%= f.label :name %>
 	<div class="controls">
-	  <%= f.text_field :name %>
+	  <%= f.collection_select :name, @backup_entries, :name, :name %>
 	</div>
       </div>
       <div class="control-group">
@@ -68,7 +68,7 @@
       <div class="control-group">
 	<%= f.label :name %>
 	<div class="controls">
-	  <%= f.text_field :name %>
+	  <%= f.collection_select :name, @space_entries, :name, :name %>
 	</div>
       </div>
       <div class="control-group">
@@ -112,5 +112,10 @@
   <div class="form-actions"> 
     <%= link_to t('.back', :default => t("helpers.links.back")),
     internal_checks_path, :class => 'btn' %>
+    <td>
+      <%= link_to 'Destroy', @internal_check, 
+	    method: :delete, data: { confirm: 'Are you sure?' },
+	    class: 'btn btn-danger' %>
+    </td>
   </div>
 </div>

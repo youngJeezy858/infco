@@ -44,7 +44,7 @@ class BackupEntriesController < ApplicationController
 
     respond_to do |format|
       if @backup_entry.save
-        format.html { redirect_to @backup_entry, notice: 'Backup entry was successfully created.' }
+        format.html { redirect_to backup_entries_path, notice: 'Backup entry was successfully created.' }
         format.json { render json: @backup_entry, status: :created, location: @backup_entry }
       else
         format.html { render action: "new" }

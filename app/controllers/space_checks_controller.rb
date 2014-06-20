@@ -53,6 +53,8 @@ class SpaceChecksController < ApplicationController
     
     respond_to do |format|
       if @space_check.save
+        @internal_check.passed = "false"
+        @internal_check.save
         format.html { redirect_to @internal_check, notice: 'Disk space failure successfully reported.' }
         format.json { render json: @space_check, status: :created, location: @space_check }
       else
