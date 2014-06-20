@@ -60,7 +60,7 @@ class SpaceEntriesController < ApplicationController
 
     respond_to do |format|
       if @space_entry.update_attributes(params[:space_entry])
-        format.html { redirect_to @space_entry, notice: 'Space entry was successfully updated.' }
+        format.html { redirect_to space_entries_path, notice: 'Space entry was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

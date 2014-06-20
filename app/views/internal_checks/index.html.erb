@@ -4,9 +4,9 @@
     <ul class="nav nav-list">
       <h5>CREATE</h5>
       <li><%= link_to 'Daily Check', {controller: "internal_checks", action: "new"} %></li>
-      <li><a href="#">ReLOUD</a></li>
+      <li><%= link_to 'ReLOUD', {controller: "reloud_checks", action: "new"} %></li>
       <li class="divider"></li>
-      <li><a href="#">ReLOUD Archives</a></li>
+      <li><%= link_to 'ReLOUD Archives', reloud_checks_path %></li>
     </ul>
   </div>
 </div>

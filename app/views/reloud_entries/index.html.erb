@@ -24,7 +24,7 @@
 
 <div class="span6">
   <div class="page-header">
-    <h1>Backups</h1>
+    <h1>ReLOUDs</h1>
   </div>
   <table class="table table-striped">
     <tr>
@@ -33,22 +33,22 @@
       <th></th>
     </tr>
 
-    <% @backup_entries.each do |backup_entry| %>
+    <% @reloud_entries.each do |reloud_entry| %>
     <tr>
-      <td><%= backup_entry.name %></td>
-      <td><%= link_to 'Edit', edit_backup_entry_path(backup_entry), :class => 'btn btn-mini' %></td>
+      <td><%= reloud_entry.name %></td>
+      <td><%= link_to 'Edit', edit_reloud_entry_path(reloud_entry), :class => 'btn btn-mini' %></td>
       <td>
-	<%= link_to 'Delete', backup_entry, 
-	    method: :delete, data: { confirm: 'Are you sure?' },
-	    :class => 'btn btn-mini btn-danger' %>
+        <%= link_to 'Delete', reloud_entry,
+            method: :delete, data: { confirm: 'Are you sure?' },
+            :class => 'btn btn-mini btn-danger' %>
       </td>
     </tr>
     <% end %>
   </table>
-  
+
   <br />
-  
+
   <div class="form-actions">
-    <%= link_to 'New Backup Entry', new_backup_entry_path, :class => 'btn btn-primary' %>
+    <%= link_to 'New ReLOUD Entry', new_reloud_entry_path, :class => 'btn btn-primary' %>
   </div>
 </div>

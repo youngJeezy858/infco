@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140618201718) do
+ActiveRecord::Schema.define(:version => 20140620194711) do
 
   create_table "backup_checks", :force => true do |t|
     t.string   "name"
@@ -34,6 +34,20 @@ ActiveRecord::Schema.define(:version => 20140618201718) do
     t.date     "date"
     t.string   "owner"
     t.boolean  "passed"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "reloud_checks", :force => true do |t|
+    t.string   "name"
+    t.date     "date"
+    t.string   "owner"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "reloud_entries", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

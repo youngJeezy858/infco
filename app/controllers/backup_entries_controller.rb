@@ -60,7 +60,7 @@ class BackupEntriesController < ApplicationController
 
     respond_to do |format|
       if @backup_entry.update_attributes(params[:backup_entry])
-        format.html { redirect_to @backup_entry, notice: 'Backup entry was successfully updated.' }
+        format.html { redirect_to backup_entries_path, notice: 'Backup entry was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

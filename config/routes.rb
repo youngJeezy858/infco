@@ -1,4 +1,10 @@
 Infco::Application.routes.draw do
+  resources :reloud_checks
+
+
+  resources :reloud_entries
+
+
   resources :admin_tools
   resources :backup_entries
   resources :space_entries

@@ -1,0 +1,2 @@
+module ReloudChecksHelper
+end
