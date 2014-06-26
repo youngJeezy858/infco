@@ -1,0 +1,10 @@
+class CreateOperationsChecks < ActiveRecord::Migration
+  def change
+    create_table :operations_checks do |t|
+      t.owner :string
+      t.date :date
+
+      t.timestamps
+    end
+  end
+end

@@ -1,4 +1,6 @@
 class SpaceEntriesController < ApplicationController
+  layout "admin_tools"
+
   # GET /space_entries
   # GET /space_entries.json
   def index

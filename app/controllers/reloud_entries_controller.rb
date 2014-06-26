@@ -1,4 +1,6 @@
 class ReloudEntriesController < ApplicationController
+  layout "admin_tools"
+
   # GET /reloud_entries
   # GET /reloud_entries.json
   def index

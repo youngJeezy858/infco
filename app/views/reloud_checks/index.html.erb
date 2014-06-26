@@ -1,28 +1,18 @@
-<div class="span2">
-  <div class="sidebar-nav-fixed" data-spy="affix" data-offset-top="140">
-    <ul class="nav nav-list">
-      <h5>CREATE</h5>
-      <li><%= link_to 'Daily Check', {controller: "internal_checks", action: "new"} %></li>
-      <li><%= link_to 'ReLOUD', {controller: "reloud_checks", action: "new"} %></li>
-      <li class="divider"></li>
-      <li><%= link_to 'ReLOUD Archives', reloud_checks_path %></li>
-    </ul>
-  </div>
+<div class="page-header">
+  <h1>ReLOUD archives</h1>
 </div>
 
-<div class="span8">
-  <div class="page-header">
-    <h1>Listing ReLOUD archives</h1>
-  </div>
-
-  <table class="table table-stripped">
+<table class="table table-striped">
+  <thead>
     <tr>
       <th>Name</th>
       <th>Date</th>
       <th>Owner</th>
       <th></th>
     </tr>
-    
+  </thead>
+
+  <tbody>
     <% @reloud_checks.each do |reloud_check| %>
     <tr>
       <td><%= reloud_check.name %></td>
@@ -35,10 +25,5 @@
       </td>
     </tr>
     <% end %>
-  </table>
-  
-  <br />
-  <div class="form-actions">
-    <%= link_to 'New Reloud check', new_reloud_check_path, :class => 'btn btn-primary' %>
-  </div>
-</div>
+  </tbody>
+</table>

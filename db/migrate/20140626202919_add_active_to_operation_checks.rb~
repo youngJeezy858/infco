@@ -1,0 +1,5 @@
+class AddActiveToOperationChecks < ActiveRecord::Migration
+  def change
+    add_column :operation_checks, :active, :boolean, :default => "true"
+  end
+end

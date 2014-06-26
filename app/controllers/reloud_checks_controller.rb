@@ -1,4 +1,6 @@
 class ReloudChecksController < ApplicationController
+  layout "internal_checks"
+
   # GET /reloud_checks
   # GET /reloud_checks.json
   def index

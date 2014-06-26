@@ -1,4 +1,5 @@
 class InternalChecksController < ApplicationController
+
   # GET /internal_checks
   # GET /internal_checks.json
   def index
@@ -16,6 +17,14 @@ class InternalChecksController < ApplicationController
     @internal_check = InternalCheck.find(params[:id])
     @backup_entries = BackupEntry.all
     @space_entries = SpaceEntry.all
+  
+    if @internal_check.backup_checks.all.count +
+        @internal_check.space_checks.all.count == 0
+      @internal_check.passed = "true"
+    else
+      @internal_check.passed = "false"
+    end
+    @internal_check.save
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,12 +42,6 @@ class InternalChecksController < ApplicationController
     ## @internal_check.owner = current_user.login
     @internal_check.save
     redirect_to @internal_check, notice: 'Internal check was successfully created.' 
-    
-
-    #respond_to do |format|
-      #format.html # new.html.erb
-     # format.json { render json: @internal_check }
-    #end
   end
 
   # GET /internal_checks/1/edit
@@ -91,4 +94,5 @@ class InternalChecksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

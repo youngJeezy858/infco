@@ -1,0 +1,20 @@
+<% content_for :content do %>  
+<div class="span2">
+  <div class="sidebar-nav-fixed" data-spy="affix" data-offset-top="140">
+    <ul class="nav nav-list">
+      <h5>CREATE</h5>
+      <li><%= link_to 'Daily Check', {controller: "internal_checks", action: "new"} %></li>
+      <li><%= link_to 'ReLOUD', {controller: "reloud_checks", action: "new"} %></li>
+      <li class="divider"></li>
+      <h5>ARCHIVES</h5>
+      <li><%= link_to 'Daily Checks', internal_checks_path %></li>
+      <li><%= link_to 'ReLOUDs', reloud_checks_path %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="span10">
+  <%= yield %>
+</div>
+<% end %>
+<%= render template: "layouts/application" %>

@@ -1,30 +1,5 @@
-<div class="span2">
-  <div class="sidebar-nav-fixed" data-spy="affix" data-offset-top="140">
-    <ul class="nav nav-list">
-      <li><%= link_to "Admin Home", admin_tools_path %></li>
-      <li class="divider"></li>
-      <h5>OPERATIONS</h5>
-      <li><a href="#">Labs</a></li>
-      <li><a href="#">Printers</a></li>
-      <li><a href="#">Automounts</a></li>
-      <li><a href="#">Nagios</a></li>
-      <li><a href="#">Request Tracker</a></li>
-      <li><a href="#">Packages</a></li>
-      <li><a href="#">Load Balancers</a></li>
-      <li><a href="#">LDAP</a></li>
-      <li class="divider"></li>
-      <h5>INTERNAL</h5>
-      <li><%= link_to "Backups", backup_entries_path %></li>
-      <li><%= link_to "Disk Space", space_entries_path %></li>
-      <li><%= link_to "ReLOUDs", reloud_entries_path %></li>
-    </ul>
-  </div>
+<div class="page-head">
+  <h1>Editing reLOUD</h1>
+  <h3 style="color: red"><%= @reloud_entry.name %></h3>
 </div>
-
-<div class="span6">
-  <div class="page-head">
-    <h1>Editing reLOUD</h1>
-    <h3 style="color: red"><%= @reloud_entry.name %></h3>
-  </div>
-  <%= render 'form' %>
-</div>
+<%= render 'form' %>

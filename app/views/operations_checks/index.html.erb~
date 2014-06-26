@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>Operations Checks   <%= link_to 'Start New Check', new_operations_check_path, :class => 'btn btn-primary' %></h1>
+</div>
+
+<div class="span12">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+	<th>Owner</th>
+	<th>Date</th>
+	<th></th>
+	<th></th>
+	<th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @operations_checks.each do |operations_check| %>
+      <tr>
+	<td><%= operations_check.owner %></td>
+	<td><%= operations_check.date.strftime("%d-%m-%Y %I:%M %p") %></td>
+	<td><%= link_to 'Show', operations_check, :class => 'btn btn-mini' %></td>
+	<td><%= link_to 'Destroy', operations_check, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

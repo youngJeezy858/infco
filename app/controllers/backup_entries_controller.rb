@@ -1,4 +1,6 @@
 class BackupEntriesController < ApplicationController
+  layout "admin_tools" 
+
   # GET /backup_entries
   # GET /backup_entries.json
   def index
@@ -80,4 +82,5 @@ class BackupEntriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end
