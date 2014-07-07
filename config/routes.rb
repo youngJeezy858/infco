@@ -8,6 +8,7 @@ Infco::Application.routes.draw do
   resources :space_entries
 
   resources :internal_checks do
+    get :sign_off, on: :member
     resources :backup_checks
     resources :space_checks
   end

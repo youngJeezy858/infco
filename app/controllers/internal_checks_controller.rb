@@ -95,4 +95,11 @@ class InternalChecksController < ApplicationController
     end
   end
 
+  def sign_off
+    @internal_check = InternalCheck.find(params[:id])
+    @internal_check.signed_off_by = "kfrank"
+    @internal_check.save
+    redirect_to @internal_check, notice: "kfrank has confirmed this check was completed"
+  end
+
 end

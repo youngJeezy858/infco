@@ -80,7 +80,7 @@
       </div>
     </div>
     <div class="actions">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= f.submit "Report Space Failure", :class => 'btn btn-primary' %>
     </div>
     <% end %>
 
@@ -118,9 +118,14 @@
 <div class="form-actions"> 
   <%= link_to t('.back', :default => t("helpers.links.back")),
   internal_checks_path, :class => 'btn' %>
-  <td>
-    <%= link_to 'Destroy', @internal_check, 
-	method: :delete, data: { confirm: 'Are you sure?' },
-	class: 'btn btn-danger' %>
-  </td>
+  
+  <% if @internal_check.signed_off_by.blank? %>
+  <%= link_to 'Sign Off On This Check', 
+      sign_off_internal_check_path(@internal_check.id), 
+      class: 'btn btn-primary' %>
+  <% end %>
+  
+  <%= link_to 'Destroy', @internal_check, 
+      method: :delete, data: { confirm: 'Are you sure?' },
+      class: 'btn btn-danger' %>
 </div>
