@@ -1,6 +1,0 @@
-<% content_for :content do %>
-<div class="span12">
-  <%= yield %>
-</div>
-<% end %>
-<%= render template: "layouts/application" %>

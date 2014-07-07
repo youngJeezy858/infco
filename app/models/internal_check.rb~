@@ -1,4 +1,0 @@
-class InternalCheck < ActiveRecord::Base
-  attr_accessible :date, :owner, :passed
-  has_many :backup_checks, :space_checks
-end

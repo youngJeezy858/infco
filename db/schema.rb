@@ -33,14 +33,15 @@ ActiveRecord::Schema.define(:version => 20140626200824) do
   create_table "internal_checks", :force => true do |t|
     t.date     "date"
     t.string   "owner"
+    t.string   "signed_off_by"
     t.boolean  "passed"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "operations_checks", :force => true do |t|
     t.string   "owner"
-    t.date     "datetime"
+    t.datetime "date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
