@@ -1,0 +1,24 @@
+<%= form_for([@lab, @machine]) do |f| %>
+  <% if @machine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@machine.errors.count, "error") %> prohibited this machine from being saved:</h2>
+
+      <ul>
+      <% @machine.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="controls">
+    <%= f.label :name %>
+    <div class="control-group">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Back', @lab, :class => 'btn' %>
+  </div>
+<% end %>

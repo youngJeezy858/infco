@@ -2,5 +2,11 @@
   <h1>New ReLOUD Check</h1>
 </div>
 
+<% unless notice.nil? %>
+<div class="alert">
+  <p id="notice"><%= notice %></p>
+</div>
+<% end %>
+
 <%= render 'form' %>
 

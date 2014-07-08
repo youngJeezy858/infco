@@ -1,4 +1,8 @@
 Infco::Application.routes.draw do
+  resources :labs do
+    resources :machines
+  end
+
   resources :operations_checks do
   end
 

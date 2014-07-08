@@ -18,11 +18,11 @@
 	<a class="brand" href="/">Infrastructure Checks</a>
 	<div class="nav-collapse collapse">
           <ul class="nav">
-	    <li class="<%= 'active' if params[:controller] =~ /admin_tools|backup_entries|space_entries|reloud_entries/ %>">
-	      <%= link_to "Admin Tools", admin_tools_path %>
-	    </li>
 	    <li class="<%= 'active' if params[:controller] == 'welcome' %>">
 	      <%= link_to "Home", root_path %>
+	    </li>
+	    <li class="<%= 'active' if params[:controller] =~ /admin_tools|backup_entries|space_entries|reloud_entries/ %>">
+	      <%= link_to "Admin Tools", admin_tools_path %>
 	    </li>
 	    <li class="<%= 'active' if params[:controller] == 'operations_checks' %>">
 	      <%= link_to "Operations", operations_checks_path %>

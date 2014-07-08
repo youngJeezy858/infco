@@ -28,7 +28,7 @@ class ReloudChecksController < ApplicationController
   def new
     @reloud_check = ReloudCheck.new
     @reloud_entries = ReloudEntry.all
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @reloud_check }
@@ -43,6 +43,11 @@ class ReloudChecksController < ApplicationController
   # POST /reloud_checks
   # POST /reloud_checks.json
   def create
+    unless params[:name].to_s.present?
+      redirect_to :back, notice: 'Please provide the name of the machine you are reporting.'
+      return
+    end
+
     @reloud_check = ReloudCheck.new(reloud_check_params)
     @reloud_check.date = Date.today
     @reloud_check.owner = "kfrank"

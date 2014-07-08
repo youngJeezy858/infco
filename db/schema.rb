@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140626200824) do
+ActiveRecord::Schema.define(:version => 20140708153139) do
 
   create_table "backup_checks", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,21 @@ ActiveRecord::Schema.define(:version => 20140626200824) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  create_table "labs", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "machines", :force => true do |t|
+    t.string   "name"
+    t.integer  "lab_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "machines", ["lab_id"], :name => "index_machines_on_lab_id"
 
   create_table "operations_checks", :force => true do |t|
     t.string   "owner"
