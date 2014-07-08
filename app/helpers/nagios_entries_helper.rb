@@ -1,0 +1,2 @@
+module NagiosEntriesHelper
+end

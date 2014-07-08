@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Disk Space Checks</h1>
+  <h1>LDAP</h1>
 </div>
 <table class="table table-striped">
   <thead>
@@ -9,14 +9,14 @@
       <th></th>
     </tr>
   </thead>
-  
+
   <tbody>
-    <% @space_entries.each do |space_entry| %>
+    <% @ldap_entries.each do |ldap_entry| %>
     <tr>
-      <td><%= space_entry.name %></td>
-      <td><%= link_to 'Edit', edit_space_entry_path(space_entry), :class => 'btn btn-mini' %></td>
+      <td><%= ldap_entry.name %></td>
+      <td><%= link_to 'Edit', edit_ldap_entry_path(ldap_entry), :class => 'btn btn-mini' %></td>
       <td>
-	<%= link_to 'Delete', space_entry,
+        <%= link_to 'Delete', ldap_entry,
             method: :delete, data: { confirm: 'Are you sure?' },
             :class => 'btn btn-mini btn-danger' %>
       </td>
@@ -28,6 +28,6 @@
 <br />
 
 <div class="form-actions">
-  <%= link_to 'Add Space entry', new_space_entry_path, :class => 'btn btn-primary' %>
-  <%= link_to 'Back', admin_tools_path,:class => 'btn'%>
+  <%= link_to 'Add LDAP Entry', new_ldap_entry_path, :class => 'btn btn-primary' %>
+  <%= link_to 'Back', admin_tools_path, :class => 'btn' %>
 </div>

@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140708153139) do
+ActiveRecord::Schema.define(:version => 20140708200737) do
+
+  create_table "automounts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "backup_checks", :force => true do |t|
     t.string   "name"
@@ -45,6 +51,18 @@ ActiveRecord::Schema.define(:version => 20140708153139) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "ldap_entries", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "load_balancers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "machines", :force => true do |t|
     t.string   "name"
     t.integer  "lab_id"
@@ -54,9 +72,21 @@ ActiveRecord::Schema.define(:version => 20140708153139) do
 
   add_index "machines", ["lab_id"], :name => "index_machines_on_lab_id"
 
+  create_table "nagios_entries", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "operations_checks", :force => true do |t|
     t.string   "owner"
     t.datetime "date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "printers", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

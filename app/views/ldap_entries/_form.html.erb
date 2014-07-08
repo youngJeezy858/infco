@@ -1,0 +1,25 @@
+<%= form_for(@ldap_entry) do |f| %>
+  <% if @ldap_entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ldap_entry.errors.count, "error") %> prohibited this LDAP entry from bei\
+ng saved:</h2>
+
+      <ul>
+      <% @ldap_entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="controls">
+    <%= f.label :name %>
+    <div class="control-group">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Back', ldap_entries_path, :class => 'btn' %>
+  </div>
+<% end %>

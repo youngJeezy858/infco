@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Labs</h1>
+  <h1>Nagios</h1>
 </div>
 <table class="table table-striped">
   <thead>
@@ -12,13 +12,12 @@
   </thead>
 
   <tbody>
-    <% @labs.each do |lab| %>
+    <% @nagios_entries.each do |nagios_entry| %>
     <tr>
-      <td><%= lab.name %></td>
-      <td><%= link_to 'View/Add Machines', lab_path(lab), :class => 'btn btn-mini' %></td>
-      <td><%= link_to 'Edit Name', edit_lab_path(lab), :class => 'btn btn-mini' %></td>
+      <td><%= nagios_entry.name %></td>
+      <td><%= link_to 'Edit', edit_nagios_entry_path(nagios_entry), :class => 'btn btn-mini' %></td>
       <td>
-        <%= link_to 'Delete', lab,
+        <%= link_to 'Delete', nagios_entry,
             method: :delete, data: { confirm: 'Are you sure?' },
             :class => 'btn btn-mini btn-danger' %>
       </td>
@@ -30,6 +29,6 @@
 <br />
 
 <div class="form-actions">
-  <%= link_to 'Add Lab', new_lab_path, :class => 'btn btn-primary' %>
+  <%= link_to 'Add Nagios Entry', new_nagios_entry_path, :class => 'btn btn-primary' %>
   <%= link_to 'Back', admin_tools_path,:class => 'btn'%>
 </div>

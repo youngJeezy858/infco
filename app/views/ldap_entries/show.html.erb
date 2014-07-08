@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ldap_entry.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_ldap_entry_path(@ldap_entry) %> |
+<%= link_to 'Back', ldap_entries_path %>

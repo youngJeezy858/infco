@@ -1,0 +1,24 @@
+<%= form_for(@automount) do |f| %>
+  <% if @automount.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@automount.errors.count, "error") %> prohibited this automount from being saved:</h2>
+
+      <ul>
+      <% @automount.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="controls">
+    <%= f.label :name %>
+    <div class="control-group">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Back', automounts_path, :class => 'btn' %>
+  </div>
+<% end %>

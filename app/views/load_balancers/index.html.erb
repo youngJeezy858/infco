@@ -1,0 +1,33 @@
+<div class="page-header">
+  <h1>Load Balancers</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @load_balancers.each do |load_balancer| %>
+    <tr>
+      <td><%= load_balancer.name %></td>
+      <td><%= link_to 'Edit', edit_load_balancer_path(load_balancer), :class => 'btn btn-mini' %></td>
+      <td>
+        <%= link_to 'Delete', load_balancer,
+            method: :delete, data: { confirm: 'Are you sure?' },
+            :class => 'btn btn-mini btn-danger' %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<div class="form-actions">
+  <%= link_to 'Add Load Balancer', new_load_balancer_path, :class => 'btn btn-primary' %>
+  <%= link_to 'Back', admin_tools_path, :class => 'btn' %>
+</div>

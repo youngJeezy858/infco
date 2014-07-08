@@ -1,4 +1,9 @@
 Infco::Application.routes.draw do
+  resources :ldap_entries
+  resources :load_balancers
+  resources :nagios_entries
+  resources :automounts
+  resources :printers
   resources :labs do
     resources :machines
   end
