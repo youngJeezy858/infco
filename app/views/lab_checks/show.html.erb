@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Lab name:</b>
+  <%= @lab_check.lab_name %>
+</p>
+
+<p>
+  <b>Machine1 name:</b>
+  <%= @lab_check.machine1_name %>
+</p>
+
+<p>
+  <b>Machine2 name:</b>
+  <%= @lab_check.machine2_name %>
+</p>
+
+<p>
+  <b>Machine3 name:</b>
+  <%= @lab_check.machine3_name %>
+</p>
+
+<p>
+  <b>Completed:</b>
+  <%= @lab_check.completed %>
+</p>
+
+
+<%= link_to 'Edit', edit_lab_check_path(@lab_check) %> |
+<%= link_to 'Back', lab_checks_path %>

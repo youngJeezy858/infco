@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lab_name: MyString
+  machine1_name: MyString
+  machine2_name: MyString
+  machine3_name: MyString
+  completed: false
+
+two:
+  lab_name: MyString
+  machine1_name: MyString
+  machine2_name: MyString
+  machine3_name: MyString
+  completed: false

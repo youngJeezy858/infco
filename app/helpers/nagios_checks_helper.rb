@@ -1,0 +1,2 @@
+module NagiosChecksHelper
+end

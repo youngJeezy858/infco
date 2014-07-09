@@ -1,0 +1,23 @@
+<h1>Listing automount_checks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @automount_checks.each do |automount_check| %>
+  <tr>
+    <td><%= automount_check.name %></td>
+    <td><%= link_to 'Show', automount_check %></td>
+    <td><%= link_to 'Edit', edit_automount_check_path(automount_check) %></td>
+    <td><%= link_to 'Destroy', automount_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Automount check', new_automount_check_path %>

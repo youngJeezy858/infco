@@ -1,0 +1,31 @@
+<h1>Listing lab_checks</h1>
+
+<table>
+  <tr>
+    <th>Lab name</th>
+    <th>Machine1 name</th>
+    <th>Machine2 name</th>
+    <th>Machine3 name</th>
+    <th>Completed</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @lab_checks.each do |lab_check| %>
+  <tr>
+    <td><%= lab_check.lab_name %></td>
+    <td><%= lab_check.machine1_name %></td>
+    <td><%= lab_check.machine2_name %></td>
+    <td><%= lab_check.machine3_name %></td>
+    <td><%= lab_check.completed %></td>
+    <td><%= link_to 'Show', lab_check %></td>
+    <td><%= link_to 'Edit', edit_lab_check_path(lab_check) %></td>
+    <td><%= link_to 'Destroy', lab_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Lab check', new_lab_check_path %>

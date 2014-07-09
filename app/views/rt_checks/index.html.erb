@@ -1,0 +1,23 @@
+<h1>Listing rt_checks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @rt_checks.each do |rt_check| %>
+  <tr>
+    <td><%= rt_check.name %></td>
+    <td><%= link_to 'Show', rt_check %></td>
+    <td><%= link_to 'Edit', edit_rt_check_path(rt_check) %></td>
+    <td><%= link_to 'Destroy', rt_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Rt check', new_rt_check_path %>

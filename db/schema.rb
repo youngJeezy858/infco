@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140708200737) do
+ActiveRecord::Schema.define(:version => 20140709201354) do
+
+  create_table "automount_checks", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "automounts", :force => true do |t|
     t.string   "name"
@@ -45,13 +51,35 @@ ActiveRecord::Schema.define(:version => 20140708200737) do
     t.datetime "updated_at",    :null => false
   end
 
+  create_table "lab_checks", :force => true do |t|
+    t.string   "lab_name"
+    t.string   "machine1_name"
+    t.string   "machine2_name"
+    t.string   "machine3_name"
+    t.boolean  "completed"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "labs", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+  create_table "ldap_checks", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "ldap_entries", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "load_balancer_checks", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -72,6 +100,12 @@ ActiveRecord::Schema.define(:version => 20140708200737) do
 
   add_index "machines", ["lab_id"], :name => "index_machines_on_lab_id"
 
+  create_table "nagios_checks", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "nagios_entries", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -81,6 +115,18 @@ ActiveRecord::Schema.define(:version => 20140708200737) do
   create_table "operations_checks", :force => true do |t|
     t.string   "owner"
     t.datetime "date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "packages_checks", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "printer_checks", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -100,6 +146,12 @@ ActiveRecord::Schema.define(:version => 20140708200737) do
   end
 
   create_table "reloud_entries", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "rt_checks", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

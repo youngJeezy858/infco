@@ -1,0 +1,23 @@
+<h1>Listing printer_checks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @printer_checks.each do |printer_check| %>
+  <tr>
+    <td><%= printer_check.name %></td>
+    <td><%= link_to 'Show', printer_check %></td>
+    <td><%= link_to 'Edit', edit_printer_check_path(printer_check) %></td>
+    <td><%= link_to 'Destroy', printer_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Printer check', new_printer_check_path %>

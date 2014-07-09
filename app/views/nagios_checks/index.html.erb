@@ -1,0 +1,23 @@
+<h1>Listing nagios_checks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @nagios_checks.each do |nagios_check| %>
+  <tr>
+    <td><%= nagios_check.name %></td>
+    <td><%= link_to 'Show', nagios_check %></td>
+    <td><%= link_to 'Edit', edit_nagios_check_path(nagios_check) %></td>
+    <td><%= link_to 'Destroy', nagios_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Nagios check', new_nagios_check_path %>

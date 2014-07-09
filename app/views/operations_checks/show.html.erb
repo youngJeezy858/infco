@@ -1,28 +1,58 @@
-<div class="page-header">
-  <h1><%= @operations_check.date.strftime("%Y-%m-%d %I:%M %p") %> : <%= @operations_check.owner %></h1>
-</div>
+<span class="hidden-phone">
+  <div class="page-header">
+    <h1><%= @operations_check.date.strftime("%Y-%m-%d %I:%M %p") %> : <%= @operations_check.owner %></h1>
+  </div>
 
-<% unless notice.nil? %>
-<div class="alert">
-  <p id="notice"><%= notice %></p>
-</div>
-<% end %>
+  <% unless notice.nil? %>
+  <div class="alert">
+    <p id="notice"><%= notice %></p>
+  </div>
+  <% end %>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <td>Check Name</td>
-      <td>Completed?</td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+  <div class="tabbable">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#labs" data-toggle="tab">Labs</a></li>
+      <li><a href="#printers" data-toggle="tab">Printers</a></li>
+      <li><a href="#automounts" data-toggle="tab">Automounts</a></li>
+      <li><a href="#nagios" data-toggle="tab">Nagios</a></li>
+      <li><a href="#rt" data-toggle="tab">RT</a></li>
+      <li><a href="#load_balancers" data-toggle="tab">Load Balancers</a></li>
+      <li><a href="#ldap" data-toggle="tab">LDAP</a></li>
+      <li><a href="#packages" data-toggle="tab">Packages</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="labs">
+      
+      </div>
+      <div class="tab-pane" id="printers">
+      
+      </div>
+      <div class="tab-pane" id="automounts">
+      
+      </div>
+      <div class="tab-pane" id="nagios">
+      
+      </div>
+      <div class="tab-pane" id="rt">
+      
+      </div>
+      <div class="tab-pane" id="load_balancers">
+      
+      </div>
+      <div class="tab-pane" id="ldap">
+      
+      </div>
+      <div class="tab-pane" id="packages">
+      
+      </div>
+    </div>
+  </div> 
 
-<%= link_to 'Back', operations_checks_path %>
+  <div class="form-actions">
+    <%= link_to 'Back', operations_checks_path, :class => 'btn' %>
+    <%= link_to 'Sign off on this check', operations_checks_path, :class => 'btn btn-primary' %>
+    <%= link_to 'Destroy', @internal_check,
+	method: :delete, data: { confirm: 'Are you sure you want to delete this check?' },
+	class: 'btn btn-danger' %>
+  </div>
+</span>

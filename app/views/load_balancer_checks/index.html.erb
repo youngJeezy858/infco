@@ -1,0 +1,23 @@
+<h1>Listing load_balancer_checks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @load_balancer_checks.each do |load_balancer_check| %>
+  <tr>
+    <td><%= load_balancer_check.name %></td>
+    <td><%= link_to 'Show', load_balancer_check %></td>
+    <td><%= link_to 'Edit', edit_load_balancer_check_path(load_balancer_check) %></td>
+    <td><%= link_to 'Destroy', load_balancer_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Load balancer check', new_load_balancer_check_path %>

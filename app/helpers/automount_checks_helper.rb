@@ -1,0 +1,2 @@
+module AutomountChecksHelper
+end

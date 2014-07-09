@@ -1,0 +1,37 @@
+<%= form_for(@lab_check) do |f| %>
+  <% if @lab_check.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lab_check.errors.count, "error") %> prohibited this lab_check from being saved:</h2>
+
+      <ul>
+      <% @lab_check.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :lab_name %><br />
+    <%= f.text_field :lab_name %>
+  </div>
+  <div class="field">
+    <%= f.label :machine1_name %><br />
+    <%= f.text_field :machine1_name %>
+  </div>
+  <div class="field">
+    <%= f.label :machine2_name %><br />
+    <%= f.text_field :machine2_name %>
+  </div>
+  <div class="field">
+    <%= f.label :machine3_name %><br />
+    <%= f.text_field :machine3_name %>
+  </div>
+  <div class="field">
+    <%= f.label :completed %><br />
+    <%= f.check_box :completed %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
