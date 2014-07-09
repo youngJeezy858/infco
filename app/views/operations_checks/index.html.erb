@@ -1,28 +1,60 @@
-<div class="page-header">
-  <h1>Operations Checks   <%= link_to 'Start New Check', new_operations_check_path, :class => 'btn btn-primary' %></h1>
-</div>
-
 <div class="span12">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-	<th>Owner</th>
-	<th>Date</th>
-	<th></th>
-	<th></th>
-	<th></th>
-      </tr>
-    </thead>
+  <div class="page-header">
+    <h1>Operations Checks   
+      <span class="hidden-phone">
+	<%= link_to 'Start New Check', new_operations_check_path, 
+	    :class => 'btn btn-primary' %>
+      </span>
+    </h1>  
+  </div>
 
-    <tbody>
-      <% @operations_checks.each do |operations_check| %>
-      <tr>
-	<td><%= operations_check.owner %></td>
-	<td><%= operations_check.date.strftime("%Y-%m-%d %I:%M %p") %></td>
-	<td><%= link_to 'Show', operations_check, :class => 'btn btn-mini' %></td>
-	<td><%= link_to 'Destroy', operations_check, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <span class="visible-phone"> 
+    <div class="row" style="padding-bottom: 20px">
+      <%= link_to 'Start New Check', new_operations_check_path, 
+	  :class => 'btn btn-block btn-primary' %>
+    </div>
+    <table class="table table-striped">
+      <thead>
+	<tr>
+	  <th>Owner</th>
+	  <th>Date</th>
+	  <th></th>
+	</tr>
+      </thead>
+      <tbody>
+	<% @operations_checks.each do |operations_check| %>
+	<tr>
+	  <td><%= operations_check.owner %></td>
+	  <td><%= operations_check.date.strftime("%Y-%m-%d %p") %></td>
+	  <td><%= link_to 'Show', operations_check, :class => 'btn btn-mini' %></td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
+  </span>
+  
+  <span class="hidden-phone">
+    <table class="table table-striped">
+      <thead>
+	<tr>
+	  <th>Owner</th>
+	  <th>Date</th>
+	  <th></th>
+	  <th></th>
+	  <th></th>
+	</tr>
+      </thead>
+
+      <tbody>
+	<% @operations_checks.each do |operations_check| %>
+	<tr>
+	  <td><%= operations_check.owner %></td>
+	  <td><%= operations_check.date.strftime("%Y-%m-%d %I:%M %p") %></td>
+	  <td><%= link_to 'Show', operations_check, :class => 'btn btn-mini' %></td>
+	  <td><%= link_to 'Destroy', operations_check, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
+  </span>
 </div>

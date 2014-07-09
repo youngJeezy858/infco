@@ -1,5 +1,4 @@
 class InternalChecksController < ApplicationController
-
   # GET /internal_checks
   # GET /internal_checks.json
   def index

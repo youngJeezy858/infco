@@ -1,20 +1,46 @@
 <% content_for :content do %>  
-<div class="span2">
-  <div class="sidebar-nav-fixed" data-spy="affix" data-offset-top="140">
-    <ul class="nav nav-list">
-      <h5>CREATE</h5>
-      <li><%= link_to 'Daily Check', {controller: "internal_checks", action: "new"} %></li>
-      <li><%= link_to 'ReLOUD', {controller: "reloud_checks", action: "new"} %></li>
-      <li class="divider"></li>
-      <h5>ARCHIVES</h5>
-      <li><%= link_to 'Daily Checks', internal_checks_path %></li>
-      <li><%= link_to 'ReLOUDs', reloud_checks_path %></li>
-    </ul>
-  </div>
-</div>
+<span class="hidden-phone">
+  <div class="row-fluid">
+    <div class="span2">
+      <div class="sidebar-nav-fixed">
+	<ul class="nav nav-list">
+	  <h5>CREATE</h5>
+	  <li><%= link_to 'Daily Check', new_internal_check_path %></li>
+	  <li><%= link_to 'ReLOUD', new_reloud_check_path %></li>
+	  <li class="divider"></li>
+	  <h5>ARCHIVES</h5>
+	  <li><%= link_to 'Daily Checks', internal_checks_path %></li>
+	  <li><%= link_to 'ReLOUDs', reloud_checks_path %></li>
+	</ul>
+      </div>
+    </div>
 
-<div class="span10">
-  <%= yield %>
-</div>
+    <div class="span10">
+      <%= yield %>
+    </div>
+  </div>
+</span>
+
+<span class="visible-phone">
+  <div class="row">
+    <%= link_to 'Create Daily Check', new_internal_check_path, 
+	:class => 'btn btn-large btn-block btn-primary' %>
+  </div>
+  <div class="row" style="padding-top: 10px">
+    <%= link_to 'Create ReLOUD Check', new_reloud_check_path, 
+	:class => 'btn btn-large btn-block btn-primary' %>
+  </div>
+  <div class="row" style="padding-top: 10px">
+    <%= link_to 'Daily Check Archives', internal_checks_path, 
+	:class => 'btn btn-large btn-block' %>
+  </div>
+  <div class="row" style="padding-top: 10px">
+    <%= link_to 'ReLOUD Archives', reloud_checks_path, 
+	:class => 'btn btn-large btn-block' %>
+  </div>
+  <div class="row">
+    <%= yield %>
+  </div>
+</span>
 <% end %>
 <%= render template: "layouts/application" %>

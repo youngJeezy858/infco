@@ -1,26 +1,63 @@
 <% content_for :content do %>
-<div class="span2">
-  <div class="sidebar-nav-fixed" data-spy="affix" data-offset-top="140">
-    <ul class="nav nav-list">
-      <li><%= link_to "Admin Home", admin_tools_path %></li>
-      <li class="divider"></li>
-      <h5>OPERATIONS</h5>
-      <li><%= link_to "Labs", labs_path %></li>
-      <li><%= link_to "Printers", printers_path %></li>
-      <li><%= link_to "Automounts", automounts_path %></li>
-      <li><%= link_to "Nagios", nagios_entries_path %></li>
-      <li><%= link_to "Load Balancers", load_balancers_path %></li>
-      <li><%= link_to "LDAP", ldap_entries_path %></li>
-      <li class="divider"></li>
-      <h5>INTERNAL</h5>
-      <li><%= link_to "Backups", backup_entries_path %></li>
-      <li><%= link_to "Disk Space", space_entries_path %></li>
-      <li><%= link_to "ReLOUDs", reloud_entries_path %></li>
-    </ul>
+<span class="hidden-phone">
+  <div class="row">
+    <div class="span2">
+      <div class="sidebar-nav-fixed">
+	<ul class="nav nav-list">
+	  <li><%= link_to "Admin Home", admin_tools_path %></li>
+	  <li class="divider"></li>
+	  <h5>OPERATIONS</h5>
+	  <li><%= link_to "Labs", labs_path %></li>
+	  <li><%= link_to "Printers", printers_path %></li>
+	  <li><%= link_to "Automounts", automounts_path %></li>
+	  <li><%= link_to "Nagios", nagios_entries_path %></li>
+	  <li><%= link_to "Load Balancers", load_balancers_path %></li>
+	  <li><%= link_to "LDAP", ldap_entries_path %></li>
+	  <li class="divider"></li>
+	  <h5>INTERNAL</h5>
+	  <li><%= link_to "Backups", backup_entries_path %></li>
+	  <li><%= link_to "Disk Space", space_entries_path %></li>
+	  <li><%= link_to "ReLOUDs", reloud_entries_path %></li>
+	</ul>
+      </div>
+    </div>
+
+    <div class="span10">
+      <%= yield %>
+    </div>
   </div>
 </div>
 
-<div class="span7">
+<div class="visible-phone">
+  <div class="row">
+    <div class="btn-group">
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+	Operations
+	<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+	<li><%= link_to "Labs", labs_path %></li>
+	<li><%= link_to "Printers", printers_path %></li>
+	<li><%= link_to "Automounts", automounts_path %></li>
+	<li><%= link_to "Nagios", nagios_entries_path %></li>
+	<li><%= link_to "Load Balancers", load_balancers_path %></li>
+	<li><%= link_to "LDAP", ldap_entries_path %></li>  
+      </ul>
+    </div>
+    
+    <div class="btn-group">
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+	Internal
+	<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+	<li><%= link_to "Backups", backup_entries_path %></li>
+	<li><%= link_to "Disk Space", space_entries_path %></li>
+	<li><%= link_to "ReLOUDs", reloud_entries_path %></li>
+      </ul>
+    </div>
+  </div>
+  
   <%= yield %>
 </div>
 <% end %>

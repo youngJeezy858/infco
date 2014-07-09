@@ -2,34 +2,59 @@
   <h1>Internal Checks</h1>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Passed?</th>
-      <th>Date</th>
-      <th>Owner</th>
-      <th>Signed off by</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @internal_checks.each do |internal_check| %>
-    <tr>
-      <% if internal_check.passed? %>
-      <td><%= image_tag("pass.png", size: "24x24") %></td>
-      <% else %>  
-      <td><%= image_tag("fail.png", size: "24x24") %></td>
+<span class="visible-phone">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+	<th>Date</th>
+	<th>Owner</th>
+	<th>Signed off by</th>
+	<th></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @internal_checks.each do |internal_check| %>
+      <tr>
+	<td><%= internal_check.date.strftime("%m-%d") %></td>
+	<td><%= internal_check.owner %></td>
+	<td><%= internal_check.signed_off_by %></td>
+	<td><%= link_to 'View', internal_check_path(internal_check), class: 'btn btn-mini' %></td>
+      </tr>
       <% end %>
-      <td><%= internal_check.date %></td>
-      <td><%= internal_check.owner %></td>
-      <td><%= internal_check.signed_off_by %></td>
-      <td><%= link_to 'View', internal_check_path(internal_check), class: 'btn btn-mini' %></td>
-      <td><%= link_to 'Destroy', internal_check, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</span>
 
+<span class="hidden-phone">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+	<th>Passed?</th>
+	<th>Date</th>
+	<th>Owner</th>
+	<th>Signed off by</th>
+	<th></th>
+	<th></th>
+	<th></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @internal_checks.each do |internal_check| %>
+      <tr>
+	<% if internal_check.passed? %>
+	<td><%= image_tag("pass.png", size: "24x24") %></td>
+	<% else %>  
+	<td><%= image_tag("fail.png", size: "24x24") %></td>
+	<% end %>
+	<td><%= internal_check.date %></td>
+	<td><%= internal_check.owner %></td>
+	<td><%= internal_check.signed_off_by %></td>
+	<td><%= link_to 'View', internal_check_path(internal_check), class: 'btn btn-mini' %></td>
+	<td><%= link_to 'Destroy', internal_check, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-mini btn-danger' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</span>
