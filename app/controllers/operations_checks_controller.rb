@@ -15,12 +15,18 @@ class OperationsChecksController < ApplicationController
   def show
     @operations_check = OperationsCheck.find(params[:id])
     @labs = Lab.all
-    @labs_unchecked = Lab.select("name").map(&:name) - @operations_check.lab_checks.select("lab_name").map(&:lab_name)
-    @printers = Printer.select("name").map(&:name) - @operations_check.printer_checks.select("name").map(&:name)
-    @automounts = Automount.select("name").map(&:name) - @operations_check.automount_checks.select("name").map(&:name)
-    @nagios_entries = NagiosEntry.all
-    @load_balancers = LoadBalancer.all
-    @ldap_entries = LdapEntry.all    
+    @labs_unchecked = Lab.select("name").map(&:name) - 
+      @operations_check.lab_checks.select("lab_name").map(&:lab_name)
+    @printers = Printer.select("name").map(&:name) - 
+      @operations_check.printer_checks.select("name").map(&:name)
+    @automounts = Automount.select("name").map(&:name) - 
+      @operations_check.automount_checks.select("name").map(&:name)
+    @nagios_entries = NagiosEntry.select("name").map(&:name) - 
+      @operations_check.nagios_checks.select("name").map(&:name)
+    @load_balancers = LoadBalancer.select("name").map(&:name) - 
+      @operations_check.load_balancer_checks.select("name").map(&:name)
+    @ldap_entries = LdapEntry.select("name").map(&:name) - 
+      @operations_check.ldap_checks.select("name").map(&:name)    
 
     respond_to do |format|
       format.html # show.html.erb

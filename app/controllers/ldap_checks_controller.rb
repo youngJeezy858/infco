@@ -45,10 +45,12 @@ class LdapChecksController < ApplicationController
 
     respond_to do |format|
       if @ldap_check.save
-        format.html { redirect_to @ldap_check, notice: 'Ldap check was successfully created.' }
+        format.html { redirect_to operations_check_path(@operations_check, tab: "ldap"), 
+          notice: 'LDAP check was successfully created.' }
         format.json { render json: @ldap_check, status: :created, location: @ldap_check }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to operations_check_path(@operations_check, tab: "ldap"), 
+          notice: 'Commit failed - you must have a ticket number if the check failed!' }
         format.json { render json: @ldap_check.errors, status: :unprocessable_entity }
       end
     end
@@ -74,11 +76,12 @@ class LdapChecksController < ApplicationController
   # DELETE /ldap_checks/1
   # DELETE /ldap_checks/1.json
   def destroy
+    operations_check = OperationsCheck.find(params[:operations_check_id])
     @ldap_check = LdapCheck.find(params[:id])
     @ldap_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to ldap_checks_url }
+      format.html { redirect_to operations_check_path(@operations_check, tab: "ldap") }
       format.json { head :no_content }
     end
   end
@@ -89,6 +92,6 @@ class LdapChecksController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def ldap_check_params
-      params.require(:ldap_check).permit(:name)
+      params.require(:ldap_check).permit(:name, :passed, :ticket)
     end
 end

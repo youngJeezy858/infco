@@ -41,14 +41,18 @@ class PackagesChecksController < ApplicationController
   # POST /packages_checks.json
   def create
     @operations_check = OperationsCheck.find(params[:operations_check_id])
-    @packages_check = @operations_check.packages_checks.create(packages_check_params)
+    @packages_check = PackagesCheck.create(packages_check_params)
+    @packages_check.name = params[:name].to_s
 
     respond_to do |format|
       if @packages_check.save
-        format.html { redirect_to @packages_check, notice: 'Packages check was successfully created.' }
+        @operations_check.packages_check = @packages_check
+        format.html { redirect_to operations_check_path(@operations_check, tab: 'packages'), 
+          notice: 'Packages check was successfully created.' }
         format.json { render json: @packages_check, status: :created, location: @packages_check }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to operations_check_path(@operations_check, tab: 'packages'), 
+          notice: 'Commit failed - you must have a ticket number if the check failed!' }
         format.json { render json: @packages_check.errors, status: :unprocessable_entity }
       end
     end
@@ -74,11 +78,12 @@ class PackagesChecksController < ApplicationController
   # DELETE /packages_checks/1
   # DELETE /packages_checks/1.json
   def destroy
+    operations_check = OperationsCheck.find(params[:operations_check_id])
     @packages_check = PackagesCheck.find(params[:id])
     @packages_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to packages_checks_url }
+      format.html { redirect_to operations_check_path(operations_check, tab: 'packages') }
       format.json { head :no_content }
     end
   end
@@ -89,6 +94,6 @@ class PackagesChecksController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def packages_check_params
-      params.require(:packages_check).permit(:name)
+      params.require(:packages_check).permit(:name, :passed, :ticket)
     end
 end

@@ -45,10 +45,12 @@ class PrinterChecksController < ApplicationController
 
     respond_to do |format|
       if @printer_check.save
-        format.html { redirect_to operations_check_path(@operations_check.id, tab:"printers"), notice: 'Printer check was successfully created.' }
+        format.html { redirect_to operations_check_path(@operations_check.id, tab:"printers"), 
+          notice: 'Printer check was successfully created.' }
         format.json { render json: @printer_check, status: :created, location: @printer_check }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to operations_check_path(@operations_check.id, tab:"printers"), 
+          notice: 'Commit Failed - You need to give a ticket number if the check failed!' }
         format.json { render json: @printer_check.errors, status: :unprocessable_entity }
       end
     end
@@ -90,6 +92,6 @@ class PrinterChecksController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def printer_check_params
-      params.require(:printer_check).permit(:name)
+      params.require(:printer_check).permit(:name, :ticket, :passed)
     end
 end

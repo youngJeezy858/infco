@@ -45,10 +45,12 @@ class LoadBalancerChecksController < ApplicationController
 
     respond_to do |format|
       if @load_balancer_check.save
-        format.html { redirect_to @load_balancer_check, notice: 'Load balancer check was successfully created.' }
+        format.html { redirect_to operations_check_path(@operations_check, tab: "load_balancers"), 
+          notice: 'Load balancer check was successfully created.' }
         format.json { render json: @load_balancer_check, status: :created, location: @load_balancer_check }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to operations_check_path(@operations_check, tab: "load_balancers"),
+          notice: 'Commit failed - you must give a ticket number if the check failed!' }
         format.json { render json: @load_balancer_check.errors, status: :unprocessable_entity }
       end
     end
@@ -74,11 +76,12 @@ class LoadBalancerChecksController < ApplicationController
   # DELETE /load_balancer_checks/1
   # DELETE /load_balancer_checks/1.json
   def destroy
+    operations_check = OperationsCheck.find(params[:operations_check_id])
     @load_balancer_check = LoadBalancerCheck.find(params[:id])
     @load_balancer_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to load_balancer_checks_url }
+      format.html { redirect_to operations_check_path(operations_check, tab: "load_balancers") }
       format.json { head :no_content }
     end
   end
@@ -89,6 +92,6 @@ class LoadBalancerChecksController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def load_balancer_check_params
-      params.require(:load_balancer_check).permit(:name)
+      params.require(:load_balancer_check).permit(:name, :passed, :ticket)
     end
 end

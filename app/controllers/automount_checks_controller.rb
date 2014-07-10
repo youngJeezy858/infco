@@ -45,10 +45,12 @@ class AutomountChecksController < ApplicationController
 
     respond_to do |format|
       if @automount_check.save
-        format.html { redirect_to operations_check_path(@operations_check.id, tab:"automounts"), notice: 'Automount check was successfully created.' }
+        format.html { redirect_to operations_check_path(@operations_check.id, tab:"automounts"), 
+          notice: 'Automount check was successfully created.' }
         format.json { render json: @automount_check, status: :created, location: @automount_check }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to operations_check_path(@operations_check.id, tab:"automounts"), 
+          notice: 'Commit Failed - You need to give a ticket number if the check failed!' }
         format.json { render json: @automount_check.errors, status: :unprocessable_entity }
       end
     end
@@ -90,6 +92,6 @@ class AutomountChecksController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def automount_check_params
-      params.require(:automount_check).permit(:name)
+      params.require(:automount_check).permit(:name, :passed, :ticket)
     end
 end

@@ -46,10 +46,12 @@ class LabChecksController < ApplicationController
 
     respond_to do |format|
       if @lab_check.save
-        format.html { redirect_to operations_check_path(@operations_check.id, tab:"labs"), notice: 'Lab check was successfully created.' }
+        format.html { redirect_to operations_check_path(@operations_check.id, tab:"labs"), 
+          notice: 'Lab check was successfully created.' }
         format.json { render json: @lab_check, status: :created, location: @lab_check }
       else
-        format.html { redirect_to @operations_check, notice: 'Commit Failed - cannot use the same machine twice!' }
+        format.html { redirect_to @operations_check, 
+          notice: 'Commit Failed - You need to give a ticket number if the check failed! ' }
       end
     end
   end
@@ -90,6 +92,6 @@ class LabChecksController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def lab_check_params
-      params.require(:lab_check).permit(:completed, :lab_name, :machine1_name, :machine2_name, :machine3_name)
+      params.require(:lab_check).permit(:completed, :lab_name, :machine1_name, :machine1_passed, :machine1_ticket, :machine2_name, :machine2_passed, :machine2_ticket, :machine3_name, :machine3_passed, :machine3_ticket)
     end
 end

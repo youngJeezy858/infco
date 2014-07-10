@@ -45,10 +45,12 @@ class NagiosChecksController < ApplicationController
 
     respond_to do |format|
       if @nagios_check.save
-        format.html { redirect_to @nagios_check, notice: 'Nagios check was successfully created.' }
+        format.html { redirect_to operations_check_path(@operations_check, tab: "nagios"), 
+          notice: 'Nagios check was successfully created.' }
         format.json { render json: @nagios_check, status: :created, location: @nagios_check }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to operations_check_path(@operations_check, tab: "nagios"), 
+          notice: 'Commit Failed - You need to give a ticket number if the check failed!' } 
         format.json { render json: @nagios_check.errors, status: :unprocessable_entity }
       end
     end
@@ -74,21 +76,21 @@ class NagiosChecksController < ApplicationController
   # DELETE /nagios_checks/1
   # DELETE /nagios_checks/1.json
   def destroy
+    operations_check = OperationsCheck.find(params[:operations_check_id])
     @nagios_check = NagiosCheck.find(params[:id])
     @nagios_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to nagios_checks_url }
+      format.html { redirect_to operations_check_path(operations_check, tab: "nagios")}
       format.json { head :no_content }
     end
   end
 
   private
-
     # Use this method to whitelist the permissible parameters. Example:
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def nagios_check_params
-      params.require(:nagios_check).permit(:name)
+      params.require(:nagios_check).permit(:name, :passed, :ticket)
     end
 end

@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "automount_checks", :force => true do |t|
     t.string   "name"
+    t.boolean  "passed"
+    t.integer  "ticket"
     t.integer  "operations_check_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
@@ -55,8 +57,14 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
   create_table "lab_checks", :force => true do |t|
     t.string   "lab_name"
     t.string   "machine1_name"
+    t.boolean  "machine1_passed"
+    t.integer  "machine1_ticket"
     t.string   "machine2_name"
+    t.boolean  "machine2_passed"
+    t.integer  "machine2_ticket"
     t.string   "machine3_name"
+    t.boolean  "machine3_passed"
+    t.integer  "machine3_ticket"
     t.boolean  "completed"
     t.integer  "operations_check_id"
     t.datetime "created_at",          :null => false
@@ -71,6 +79,8 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "ldap_checks", :force => true do |t|
     t.string   "name"
+    t.boolean  "passed"
+    t.integer  "ticket"
     t.integer  "operations_check_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
@@ -84,6 +94,8 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "load_balancer_checks", :force => true do |t|
     t.string   "name"
+    t.boolean  "passed"
+    t.integer  "ticket"
     t.integer  "operations_check_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
@@ -106,6 +118,8 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "nagios_checks", :force => true do |t|
     t.string   "name"
+    t.boolean  "passed"
+    t.integer  "ticket"
     t.integer  "operations_check_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
@@ -127,6 +141,8 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "packages_checks", :force => true do |t|
     t.string   "name"
+    t.boolean  "passed"
+    t.integer  "ticket"
     t.integer  "operations_check_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
@@ -134,6 +150,8 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "printer_checks", :force => true do |t|
     t.string   "name"
+    t.boolean  "passed"
+    t.integer  "ticket"
     t.integer  "operations_check_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
@@ -161,6 +179,8 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "rt_checks", :force => true do |t|
     t.string   "name"
+    t.boolean  "passed"
+    t.integer  "ticket"
     t.integer  "operations_check_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
