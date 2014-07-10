@@ -40,7 +40,8 @@ class RtChecksController < ApplicationController
   # POST /rt_checks
   # POST /rt_checks.json
   def create
-    @rt_check = RtCheck.new(rt_check_params)
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @rt_check = @operations_check.rt_checks.create(rt_check_params)
 
     respond_to do |format|
       if @rt_check.save
@@ -56,7 +57,8 @@ class RtChecksController < ApplicationController
   # PATCH/PUT /rt_checks/1
   # PATCH/PUT /rt_checks/1.json
   def update
-    @rt_check = RtCheck.find(params[:id])
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @rt_check = @operations_check.rt_checks.find(params[:id])
 
     respond_to do |format|
       if @rt_check.update_attributes(rt_check_params)

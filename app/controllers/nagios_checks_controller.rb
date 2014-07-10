@@ -40,7 +40,8 @@ class NagiosChecksController < ApplicationController
   # POST /nagios_checks
   # POST /nagios_checks.json
   def create
-    @nagios_check = NagiosCheck.new(nagios_check_params)
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @nagios_check = @operations_check.nagios_checks.create(nagios_check_params)
 
     respond_to do |format|
       if @nagios_check.save
@@ -56,7 +57,8 @@ class NagiosChecksController < ApplicationController
   # PATCH/PUT /nagios_checks/1
   # PATCH/PUT /nagios_checks/1.json
   def update
-    @nagios_check = NagiosCheck.find(params[:id])
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @lab_check = @operations_check.lab_checks.find(params[:id])
 
     respond_to do |format|
       if @nagios_check.update_attributes(nagios_check_params)

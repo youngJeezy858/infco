@@ -40,15 +40,16 @@ class LabChecksController < ApplicationController
   # POST /lab_checks
   # POST /lab_checks.json
   def create
-    @lab_check = LabCheck.new(lab_check_params)
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @lab_check = @operations_check.lab_checks.create(lab_check_params)
+    @lab_check.lab_name = params[:lab_name].to_s
 
     respond_to do |format|
       if @lab_check.save
-        format.html { redirect_to @lab_check, notice: 'Lab check was successfully created.' }
+        format.html { redirect_to @operations_check, notice: 'Lab check was successfully created.' }
         format.json { render json: @lab_check, status: :created, location: @lab_check }
       else
-        format.html { render action: "new" }
-        format.json { render json: @lab_check.errors, status: :unprocessable_entity }
+        format.html { redirect_to @operations_check, notice: 'Commit Failed - cannot use the same machine twice!' }
       end
     end
   end
@@ -56,8 +57,9 @@ class LabChecksController < ApplicationController
   # PATCH/PUT /lab_checks/1
   # PATCH/PUT /lab_checks/1.json
   def update
-    @lab_check = LabCheck.find(params[:id])
-
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @lab_check = @operations_check.lab_checks.find(params[:id])
+    
     respond_to do |format|
       if @lab_check.update_attributes(lab_check_params)
         format.html { redirect_to @lab_check, notice: 'Lab check was successfully updated.' }
@@ -72,11 +74,12 @@ class LabChecksController < ApplicationController
   # DELETE /lab_checks/1
   # DELETE /lab_checks/1.json
   def destroy
+    operations_check = OperationsCheck.find(params[:operations_check_id])
     @lab_check = LabCheck.find(params[:id])
     @lab_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to lab_checks_url }
+      format.html { redirect_to operations_check }
       format.json { head :no_content }
     end
   end

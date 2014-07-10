@@ -15,8 +15,9 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "automount_checks", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "operations_check_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "automounts", :force => true do |t|
@@ -57,8 +58,9 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
     t.string   "machine2_name"
     t.string   "machine3_name"
     t.boolean  "completed"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "operations_check_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "labs", :force => true do |t|
@@ -69,8 +71,9 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "ldap_checks", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "operations_check_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "ldap_entries", :force => true do |t|
@@ -81,8 +84,9 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "load_balancer_checks", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "operations_check_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "load_balancers", :force => true do |t|
@@ -102,8 +106,9 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "nagios_checks", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "operations_check_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "nagios_entries", :force => true do |t|
@@ -114,21 +119,24 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "operations_checks", :force => true do |t|
     t.string   "owner"
+    t.string   "signed_off_by"
     t.datetime "date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "packages_checks", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "operations_check_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "printer_checks", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "operations_check_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "printers", :force => true do |t|
@@ -153,8 +161,9 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "rt_checks", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "operations_check_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "space_checks", :force => true do |t|

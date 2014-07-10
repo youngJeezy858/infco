@@ -14,6 +14,12 @@ class OperationsChecksController < ApplicationController
   # GET /operations_checks/1.json
   def show
     @operations_check = OperationsCheck.find(params[:id])
+    @labs = Lab.all
+    @printers = Printer.all
+    @automounts = Automount.all
+    @nagios_entries = NagiosEntry.all
+    @load_balancers = LoadBalancer.all
+    @ldap_entries = LdapEntry.all    
 
     respond_to do |format|
       format.html # show.html.erb

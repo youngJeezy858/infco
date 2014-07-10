@@ -40,7 +40,8 @@ class AutomountChecksController < ApplicationController
   # POST /automount_checks
   # POST /automount_checks.json
   def create
-    @automount_check = AutomountCheck.new(automount_check_params)
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @automount_check = @operations_check.automount_checks.create(automount_check_params)
 
     respond_to do |format|
       if @automount_check.save
@@ -56,7 +57,8 @@ class AutomountChecksController < ApplicationController
   # PATCH/PUT /automount_checks/1
   # PATCH/PUT /automount_checks/1.json
   def update
-    @automount_check = AutomountCheck.find(params[:id])
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @automount_check = @operations_check.automount_checks.find(params[:id])
 
     respond_to do |format|
       if @automount_check.update_attributes(automount_check_params)

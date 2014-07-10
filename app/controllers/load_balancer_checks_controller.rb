@@ -40,7 +40,8 @@ class LoadBalancerChecksController < ApplicationController
   # POST /load_balancer_checks
   # POST /load_balancer_checks.json
   def create
-    @load_balancer_check = LoadBalancerCheck.new(load_balancer_check_params)
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @load_balancer_check = @operations_check.load_balancer_checks.create(load_balancer_check_params)
 
     respond_to do |format|
       if @load_balancer_check.save
@@ -56,7 +57,8 @@ class LoadBalancerChecksController < ApplicationController
   # PATCH/PUT /load_balancer_checks/1
   # PATCH/PUT /load_balancer_checks/1.json
   def update
-    @load_balancer_check = LoadBalancerCheck.find(params[:id])
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @load_balancer_check = @operations_check.load_balancer_checks.find(params[:id])
 
     respond_to do |format|
       if @load_balancer_check.update_attributes(load_balancer_check_params)

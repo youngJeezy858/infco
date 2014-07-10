@@ -40,7 +40,8 @@ class PackagesChecksController < ApplicationController
   # POST /packages_checks
   # POST /packages_checks.json
   def create
-    @packages_check = PackagesCheck.new(packages_check_params)
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @packages_check = @operations_check.packages_checks.create(packages_check_params)
 
     respond_to do |format|
       if @packages_check.save
@@ -56,7 +57,8 @@ class PackagesChecksController < ApplicationController
   # PATCH/PUT /packages_checks/1
   # PATCH/PUT /packages_checks/1.json
   def update
-    @packages_check = PackagesCheck.find(params[:id])
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @packages_check = @operations_check.packages_checks.find(params[:id])
 
     respond_to do |format|
       if @packages_check.update_attributes(packages_check_params)

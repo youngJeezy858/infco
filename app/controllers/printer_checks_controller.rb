@@ -40,11 +40,12 @@ class PrinterChecksController < ApplicationController
   # POST /printer_checks
   # POST /printer_checks.json
   def create
-    @printer_check = PrinterCheck.new(printer_check_params)
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @printer_check = @operations_check.printer_checks.create(printer_check_params)
 
     respond_to do |format|
       if @printer_check.save
-        format.html { redirect_to @printer_check, notice: 'Printer check was successfully created.' }
+        format.html { redirect_to @operations_check, notice: 'Printer check was successfully created.' }
         format.json { render json: @printer_check, status: :created, location: @printer_check }
       else
         format.html { render action: "new" }
@@ -56,7 +57,8 @@ class PrinterChecksController < ApplicationController
   # PATCH/PUT /printer_checks/1
   # PATCH/PUT /printer_checks/1.json
   def update
-    @printer_check = PrinterCheck.find(params[:id])
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @printer_check = @operations_check.printer_checks.find(params[:id])
 
     respond_to do |format|
       if @printer_check.update_attributes(printer_check_params)
@@ -72,11 +74,12 @@ class PrinterChecksController < ApplicationController
   # DELETE /printer_checks/1
   # DELETE /printer_checks/1.json
   def destroy
+    operations_check = OperationsCheck.find(params[:operations_check_id])
     @printer_check = PrinterCheck.find(params[:id])
     @printer_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to printer_checks_url }
+      format.html { redirect_to operations_check }
       format.json { head :no_content }
     end
   end

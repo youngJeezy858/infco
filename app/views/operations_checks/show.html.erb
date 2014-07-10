@@ -20,13 +20,105 @@
       <li><a href="#ldap" data-toggle="tab">LDAP</a></li>
       <li><a href="#packages" data-toggle="tab">Packages</a></li>
     </ul>
+    
     <div class="tab-content">
       <div class="tab-pane active" id="labs">
-      
+	<table class="table table-striped">
+	  <% unless @operations_check.lab_checks.empty? %>
+	  <thead>
+	    <tr>
+              <th>Name</th>
+              <th>M1</th>
+              <th>M2</th>
+              <th>M3</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <% end %>
+	  <tbody>
+	    <% @operations_check.lab_checks.each do |lab_check| %>
+	    <% unless lab_check.id.nil? %>
+	    <tr>
+              <td><%= lab_check.lab_name %></td>
+	      <td><%= lab_check.machine1_name %></td>
+              <td><%= lab_check.machine2_name %></td>
+	      <td><%= lab_check.machine3_name %></td>
+	      <td><%= link_to 'Remove', 
+		      operations_check_lab_check_path(@operations_check, lab_check), 
+		      method: :delete, class: 'btn btn-mini btn-danger' %></td>
+	    </tr>
+	    <% end %>
+	    <% end %>
+	  </tbody>
+	</table>
+	
+	<% @labs.each do |lab| %>
+	<% next if @operations_check.lab_checks.select("lab_name").map(&:lab_name).include? lab.name %>
+	<%= form_for([@operations_check, @operations_check.lab_checks.build]) do |f| %>
+	<h3><%= lab.name %></h3>
+	<%= f.hidden_field :lab_name %>
+	<%= hidden_field_tag 'lab_name', lab.name %>
+	<div class="control-group">
+	  <div class="controls">
+            <%= f.collection_select :machine1_name, lab.machines, :name, :name %>
+	  </div>
+	</div>
+	<div class="control-group">
+	  <div class="controls">
+            <%= f.collection_select :machine2_name, lab.machines, :name, :name %>
+	  </div>
+	</div>	
+	<div class="control-group">
+	  <div class="controls">
+            <%= f.collection_select :machine3_name, lab.machines, :name, :name %>
+	  </div>
+	</div>
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
+	</div>
+	<% end %>
+	<% end %>
       </div>
+      
       <div class="tab-pane" id="printers">
-      
+	<table class="table table-striped">
+	  <% unless @operations_check.printer_checks.empty? %>
+	  <thead>
+	    <tr>
+              <th>Name</th>
+              <th></th>
+	    </tr>
+	  </thead>
+	  <% end %>
+	  <tbody>
+	    <% @operations_check.printer_checks.each do |printer_check| %>
+	    <% unless printer_check.id.nil? %>
+	    <tr>
+              <td><%= printer_check.name %></td>
+	      <td><%= link_to 'Remove', 
+		      operations_check_printer_check_path(@operations_check, printer_check), 
+		      method: :delete, class: 'btn btn-mini btn-danger' %></td>
+            </tr>
+	    <% end %>
+	    <% end %>
+	  </tbody>
+	</table>
+	
+	<% @printers.each do |printer| %>
+	<% next if @operations_check.printer_checks.select("name").map(&:name).include? printer.name %>
+	<%= form_for([@operations_check, @operations_check.printer_checks.build]) do |f| %>
+	<div class="control-group">
+	  <div class="controls">
+            <%= f.collection_select :name, @printers, :name, :name %>
+	  </div>
+	</div>	
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
+	</div>
+	<% end %>
+	<% end %>
       </div>
+
       <div class="tab-pane" id="automounts">
       
       </div>

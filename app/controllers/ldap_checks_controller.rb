@@ -40,7 +40,8 @@ class LdapChecksController < ApplicationController
   # POST /ldap_checks
   # POST /ldap_checks.json
   def create
-    @ldap_check = LdapCheck.new(ldap_check_params)
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @ldap_check = @operations_check.ldap_checks.create(ldap_check_params)
 
     respond_to do |format|
       if @ldap_check.save
@@ -56,7 +57,8 @@ class LdapChecksController < ApplicationController
   # PATCH/PUT /ldap_checks/1
   # PATCH/PUT /ldap_checks/1.json
   def update
-    @ldap_check = LdapCheck.find(params[:id])
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    @ldap_check = @operations_check.ldap_checks.find(params[:id])
 
     respond_to do |format|
       if @ldap_check.update_attributes(ldap_check_params)
