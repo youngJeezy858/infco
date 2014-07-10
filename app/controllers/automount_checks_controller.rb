@@ -45,7 +45,7 @@ class AutomountChecksController < ApplicationController
 
     respond_to do |format|
       if @automount_check.save
-        format.html { redirect_to @automount_check, notice: 'Automount check was successfully created.' }
+        format.html { redirect_to operations_check_path(@operations_check.id, tab:"automounts"), notice: 'Automount check was successfully created.' }
         format.json { render json: @automount_check, status: :created, location: @automount_check }
       else
         format.html { render action: "new" }
@@ -74,11 +74,12 @@ class AutomountChecksController < ApplicationController
   # DELETE /automount_checks/1
   # DELETE /automount_checks/1.json
   def destroy
+    operations_check = OperationsCheck.find(params[:operations_check_id])
     @automount_check = AutomountCheck.find(params[:id])
     @automount_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to automount_checks_url }
+      format.html { redirect_to operations_check_path(operations_check, tab:"automounts") }
       format.json { head :no_content }
     end
   end

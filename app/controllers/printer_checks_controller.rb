@@ -45,7 +45,7 @@ class PrinterChecksController < ApplicationController
 
     respond_to do |format|
       if @printer_check.save
-        format.html { redirect_to @operations_check, notice: 'Printer check was successfully created.' }
+        format.html { redirect_to operations_check_path(@operations_check.id, tab:"printers"), notice: 'Printer check was successfully created.' }
         format.json { render json: @printer_check, status: :created, location: @printer_check }
       else
         format.html { render action: "new" }
@@ -79,7 +79,7 @@ class PrinterChecksController < ApplicationController
     @printer_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to operations_check }
+      format.html { redirect_to operations_check_path(operations_check.id, tab:"printers") }
       format.json { head :no_content }
     end
   end

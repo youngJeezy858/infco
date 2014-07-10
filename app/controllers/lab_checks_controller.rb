@@ -46,7 +46,7 @@ class LabChecksController < ApplicationController
 
     respond_to do |format|
       if @lab_check.save
-        format.html { redirect_to @operations_check, notice: 'Lab check was successfully created.' }
+        format.html { redirect_to operations_check_path(@operations_check.id, tab:"labs"), notice: 'Lab check was successfully created.' }
         format.json { render json: @lab_check, status: :created, location: @lab_check }
       else
         format.html { redirect_to @operations_check, notice: 'Commit Failed - cannot use the same machine twice!' }
@@ -79,7 +79,7 @@ class LabChecksController < ApplicationController
     @lab_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to operations_check }
+      format.html { redirect_to operations_check_path(operations_check.id, tab:"labs") }
       format.json { head :no_content }
     end
   end

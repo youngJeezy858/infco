@@ -11,105 +11,141 @@
 
   <div class="tabbable">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#labs" data-toggle="tab">Labs</a></li>
-      <li><a href="#printers" data-toggle="tab">Printers</a></li>
-      <li><a href="#automounts" data-toggle="tab">Automounts</a></li>
-      <li><a href="#nagios" data-toggle="tab">Nagios</a></li>
-      <li><a href="#rt" data-toggle="tab">RT</a></li>
-      <li><a href="#load_balancers" data-toggle="tab">Load Balancers</a></li>
-      <li><a href="#ldap" data-toggle="tab">LDAP</a></li>
-      <li><a href="#packages" data-toggle="tab">Packages</a></li>
+      <li class="<%= 'active' if params[:tab] == 'labs' || !params[:tab] %>">
+	<a href="#labs" data-toggle="tab" 
+	   style="<%= if (@labs_unchecked.empty?) then 
+		  'color: green' else 'color: red' end %>">Labs</a>
+      </li>
+      <li class="<%= 'active' if params[:tab] == 'printers' %>">
+	<a href="#printers" data-toggle="tab"
+	   style="<%= if (@printers.empty?) then 
+		  'color: green' else 'color: red' end %>">Printers</a></li>
+      <li class="<%= 'active' if params[:tab] == 'automounts' %>">
+	<a href="#automounts" data-toggle="tab"
+	   style="<%= if (@automounts.empty?) then 
+		  'color: green' else 'color: red' end %>">Automounts</a></li>
+      <li class="<%= 'active' if params[:tab] == 'naigos' %>">
+	<a href="#nagios" data-toggle="tab">Nagios</a></li>
+      <li class="<%= 'active' if params[:tab] == 'rt' %>">
+	<a href="#rt" data-toggle="tab">RT</a></li>
+      <li class="<%= 'active' if params[:tab] == 'load_balancers' %>">
+	<a href="#load_balancers" data-toggle="tab">Load Balancers</a></li>
+      <li class="<%= 'active' if params[:tab] == 'ldap' %>">
+	<a href="#ldap" data-toggle="tab">LDAP</a></li>
+      <li class="<%= 'active' if params[:tab] == 'packages' %>">
+	<a href="#packages" data-toggle="tab">Packages</a></li>
     </ul>
     
     <div class="tab-content">
-      <div class="tab-pane active" id="labs">
-	<table class="table table-striped">
-	  <% unless @operations_check.lab_checks.empty? %>
-	  <thead>
-	    <tr>
-              <th>Name</th>
-              <th>M1</th>
-              <th>M2</th>
-              <th>M3</th>
-	      <th></th>
-	    </tr>
-	  </thead>
-	  <% end %>
-	  <tbody>
-	    <% @operations_check.lab_checks.each do |lab_check| %>
-	    <% unless lab_check.id.nil? %>
-	    <tr>
-              <td><%= lab_check.lab_name %></td>
-	      <td><%= lab_check.machine1_name %></td>
-              <td><%= lab_check.machine2_name %></td>
-	      <td><%= lab_check.machine3_name %></td>
-	      <td><%= link_to 'Remove', 
-		      operations_check_lab_check_path(@operations_check, lab_check), 
-		      method: :delete, class: 'btn btn-mini btn-danger' %></td>
-	    </tr>
-	    <% end %>
-	    <% end %>
-	  </tbody>
-	</table>
+      <!-- BEGIN lab checks tab --> 
+      <div class="<%= if (params[:tab] == 'labs' || !params[:tab])
+		  then 'tab-pane active' else 'tab-pane' end %>" id="labs">
+	<% unless @operations_check.lab_checks.empty? %>
+	<div class="ops-check-divider">
+	  <table class="table table-striped">
+	    <thead>
+	      <tr>
+		<th>Name</th>
+		<th>M1</th>
+		<th>M2</th>
+		<th>M3</th>
+		<th></th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <% @operations_check.lab_checks.each do |lab_check| %>
+	      <% unless lab_check.id.nil? %>
+	      <tr>
+		<td><%= lab_check.lab_name %></td>
+		<td><%= lab_check.machine1_name %></td>
+		<td><%= lab_check.machine2_name %></td>
+		<td><%= lab_check.machine3_name %></td>
+		<td><%= link_to 'Remove', 
+			operations_check_lab_check_path(@operations_check, lab_check), 
+			method: :delete, class: 'btn btn-mini btn-danger' %></td>
+	      </tr>
+	      <% end %>
+	      <% end %>
+	    </tbody>
+	  </table>
+	</div>
+	<% end %>
 	
 	<% @labs.each do |lab| %>
 	<% next if @operations_check.lab_checks.select("lab_name").map(&:lab_name).include? lab.name %>
 	<%= form_for([@operations_check, @operations_check.lab_checks.build]) do |f| %>
-	<h3><%= lab.name %></h3>
-	<%= f.hidden_field :lab_name %>
-	<%= hidden_field_tag 'lab_name', lab.name %>
-	<div class="control-group">
-	  <div class="controls">
-            <%= f.collection_select :machine1_name, lab.machines, :name, :name %>
+	<h3 style="margin-bottom: 0px"><%= lab.name %></h3>
+	<div class="row">
+	  <%= f.hidden_field :lab_name %>
+	  <%= hidden_field_tag 'lab_name', lab.name %>
+	  <div class="span4">
+	    <div class="control-group">
+	      <h5>Machine 1</h5>
+	      <div class="controls">
+		<%= f.collection_select :machine1_name, lab.machines, :name, :name %>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="span4">
+	    <div class="control-group">
+	      <h5>Machine 2</h5>
+	      <div class="controls">
+		<%= f.collection_select :machine2_name, lab.machines, :name, :name %>
+	      </div>
+	    </div>	
+	  </div>
+	  <div class="span4">
+	    <div class="control-group">
+	      <h5>Machine 3</h5>
+	      <div class="controls">
+		<%= f.collection_select :machine3_name, lab.machines, :name, :name %>
+	      </div>
+	    </div>
 	  </div>
 	</div>
-	<div class="control-group">
-	  <div class="controls">
-            <%= f.collection_select :machine2_name, lab.machines, :name, :name %>
-	  </div>
-	</div>	
-	<div class="control-group">
-	  <div class="controls">
-            <%= f.collection_select :machine3_name, lab.machines, :name, :name %>
-	  </div>
-	</div>
-	<div class="actions">
+	<div class="actions" style="padding-bottom: 10px;
+				    border-bottom: 1px solid #eeeeee">
 	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
 	</div>
 	<% end %>
 	<% end %>
       </div>
+      <!-- END lab checks tab -->
       
-      <div class="tab-pane" id="printers">
-	<table class="table table-striped">
-	  <% unless @operations_check.printer_checks.empty? %>
-	  <thead>
-	    <tr>
-              <th>Name</th>
-              <th></th>
-	    </tr>
-	  </thead>
-	  <% end %>
-	  <tbody>
-	    <% @operations_check.printer_checks.each do |printer_check| %>
-	    <% unless printer_check.id.nil? %>
-	    <tr>
-              <td><%= printer_check.name %></td>
-	      <td><%= link_to 'Remove', 
-		      operations_check_printer_check_path(@operations_check, printer_check), 
-		      method: :delete, class: 'btn btn-mini btn-danger' %></td>
-            </tr>
-	    <% end %>
-	    <% end %>
-	  </tbody>
-	</table>
+      <!-- BEGIN printer checks tab -->
+      <div class="<%= if params[:tab] == 'printers'
+		  then 'tab-pane active' else 'tab-pane' end %>" id="printers">
+	<% unless @operations_check.printer_checks.empty? %>
+	<div class="ops-check-divider">
+	  <table class="table table-striped">
+	    <thead>
+	      <tr>
+		<th>Name</th>
+		<th></th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <% @operations_check.printer_checks.each do |printer_check| %>
+	      <% unless printer_check.id.nil? %>
+	      <tr>
+		<td><%= printer_check.name %></td>
+		<td><%= link_to 'Remove', 
+			operations_check_printer_check_path(@operations_check, printer_check), 
+			method: :delete, class: 'btn btn-mini btn-danger' %></td>
+              </tr>
+	      <% end %>
+	      <% end %>
+	    </tbody>
+	  </table>
+	</div>
+	<% end %>
 	
-	<% @printers.each do |printer| %>
-	<% next if @operations_check.printer_checks.select("name").map(&:name).include? printer.name %>
+	<% unless @printers.empty? %>
 	<%= form_for([@operations_check, @operations_check.printer_checks.build]) do |f| %>
 	<div class="control-group">
+	  <h5>Printer Name</h5>
 	  <div class="controls">
-            <%= f.collection_select :name, @printers, :name, :name %>
+            <%= f.collection_select :name, @printers, :to_s, :to_s %>
 	  </div>
 	</div>	
 	<div class="actions">
@@ -118,23 +154,83 @@
 	<% end %>
 	<% end %>
       </div>
+      <!-- END printer checks tab -->
 
-      <div class="tab-pane" id="automounts">
+      <!-- BEGIN automounts checks tab -->
+      <div class="<%= if params[:tab] == 'automounts'
+		  then 'tab-pane active' else 'tab-pane' end %>" id="automounts">
+	<% unless @operations_check.automount_checks.empty? %>
+	<div class="ops-check-divider">
+	  <table class="table table-striped">
+            <thead>
+              <tr>
+		<th>Name</th>
+		<th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @operations_check.automount_checks.each do |automount_check| %>
+              <% unless automount_check.id.nil? %>
+              <tr>
+		<td><%= automount_check.name %></td>
+		<td><%= link_to 'Remove',
+			operations_check_automount_check_path(@operations_check, automount_check),
+			method: :delete, class: 'btn btn-mini btn-danger' %></td>
+              </tr>
+	      <% end %>
+              <% end %>
+            </tbody>
+          </table>
+	</div>
+	<% end %>
+
+	<% unless @automounts.empty? %>
+        <%= form_for([@operations_check, @operations_check.automount_checks.build]) do |f| %>
+        <div class="control-group">
+	  <h5>Automount Name</h5>
+          <div class="controls">
+            <%= f.collection_select :name, @automounts, :to_s, :to_s %>
+          </div>
+        </div>
+        <div class="actions">
+          <%= f.submit "Create Check", :class => 'btn btn-primary' %>
+        </div>
+        <% end %>
+	<% end %>
+      </div>
+      <!-- END automounts checks tab -->
+
+      <!-- BEGIN nagios checks tab -->
+      <div class="<%= if params[:tab] == 'nagios'
+		  then 'tab-pane active' else 'tab-pane' end %>" id="nagios">
       
       </div>
-      <div class="tab-pane" id="nagios">
+      <!-- END nagios checks tab -->
+
+      <!-- BEGIN request tracker check tab -->
+      <div class="<%= if params[:tab] == 'rt'
+		  then 'tab-pane active' else 'tab-pane' end %>" id="rt">
       
       </div>
-      <div class="tab-pane" id="rt">
+      <!-- END request tracker check tab -->
+
+      <!-- BEGIN load_balancers check tab -->
+      <div class="<%= if params[:tab] == 'load_balancers'
+		  then 'tab-pane active' else 'tab-pane' end %>" id="load_balancers">
       
       </div>
-      <div class="tab-pane" id="load_balancers">
+      <!-- END load_balancers check tab -->
+
+      <!-- BEGIN ldap checks tab -->
+      <div class="<%= if params[:tab] == 'ldap'
+		  then 'tab-pane active' else 'tab-pane' end %>" id="ldap">
       
       </div>
-      <div class="tab-pane" id="ldap">
+      <!-- END ldap checks tab -->
       
-      </div>
-      <div class="tab-pane" id="packages">
+      <!-- BEGIN package checks tab -->
+      <div class="<%= if params[:tab] == 'packages'
+		  then 'tab-pane active' else 'tab-pane' end %>" id="packages">
       
       </div>
     </div>

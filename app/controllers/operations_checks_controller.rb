@@ -15,8 +15,9 @@ class OperationsChecksController < ApplicationController
   def show
     @operations_check = OperationsCheck.find(params[:id])
     @labs = Lab.all
-    @printers = Printer.all
-    @automounts = Automount.all
+    @labs_unchecked = Lab.select("name").map(&:name) - @operations_check.lab_checks.select("lab_name").map(&:lab_name)
+    @printers = Printer.select("name").map(&:name) - @operations_check.printer_checks.select("name").map(&:name)
+    @automounts = Automount.select("name").map(&:name) - @operations_check.automount_checks.select("name").map(&:name)
     @nagios_entries = NagiosEntry.all
     @load_balancers = LoadBalancer.all
     @ldap_entries = LdapEntry.all    
