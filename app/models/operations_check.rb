@@ -7,5 +7,5 @@ class OperationsCheck < ActiveRecord::Base
   has_many :ldap_checks
   has_one :rt_check
   has_one :packages_check
-  attr_accessible :date, :string
+  attr_accessible :date, :string, :signed_off_by
 end

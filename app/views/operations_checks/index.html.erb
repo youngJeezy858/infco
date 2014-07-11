@@ -39,7 +39,7 @@
 	<tr>
 	  <th>Owner</th>
 	  <th>Date</th>
-	  <th></th>
+	  <th>Signed by</th>
 	  <th></th>
 	  <th></th>
 	</tr>
@@ -50,8 +50,11 @@
 	<tr>
 	  <td><%= operations_check.owner %></td>
 	  <td><%= operations_check.date.strftime("%Y-%m-%d %I:%M %p") %></td>
+	  <td><%= operations_check.signed_off_by %></td>
 	  <td><%= link_to 'Show', operations_check, :class => 'btn btn-mini' %></td>
-	  <td><%= link_to 'Destroy', operations_check, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+	  <td><%= link_to 'Destroy', operations_check, 
+		  method: :delete, data: { confirm: 'Are you sure?' }, 
+		  :class => 'btn btn-mini btn-danger' %></td>
 	</tr>
 	<% end %>
       </tbody>

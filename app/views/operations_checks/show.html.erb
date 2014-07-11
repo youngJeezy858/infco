@@ -365,6 +365,7 @@
 	<%= f.hidden_field :name %>
         <%= hidden_field_tag 'name', 'rt002' %>
         <div class="control-group">
+	  <h5>Ticket Number</h5>
           <div class="controls">
             <%= f.number_field :ticket, :style => 'width: 100px' %>
 	    <%= f.check_box :passed, :class => 'lab-check-box' %>
@@ -520,6 +521,7 @@
 	<%= f.hidden_field :name %>
         <%= hidden_field_tag 'name', 'Packages' %>
         <div class="control-group">
+	  <h5>Ticket Number</h5>
           <div class="controls">
             <%= f.number_field :ticket, :style => 'width: 100px' %>
 	    <%= f.check_box :passed, :class => 'lab-check-box' %>
@@ -536,7 +538,11 @@
 
   <div class="form-actions">
     <%= link_to 'Back', operations_checks_path, :class => 'btn' %>
-    <%= link_to 'Sign off on this check', operations_checks_path, :class => 'btn btn-primary' %>
+    <% if @operations_check.signed_off_by.blank? %>
+    <%= link_to 'Sign off on this check', 
+	sign_off_operations_check_path(@operations_check), 
+	:class => 'btn btn-primary' %>
+    <% end %>
     <%= link_to 'Destroy', @internal_check,
 	method: :delete, data: { confirm: 'Are you sure you want to delete this check?' },
 	class: 'btn btn-danger' %>

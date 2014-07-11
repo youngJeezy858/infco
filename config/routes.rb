@@ -9,27 +9,15 @@ Infco::Application.routes.draw do
   end
 
   resources :operations_checks do
+    get :sign_off, on: :member
     resources :lab_checks
-      resources :packages_checks
-
-
-  resources :ldap_checks
-
-
-  resources :load_balancer_checks
-
-
-  resources :rt_checks
-
-
-  resources :nagios_checks
-
-
-  resources :automount_checks
-
-
-  resources :printer_checks
-
+    resources :packages_checks
+    resources :ldap_checks
+    resources :load_balancer_checks
+    resources :rt_checks
+    resources :nagios_checks
+    resources :automount_checks
+    resources :printer_checks
   end
 
   resources :admin_tools
