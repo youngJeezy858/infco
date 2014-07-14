@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  machine_name: MyString
+  person: 
+
+two:
+  machine_name: MyString
+  person: 

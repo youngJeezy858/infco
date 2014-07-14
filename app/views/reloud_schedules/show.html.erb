@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Machine name:</b>
+  <%= @reloud_schedule.machine_name %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%= @reloud_schedule.person %>
+</p>
+
+
+<%= link_to 'Edit', edit_reloud_schedule_path(@reloud_schedule) %> |
+<%= link_to 'Back', reloud_schedules_path %>

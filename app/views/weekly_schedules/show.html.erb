@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @weekly_schedule.name %>
+</p>
+
+<p>
+  <b>Monday:</b>
+  <%= @weekly_schedule.monday %>
+</p>
+
+<p>
+  <b>Tuesday:</b>
+  <%= @weekly_schedule.tuesday %>
+</p>
+
+<p>
+  <b>Wednesday:</b>
+  <%= @weekly_schedule.wednesday %>
+</p>
+
+<p>
+  <b>Thursday:</b>
+  <%= @weekly_schedule.thursday %>
+</p>
+
+<p>
+  <b>Friday:</b>
+  <%= @weekly_schedule.friday %>
+</p>
+
+
+<%= link_to 'Edit', edit_weekly_schedule_path(@weekly_schedule) %> |
+<%= link_to 'Back', weekly_schedules_path %>

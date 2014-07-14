@@ -1,0 +1,111 @@
+<div class="page-header">
+  <h1>Daily Checks</h1>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <div class="hidden-phone">
+      <table class="table table-striped">
+	<thead>
+	  <tr>
+	    <td><b>Name</b></td>
+	    <td>Monday</td>
+	    <td>Tuesday</td>
+	    <td>Wednesday</td>
+	    <td>Thursday</td>
+	    <td>Friday</td>
+	  </tr>
+	</thead>
+	
+	<tbody>
+	  <% @weekly_schedules.each do |weekly_schedule| %>
+	  <tr>
+	    <td><%= weekly_schedule.name %></td>
+	    <td><%= weekly_schedule.monday %></td>
+	    <td><%= weekly_schedule.tuesday %></td>
+	    <td><%= weekly_schedule.wednesday %></td>
+	    <td><%= weekly_schedule.thursday %></td>
+	    <td><%= weekly_schedule.friday %></td>
+	  </tr>
+	  <% end %>
+	</tbody>
+      </table>
+    </div>
+    <div class="visible-phone">
+      <table class="table table-striped">
+	<thead>
+	  <tr>
+	    <td><b>Name</b></td>
+	    <td>M</td>
+	    <td>T</td>
+	    <td>W</td>
+	    <td>T</td>
+	    <td>F</td>
+	  </tr>
+	</thead>
+	
+	<tbody>
+	  <% @weekly_schedules.each do |weekly_schedule| %>
+	  <tr>
+	    <td><%= weekly_schedule.name %></td>
+	    <td><%= weekly_schedule.monday[0..7] %></td>
+	    <td><%= weekly_schedule.tuesday[0..7] %></td>
+	    <td><%= weekly_schedule.wednesday[0..7] %></td>
+	    <td><%= weekly_schedule.thursday[0..7] %></td>
+	    <td><%= weekly_schedule.friday[0..7] %></td>
+	  </tr>
+	  <% end %>
+	</tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span6">
+    <div class="page-header">
+      <h1>ReLOUD Checks</h1>
+    </div>
+    <table class="table table-striped">
+      <thead>
+	<tr>
+	  <td><b>Hostname</b></td>
+	  <td><b>Tech</b></td>
+	</tr>
+      </thead>
+      <tbody>
+	<% @reloud_schedules.each do |reloud_schedule| %>
+	<tr>
+	  <td><%= reloud_schedule.machine_name %></td>
+	  <td><%= reloud_schedule.person %></td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="span6">
+    <div class="page-header">
+      <h1>Office Cleanings</h1>
+    </div>
+    <table class="table table-striped">
+      <thead>
+	<tr>
+	  <td><b>Date</b></td>
+	  <td><b>Tech</b></td>
+	</tr>
+      </thead>
+      <tbody>
+	<% @office_cleanings_schedules.each do |office_cleanings_schedule| %>
+	<tr>
+	  <td>
+	    <%= office_cleanings_schedule.start_date.strftime("%m/%d") %>
+	    - <%= office_cleanings_schedule.end_date.strftime("%m/%d") %>
+	  </td>
+	  <td><%= office_cleanings_schedule.person %></td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

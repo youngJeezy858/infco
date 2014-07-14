@@ -1,4 +1,15 @@
 Infco::Application.routes.draw do
+  resources :office_cleanings_schedules
+
+
+  resources :reloud_schedules
+
+
+  resources :weekly_schedules
+
+
+  get "schedule/index"
+
   resources :ldap_entries
   resources :load_balancers
   resources :nagios_entries

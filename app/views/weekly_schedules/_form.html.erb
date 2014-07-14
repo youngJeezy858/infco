@@ -1,0 +1,56 @@
+<%= form_for(@weekly_schedule) do |f| %>
+  <% if @weekly_schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@weekly_schedule.errors.count, "error") %> prohibited this weekly_schedule from being saved:</h2>
+
+      <ul>
+      <% @weekly_schedule.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="controls">
+    <%= f.label :name %>
+    <div class="control-group">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+  <div class="offset1 controls">
+    <%= f.label :monday %>
+    <div class="control-group">
+      <%= f.text_field :monday %>
+    </div>
+  </div>
+  <div class="offset1 controls">
+    <%= f.label :tuesday %>
+    <div class="control-group">
+      <%= f.text_field :tuesday %>
+    </div>
+  </div>
+  <div class="offset1 controls">
+    <%= f.label :wednesday %>
+    <div class="control-group">
+      <%= f.text_field :wednesday %>
+    </div>
+  </div>
+  <div class="offset1 controls">
+    <%= f.label :thursday %>
+    <div class="control-group">
+      <%= f.text_field :thursday %>
+    </div>
+  </div>
+  <div class="offset1 controls">
+    <%= f.label :friday %>
+    <div class="control-group">
+      <%= f.text_field :friday %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Back', weekly_schedules_path, :class => 'btn' %>
+  </div>
+<% end %>
+

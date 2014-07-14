@@ -1,0 +1,76 @@
+<div class="page-header">
+  <h1>Weekly Schedules</h1>
+</div>
+
+<div class="hidden-phone">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+	<th>Name</th>
+	<th>Monday</th>
+	<th>Tuesday</th>
+	<th>Wednesday</th>
+	<th>Thursday</th>
+	<th>Friday</th>
+	<th></th>
+	<th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @weekly_schedules.each do |weekly_schedule| %>
+      <tr>
+	<td><%= weekly_schedule.name %></td>
+	<td><%= weekly_schedule.monday %></td>
+	<td><%= weekly_schedule.tuesday %></td>
+	<td><%= weekly_schedule.wednesday %></td>
+	<td><%= weekly_schedule.thursday %></td>
+	<td><%= weekly_schedule.friday %></td>
+	<td><%= link_to 'Edit', edit_weekly_schedule_path(weekly_schedule), 
+		:class => 'btn btn-mini' %></td>
+	<td><%= link_to 'Destroy', weekly_schedule, method: :delete, 
+		data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+      </tr>
+      <% end %> 
+    </tbody>
+  </table>
+</div>
+
+<div class="visible-phone">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+	<th>Name</th>
+	<th>M</th>
+	<th>T</th>
+	<th>W</th>
+	<th>R</th>
+	<th>F</th>
+	<th></th>
+	<th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @weekly_schedules.each do |weekly_schedule| %>
+      <tr>
+	<td><%= weekly_schedule.name[0..10] %></td>
+	<td><%= weekly_schedule.monday[0..4] %></td>
+	<td><%= weekly_schedule.tuesday[0..4] %></td>
+	<td><%= weekly_schedule.wednesday[0..4] %></td>
+	<td><%= weekly_schedule.thursday[0..4] %></td>
+	<td><%= weekly_schedule.friday[0..4] %></td>
+	<td><%= link_to 'Edit', edit_weekly_schedule_path(weekly_schedule), 
+		:class => 'btn btn-mini' %></td>
+	<td><%= link_to 'Destroy', weekly_schedule, method: :delete, 
+		data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="form-actions">
+  <%= link_to 'Back', admin_tools_path, :class => 'btn' %>
+  <%= link_to 'New Weekly schedule', new_weekly_schedule_path, :class => 'btn btn-primary' %>
+</div>

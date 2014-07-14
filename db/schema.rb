@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140709201354) do
+ActiveRecord::Schema.define(:version => 20140714213543) do
 
   create_table "automount_checks", :force => true do |t|
     t.string   "name"
@@ -131,6 +131,14 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "office_cleanings_schedules", :force => true do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "person"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "operations_checks", :force => true do |t|
     t.string   "owner"
     t.string   "signed_off_by"
@@ -177,6 +185,13 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "reloud_schedules", :force => true do |t|
+    t.string   "machine_name"
+    t.string   "person"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "rt_checks", :force => true do |t|
     t.string   "name"
     t.boolean  "passed"
@@ -199,6 +214,17 @@ ActiveRecord::Schema.define(:version => 20140709201354) do
 
   create_table "space_entries", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "weekly_schedules", :force => true do |t|
+    t.string   "name"
+    t.string   "monday"
+    t.string   "tuesday"
+    t.string   "wednesday"
+    t.string   "thursday"
+    t.string   "friday"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

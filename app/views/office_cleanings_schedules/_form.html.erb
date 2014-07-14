@@ -1,0 +1,36 @@
+<%= form_for(@office_cleanings_schedule) do |f| %>
+  <% if @office_cleanings_schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@office_cleanings_schedule.errors.count, "error") %> prohibited this office_cleanings_schedule from being saved:</h2>
+
+      <ul>
+      <% @office_cleanings_schedule.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="controls">
+    <%= f.label :start_date %>
+    <div class="control-group">
+      <%= f.date_select :start_date, {}, { :class => 'date-select' } %>
+    </div>
+  </div>
+  <div class="controls">
+    <%= f.label :end_date %>
+    <div class="control-group">
+      <%= f.date_select :end_date, { :default => Time.now + 7.days }, { :class => 'date-select' }  %>
+    </div>
+  </div>
+  <div class="controls">
+    <%= f.label :person %>
+    <div class="control-group">
+      <%= f.text_field :person %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Back', office_cleanings_schedules_path, :class => 'btn' %>
+  </div>
+<% end %>

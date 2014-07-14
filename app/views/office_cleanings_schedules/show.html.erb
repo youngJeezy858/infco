@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Start date:</b>
+  <%= @office_cleanings_schedule.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @office_cleanings_schedule.end_date %>
+</p>
+
+<p>
+  <b>Person:</b>
+  <%= @office_cleanings_schedule.person %>
+</p>
+
+
+<%= link_to 'Edit', edit_office_cleanings_schedule_path(@office_cleanings_schedule) %> |
+<%= link_to 'Back', office_cleanings_schedules_path %>

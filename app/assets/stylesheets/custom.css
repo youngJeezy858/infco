@@ -23,3 +23,7 @@ input.lab-check-box-phone {
 select.collection-select {
     width: 180px; 
 }
+
+select.date-select {
+    width: 100px; 
+}

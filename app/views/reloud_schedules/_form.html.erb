@@ -1,0 +1,30 @@
+<%= form_for(@reloud_schedule) do |f| %>
+  <% if @reloud_schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reloud_schedule.errors.count, "error") %> prohibited this reloud_schedule from being saved:</h2>
+
+      <ul>
+      <% @reloud_schedule.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="controls">
+    <%= f.label :machine_name %>
+    <div class="control-group">
+      <%= f.collection_select :machine_name, @reloud_entries, :to_s, :to_s %>
+    </div>
+  </div>
+  <div class="controls">
+    <%= f.label :person %>
+    <div class="control-group">
+      <%= f.text_field :person %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Back', reloud_schedules_path, :class => 'btn' %>
+  </div>
+<% end %>
