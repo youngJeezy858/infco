@@ -506,7 +506,7 @@
 	  </div>
 	</div>
 	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
+	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
 	</div>
       </div>
       <div class="visible-phone">
@@ -533,6 +533,7 @@
     <div class="<%= if params[:tab] == 'rt'
 		then 'tab-pane active' else 'tab-pane' end %>" id="rt">
       <div class="row">
+	<h3>rt002</h3>
 	<div class="span10">
           <p>
             Email the helpdesk from your work email and make sure a
@@ -574,19 +575,34 @@
       <% if @operations_check.rt_check.blank? %> 
       <%= form_for([@operations_check, @operations_check.build_rt_check]) do |f| %>
       <div class="hidden-phone">
-      <h3>rt002</h3>
-      <%= f.hidden_field :name %>
-      <%= hidden_field_tag 'name', 'rt002' %>
-      <div class="control-group">
-	<h5>Ticket Number</h5>
-        <div class="controls">
-          <%= f.number_field :ticket, :style => 'width: 100px' %>
-	  <%= f.check_box :passed, :class => 'lab-check-box' %>
+	<h3>rt002</h3>
+	<%= f.hidden_field :name %>
+	<%= hidden_field_tag 'name', 'rt002' %>
+	<div class="control-group">
+	  <h5>Ticket Number</h5>
+          <div class="controls">
+            <%= f.number_field :ticket, :style => 'width: 100px' %>
+	    <%= f.check_box :passed, :class => 'lab-check-box' %>
+	  </div>
+	</div>
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
 	</div>
       </div>
-      <div class="actions">
-	<%= f.submit "Create Check", :class => 'btn btn-primary' %>
-      </div>
+      <div class="visible-phone">
+	<%= f.hidden_field :name %>
+	<%= hidden_field_tag 'name', 'rt002' %>
+	<div class="control-group">
+	  <h5>Ticket Number</h5>
+          <div class="controls">
+            <%= f.number_field :ticket, :style => 'width: 100px' %>
+	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
+	  </div>
+	</div>
+	<br/>
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
+	</div>
       </div>
       <% end %>      
       <% end %>
@@ -643,21 +659,38 @@
       
       <% unless @load_balancers.empty? %>
       <%= form_for([@operations_check, @operations_check.load_balancer_checks.build]) do |f| %>
-      <div class="control-group">
-	<h5>Load Balancer Name</h5>
-	<div class="controls">
-          <%= f.collection_select :name, @load_balancers, :to_s, :to_s %>
-	  <%= f.check_box :passed, :class => 'lab-check-box' %>
+      <div class="hidden-phone">
+	<div class="control-group">
+	  <h5>Load Balancer Name</h5>
+	  <div class="controls">
+            <%= f.collection_select :name, @load_balancers, :to_s, :to_s %>
+	    <%= f.check_box :passed, :class => 'lab-check-box' %>
+	  </div>
+	</div>	
+	<div class="control-group">
+          <h5>Ticket Number</h5>
+          <div class="controls">
+            <%= f.number_field :ticket, :style => 'width: 100px' %>
+          </div>
 	</div>
-      </div>	
-      <div class="control-group">
-        <h5>Ticket Number</h5>
-        <div class="controls">
-          <%= f.number_field :ticket, :style => 'width: 100px' %>
-        </div>
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
+	</div>
       </div>
-      <div class="actions">
-	<%= f.submit "Create Check", :class => 'btn btn-primary' %>
+      <div class="visible-phone">
+	<div class="control-group">
+	  <h5>Load Balancer Name</h5>
+	  <div class="controls">
+            <%= f.collection_select :name, @load_balancers, :to_s, :to_s,
+		{}, { :class => 'collection-select' } %>
+	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
+	    <%= f.number_field :ticket, :style => 'width: 100px' %>
+          </div>
+	</div>	
+	<br/>
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
+	</div>
       </div>
       <% end %>
       <% end %>
@@ -714,21 +747,38 @@
 
       <% unless @ldap_entries.empty? %>
       <%= form_for([@operations_check, @operations_check.ldap_checks.build]) do |f| %>
-      <div class="control-group">
-	<h5>LDAP Server Name</h5>
-        <div class="controls">
-          <%= f.collection_select :name, @ldap_entries, :to_s, :to_s %>
-	  <%= f.check_box :passed, :class => 'lab-check-box' %>
-        </div>
+      <div class="hidden-phone">
+	<div class="control-group">
+	  <h5>LDAP Server Name</h5>
+          <div class="controls">
+            <%= f.collection_select :name, @ldap_entries, :to_s, :to_s %>
+	    <%= f.check_box :passed, :class => 'lab-check-box' %>
+          </div>
+	</div>
+	<div class="control-group">
+          <h5>Ticket Number</h5>
+          <div class="controls">
+            <%= f.number_field :ticket, :style => 'width: 100px' %>
+          </div>
+	</div>
+	<div class="actions">
+          <%= f.submit "Create Check", :class => 'btn btn-primary' %>
+	</div>
       </div>
-      <div class="control-group">
-        <h5>Ticket Number</h5>
-        <div class="controls">
-          <%= f.number_field :ticket, :style => 'width: 100px' %>
-        </div>
-      </div>
-      <div class="actions">
-        <%= f.submit "Create Check", :class => 'btn btn-primary' %>
+      <div class="visible-phone">
+	<div class="control-group">
+	  <h5>LDAP Server Name</h5>
+          <div class="controls">
+            <%= f.collection_select :name, @ldap_entries, :to_s, :to_s,
+		{}, { :class => 'collection-select' } %>
+	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
+            <%= f.number_field :ticket, :style => 'width: 100px' %>
+          </div>
+	</div>
+	<br/>
+	<div class="actions">
+          <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
+	</div>
       </div>
       <% end %>
       <% end %>
@@ -739,6 +789,7 @@
     <div class="<%= if params[:tab] == 'packages'
 		then 'tab-pane active' else 'tab-pane' end %>" id="packages">
       <div class="row">
+	<h3>Packages</h3>
         <div class="span10">
           <p>
             This check should never be marked as fail but should
@@ -779,18 +830,35 @@
 
       <% if @operations_check.packages_check.blank? %> 
       <%= form_for([@operations_check, @operations_check.build_packages_check]) do |f| %>
-      <h3>Packages</h3>
-      <%= f.hidden_field :name %>
-      <%= hidden_field_tag 'name', 'Packages' %>
-      <div class="control-group">
-	<h5>Ticket Number</h5>
-        <div class="controls">
-          <%= f.number_field :ticket, :style => 'width: 100px' %>
-	  <%= f.check_box :passed, :class => 'lab-check-box' %>
+      <div class="hidden-phone">
+	<h3>Packages</h3>
+	<%= f.hidden_field :name %>
+	<%= hidden_field_tag 'name', 'Packages' %>
+	<div class="control-group">
+	  <h5>Ticket Number</h5>
+          <div class="controls">
+            <%= f.number_field :ticket, :style => 'width: 100px' %>
+	    <%= f.check_box :passed, :class => 'lab-check-box' %>
+	  </div>
+	</div>
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
 	</div>
       </div>
-      <div class="actions">
-	<%= f.submit "Create Check", :class => 'btn btn-primary' %>
+      <div class="visible-phone">
+	<%= f.hidden_field :name %>
+	<%= hidden_field_tag 'name', 'Packages' %>
+	<div class="control-group">
+	  <h5>Ticket Number</h5>
+          <div class="controls">
+            <%= f.number_field :ticket, :style => 'width: 100px' %>
+	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
+	  </div>
+	</div>
+	<br/>
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
+	</div>
       </div>
       <% end %>      
       <% end %>
@@ -799,13 +867,27 @@
 </div> 
 
 <div class="form-actions">
-  <%= link_to 'Back', operations_checks_path, :class => 'btn' %>
-  <% if @operations_check.signed_off_by.blank? %>
-  <%= link_to 'Sign off on this check', 
-      sign_off_operations_check_path(@operations_check), 
-      :class => 'btn btn-primary' %>
-  <% end %>
-  <%= link_to 'Destroy', @internal_check,
-      method: :delete, data: { confirm: 'Are you sure you want to delete this check?' },
-      class: 'btn btn-danger' %>
+  <div class="hidden-phone">
+    <%= link_to 'Back', operations_checks_path, :class => 'btn' %>
+    <% if @operations_check.signed_off_by.blank? %>
+    <%= link_to 'Sign off on this check', 
+	sign_off_operations_check_path(@operations_check), 
+	:class => 'btn btn-success' %>
+    <% end %>
+    <%= link_to 'Destroy', @internal_check,
+	method: :delete, data: { confirm: 'Are you sure you want to delete this check?' },
+	class: 'btn btn-danger' %>
+  </div>
+  <div class="visible-phone">
+    <br/>
+    <%= link_to 'Back', operations_checks_path, :class => 'btn btn-block' %>
+    <% if @operations_check.signed_off_by.blank? %><br/>
+    <%= link_to 'Sign off on this check', 
+	sign_off_operations_check_path(@operations_check), 
+	:class => 'btn btn-block btn-success' %>
+    <% end %><br/>
+    <%= link_to 'Destroy', @internal_check,
+	method: :delete, data: { confirm: 'Are you sure you want to delete this check?' },
+	class: 'btn btn-block btn-danger' %><br/>
+  </div>
 </div>

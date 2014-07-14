@@ -81,7 +81,7 @@ class LdapChecksController < ApplicationController
     @ldap_check.destroy
 
     respond_to do |format|
-      format.html { redirect_to operations_check_path(@operations_check, tab: "ldap") }
+      format.html { redirect_to operations_check_path(operations_check, tab: "ldap") }
       format.json { head :no_content }
     end
   end
