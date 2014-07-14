@@ -14,6 +14,12 @@ input.lab-check-box {
     margin: 0px 0px 10px 5px;
 }
 
-select.lab-select {
+input.lab-check-box-phone {
+    width: 25px; 
+    height: 25px; 
+    margin: 0px 40px 10px 40px;
+}
+
+select.collection-select {
     width: 180px; 
 }

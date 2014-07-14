@@ -11,11 +11,33 @@
 <% end %>
 
 <div class="row-fluid">
+  <div class="span10">
+    <p>
+      Open a terminal and run backup-check. This will verify backups
+      were made last night and pushed to both of the backup
+      servers. If a backup fails for either backup server create a
+      ticket for it and mark the backup as failed.
+    </p>
+    <p>
+      For AWS instances, you will need to ssh to that instance and
+      check the previous syslog (syslog.1). Use grep to quickly find
+      the log entries (glorious-aws-backup-driver). Any entry with a
+      [CONDEMNATION] means the backup failed. Make a ticket including
+      the log entry and mark the check as failed.
+    </p>
+    <p>
+      Open a terminal and run space-check. This will check hard disk
+      space for the cloudstorages and fileservers. Anything more than
+      95% full should have a ticket created and marked as failed. 
+    </p>
+  </div>
+</div>
+
+<div class="row-fluid">
   <div class="span5">
     <div class="page-header">
       <h3>Backup Failures</h3>
     </div>
-
     <%= form_for([@internal_check, @internal_check.backup_checks.build]) do |f| %>      
     <div class="control-group">
       <%= f.label :name %>
@@ -66,7 +88,6 @@
     <div class="page-header">
       <h3>Disk Space Failures</h3>
     </div>
-    
     <%= form_for([@internal_check, @internal_check.space_checks.build]) do |f| %>
     <div class="control-group">
       <%= f.label :name %>
