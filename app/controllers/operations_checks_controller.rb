@@ -96,31 +96,14 @@ class OperationsChecksController < ApplicationController
 
   def sign_off
     @operations_check = OperationsCheck.find(params[:id])
-
-    @labs_unchecked = Lab.select("name").map(&:name) -
-      @operations_check.lab_checks.select("lab_name").map(&:lab_name)
-    @printers = Printer.select("name").map(&:name) -
-      @operations_check.printer_checks.select("name").map(&:name)
-    @automounts = Automount.select("name").map(&:name) -
-      @operations_check.automount_checks.select("name").map(&:name)
-    @nagios_entries = NagiosEntry.select("name").map(&:name) -
-      @operations_check.nagios_checks.select("name").map(&:name)
-    @load_balancers = LoadBalancer.select("name").map(&:name) -
-      @operations_check.load_balancer_checks.select("name").map(&:name)
-    @ldap_entries = LdapEntry.select("name").map(&:name) -
-      @operations_check.ldap_checks.select("name").map(&:name)
-
-    if @labs_unchecked.any? or @printers.any? or @automounts.any? or
-        @nagios_entries.any? or @load_balancers.any? or @ldap_entries.any? or
-        @operations_check.rt_check.blank? or @operations_check.packages_check.blank?
-      redirect_to(@operations_check, 
+    unless @operations_check.complete?
+      @operations_check.signed_off_by = "kfrank"
+      @operations_check.save
+      redirect_to @operations_check, notice: "kfrank has confirmed this check was completed"
+    else
+      redirect_to(@operations_check,
                   notice: "Sign off failed - check is not complete! Commence frying!!!")
-      return
     end
-
-    @operations_check.signed_off_by = "kfrank"
-    @operations_check.save
-    redirect_to @operations_check, notice: "kfrank has confirmed this check was completed"
   end
 
   private

@@ -70,6 +70,8 @@
 	<tr>
 	  <th>Owner</th>
 	  <th>Date</th>
+	  <th>Failures Reported?</th>
+	  <th>Complete?</th>
 	  <th>Signed by</th>
 	  <th></th>
 	  <th></th>
@@ -81,6 +83,16 @@
 	<tr>
 	  <td><%= operations_check.owner %></td>
 	  <td><%= operations_check.date.strftime("%Y-%m-%d %I:%M %p") %></td>
+	  <% if operations_check.failures? %>
+	  <td style="color: green">NO</td>
+	  <% else %>
+	  <td style="color: red">YES</td>
+	  <% end %>
+	  <% if operations_check.complete? %>
+	  <td style="color: red">NO</td>
+	  <% else %>
+	  <td style="color: green">YES</td>
+	  <% end %>
 	  <td><%= operations_check.signed_off_by %></td>
 	  <td><%= link_to 'Show', operations_check, :class => 'btn btn-mini' %></td>
 	  <td><%= link_to 'Destroy', operations_check, 

@@ -1,14 +1,9 @@
 Infco::Application.routes.draw do
-  resources :office_cleanings_schedules
-
-
-  resources :reloud_schedules
-
-
-  resources :weekly_schedules
-
 
   get "schedule/index"
+  resources :office_cleanings_schedules
+  resources :reloud_schedules
+  resources :weekly_schedules
 
   resources :ldap_entries
   resources :load_balancers
@@ -20,7 +15,7 @@ Infco::Application.routes.draw do
   end
 
   resources :operations_checks do
-    get :sign_off, on: :member
+    get 'sign_off', on: :member
     resources :lab_checks
     resources :packages_checks
     resources :ldap_checks
