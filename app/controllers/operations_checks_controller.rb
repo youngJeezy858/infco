@@ -2,7 +2,7 @@ class OperationsChecksController < ApplicationController
   # GET /operations_checks
   # GET /operations_checks.json
   def index
-    @operations_checks = OperationsCheck.all
+    @operations_checks = OperationsCheck.search(params[:search])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -39,7 +39,7 @@ class OperationsChecksController < ApplicationController
   def new
     @operations_check = OperationsCheck.new
     @operations_check.date = DateTime.now
-    @operations_check.owner = "kfrank"
+    @operations_check.owner = "fmurray"
     ## @internal_check.owner = current_user.login 
     @operations_check.save
     redirect_to @operations_check, notice: 'Operations check was successfully created.'

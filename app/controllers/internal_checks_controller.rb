@@ -2,7 +2,7 @@ class InternalChecksController < ApplicationController
   # GET /internal_checks
   # GET /internal_checks.json
   def index
-    @internal_checks = InternalCheck.all
+    @internal_checks = InternalCheck.search(params[:search])
 
     respond_to do |format|
       format.html # index.html.erb

@@ -43,21 +43,17 @@ class ReloudChecksController < ApplicationController
   # POST /reloud_checks
   # POST /reloud_checks.json
   def create
-    unless params[:name].to_s.present?
-      redirect_to :back, notice: 'Please provide the name of the machine you are reporting.'
-      return
-    end
-
     @reloud_check = ReloudCheck.new(reloud_check_params)
     @reloud_check.date = Date.today
     @reloud_check.owner = "kfrank"
 
     respond_to do |format|
       if @reloud_check.save
-        format.html { redirect_to reloud_checks_path, notice: 'Reloud check was successfully created.' }
+        format.html { redirect_to reloud_checks_path, 
+          notice: 'Reloud check was successfully created.' }
         format.json { render json: @reloud_check, status: :created, location: @reloud_check }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new" } 
         format.json { render json: @reloud_check.errors, status: :unprocessable_entity }
       end
     end

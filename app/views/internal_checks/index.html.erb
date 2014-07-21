@@ -1,8 +1,23 @@
 <div class="page-header">
-  <h1>Internal Checks</h1>
+  <h1>Internal Checks: 
+    <% if params[:search].nil? %>
+    Latest Archives
+    <% else %>
+    <%= if params[:search] == 'all' then 'All Archives'
+        else "Archives for #{params[:search]}" end %>
+    <% end %>
+  </h1>
 </div>
 
 <span class="visible-phone">
+  <div align="center">
+    <%= form_tag internal_checks_path, :method => 'get' do %>
+    <%= text_field_tag :search, params[:search],
+	:style => 'margin-top: 10px; width: 220px' %>
+    <%= submit_tag "Search", :name => nil, :class => 'btn' %>
+    <%= link_to 'View All', internal_checks_path(:search => 'all'), :class => 'btn' %>
+    <% end %>
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -27,6 +42,16 @@
 </span>
 
 <span class="hidden-phone">
+  <div align="right" class="row">
+    <div class="span11">
+      <%= form_tag internal_checks_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search],
+          :style => 'margin-top: 10px; width: 150px' %>
+      <%= submit_tag "Search", :name => nil, :class => 'btn' %>
+      <%= link_to 'View All', internal_checks_path(:search => 'all'), :class => 'btn' %>
+      <% end %>
+    </div>
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>
