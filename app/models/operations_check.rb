@@ -54,7 +54,11 @@ class OperationsCheck < ActiveRecord::Base
       return false unless ldap_check.passed?
     end    
 
-    unless self.rt_check.passed? and self.packages_check.passed?
+    unless self.rt_check.nil? or self.rt_check.passed?
+      return false
+    end
+
+    unless self.packages_check.nil? or self.packages_check.passed?
       false
     else
       true
