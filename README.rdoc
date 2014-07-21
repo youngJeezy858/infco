@@ -1,5 +1,19 @@
 == Welcome to infco on rails 
 
-$ sudo apt-get install ruby-rails-3.2 sqlite3 libsqlite3-dev
+==== dev environment
 
+$ sudo apt-get install ruby-rails-3.2 sqlite3 libsqlite3-dev
+$ bundle install
+$ rake db:migrate
+$ rails s
+
+==== production environment
+
+- make apache configs for app (see lcsee-aws-rails-appserver)
+- clone package and move to /railsapps dir
+- from app dir
+
+$ bundle install
+$ bundle exec rake assets:precompile
+$ rake db:migrate RAILS_ENV=production
 
