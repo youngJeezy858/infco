@@ -8,6 +8,7 @@ class OperationsCheck < ActiveRecord::Base
   has_many :ldap_checks
   has_one :rt_check
   has_one :packages_check
+  has_one :mail_check
   attr_accessible :date, :string, :signed_off_by
   
 
@@ -27,7 +28,8 @@ class OperationsCheck < ActiveRecord::Base
 
     labs_unchecked.any? or printers.any? or automounts.any? or
       nagios_entries.any? or load_balancers.any? or ldap_entries.any? or
-      self.rt_check.blank? or self.packages_check.blank?
+      self.rt_check.blank? or self.packages_check.blank? or 
+      self.mail_check.blank?
   end
 
   def failures?
@@ -57,6 +59,10 @@ class OperationsCheck < ActiveRecord::Base
     end    
 
     unless self.rt_check.nil? or self.rt_check.passed?
+      return false
+    end
+
+    unless self.mail_check.nil? or self.mail_check.passed?
       return false
     end
 

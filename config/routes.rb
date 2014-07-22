@@ -1,5 +1,7 @@
 Infco::Application.routes.draw do
 
+  devise_for :users
+
   get "schedule/index"
   resources :office_cleanings_schedules
   resources :reloud_schedules
@@ -24,7 +26,9 @@ Infco::Application.routes.draw do
     resources :nagios_checks
     resources :automount_checks
     resources :printer_checks
+    resources :mail_checks
   end
+  resources :virtual_box_checks
 
   resources :admin_tools
   resources :reloud_entries

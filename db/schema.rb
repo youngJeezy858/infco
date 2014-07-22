@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140714213543) do
+ActiveRecord::Schema.define(:version => 20140722192526) do
 
   create_table "automount_checks", :force => true do |t|
     t.string   "name"
@@ -116,6 +116,16 @@ ActiveRecord::Schema.define(:version => 20140714213543) do
 
   add_index "machines", ["lab_id"], :name => "index_machines_on_lab_id"
 
+  create_table "mail_checks", :force => true do |t|
+    t.boolean  "passed"
+    t.integer  "ticket"
+    t.integer  "operations_check_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "mail_checks", ["operations_check_id"], :name => "index_mail_checks_on_operations_check_id"
+
   create_table "nagios_checks", :force => true do |t|
     t.string   "name"
     t.boolean  "passed"
@@ -214,6 +224,29 @@ ActiveRecord::Schema.define(:version => 20140714213543) do
 
   create_table "space_entries", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "login",               :default => "", :null => false
+    t.string   "encrypted_password",  :default => "", :null => false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       :default => 0,  :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "virtual_box_checks", :force => true do |t|
+    t.string   "name"
+    t.integer  "ticket"
+    t.date     "date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -2,6 +2,29 @@
   <h1>ReLOUD archives</h1>
 </div>
 
+<div class="row">
+  <div class="hidden-phone">
+    <div class="span11" align="right">
+      <%= form_tag reloud_checks_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search],
+	  :style => 'margin-top: 10px; width: 150px' %>
+      <%= submit_tag "Search", :name => nil, :class => 'btn' %>
+      <%= link_to 'View All', reloud_checks_path(:search => 'all'), :class => 'btn' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="visible-phone">
+    <div align="center">
+      <%= form_tag reloud_checks_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search],
+	  :style => 'margin-top: 10px; width: 200px' %>
+      <%= submit_tag "Search", :name => nil, :class => 'btn' %>
+      <%= link_to 'View All', reloud_checks_path(:search => 'all'), :class => 'btn' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>

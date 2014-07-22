@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Passed:</b>
+  <%= @mail_check.passed %>
+</p>
+
+<p>
+  <b>Ticket:</b>
+  <%= @mail_check.ticket %>
+</p>
+
+<p>
+  <b>Operations check:</b>
+  <%= @mail_check.operations_check %>
+</p>
+
+
+<%= link_to 'Edit', edit_mail_check_path(@mail_check) %> |
+<%= link_to 'Back', mail_checks_path %>

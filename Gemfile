@@ -40,3 +40,5 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'strong_parameters'
+gem 'devise'
+gem 'devise_ldap_authenticatable'

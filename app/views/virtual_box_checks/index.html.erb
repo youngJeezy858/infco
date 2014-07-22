@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h1>Virtual Box Checks</h1>
+</div>
+
+<p>
+  This check should be done once a week by each tech. It doesn't
+  matter which day as long as it gets done every week. To execute this
+  check simply install LOUD on a virtual box. After that take a
+  screenshot of the LOUD VM with the date included in the screenshot
+  and post it into an RT ticket. Record the ticket number here to
+  profit!
+</p>
+<br/>
+
+<table class="table table-striped">
+  <h3>
+    Showing <%= @week.at_beginning_of_week.strftime("%b %e") %> - 
+    <%= @week.at_end_of_week.strftime("%b %e") %> 
+    <%= link_to image_tag("left_arrow_small.png"), 
+	virtual_box_checks_path(:week => @week - 1.week) %>  
+    <% unless Date.today == @week %>
+    <%= link_to image_tag("right_arrow_small.png"), 
+	virtual_box_checks_path(:week => @week + 1.week) %>
+    <% end %>
+  </h3>
+  <thead>
+    <tr>
+      <th>Tech Name</th>
+      <th>Date</th>
+      <th>Ticket</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @virtual_box_checks.each do |virtual_box_check| %>
+    <tr>
+      <td><%= virtual_box_check.name %></td>
+      <td><%= virtual_box_check.date %></td>
+      <td><%= virtual_box_check.ticket %></td>
+      <td><%= link_to 'Show', virtual_box_check, :class => 'btn btn-mini' %></td>
+      <td><%= link_to 'Edit', edit_virtual_box_check_path(virtual_box_check),
+	      :class => 'btn btn-mini' %></td>
+      <td><%= link_to 'Destroy', virtual_box_check, method: :delete, 
+	      data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="form-actions">
+  <%= link_to 'New Virtual box check', new_virtual_box_check_path, :class => 'btn btn-primary' %>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  passed: false
+  ticket: 1
+  operations_check: 
+
+two:
+  passed: false
+  ticket: 1
+  operations_check: 

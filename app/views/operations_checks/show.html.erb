@@ -50,6 +50,10 @@
       <a href="#packages" data-toggle="tab"
 	 style="<%= unless (@operations_check.packages_check.blank?) then 
 		'color: green' else 'color: red' end %>">Packages</a></li>
+    <li class="<%= 'active' if params[:tab] == 'mail' %>">
+      <a href="#mail" data-toggle="tab"
+	 style="<%= unless (@operations_check.mail_check.blank?) then 
+		'color: green' else 'color: red' end %>">Mail</a></li>
   </ul>
   
   <div class="tab-content">
@@ -896,6 +900,81 @@
 	<% end %>
       </div>
     </div>
+    <!-- END packages check tab -->
+
+    <!-- BEGIN mail check tab -->
+    <div class="<%= if params[:tab] == 'mail'
+		then 'tab-pane active' else 'tab-pane' end %>" id="mail">
+      <div class="row">
+        <div class="span10">
+	  <h3>Mail</h3>
+          <p>
+            Go to 848ESB and check the Systems mail slot. Then deliver
+            mail to person addressed. Usually it's just pay stubs.
+          </p>
+          <br/>
+        </div>
+      </div>
+
+      <% unless @operations_check.mail_check.nil? %>
+      <div class="ops-check-divider">
+	<table class="table table-striped">
+          <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Ticket</th>
+	      <th></th>
+	    </tr>
+          </thead>
+          <tbody>
+	    <tr>
+	      <td style="<%= if @operations_check.mail_check.passed? then 
+			 'color: green' else 'color: red' end %>">Mail</td>
+	      <td><%= @operations_check.mail_check.ticket %></td>
+	      <td><%= link_to 'Remove', operations_check_mail_check_path(@operations_check, @operations_check.mail_check), method: :delete, class: 'btn btn-mini btn-danger' %></td>
+	    </tr>
+          </tbody>
+        </table>
+      </div>
+      <% end %>
+
+      <div class="hidden-phone">
+	<% if @operations_check.mail_check.nil? %> 
+	<%= form_for([@operations_check, @operations_check.build_mail_check]) do |f| %>
+	<div class="control-group">
+	  <h5>Ticket Number</h5>
+          <div class="controls">
+            <%= f.number_field :ticket, :style => 'width: 100px' %>
+	    <%= f.check_box :passed, :class => 'lab-check-box' %>
+	  </div>
+	</div>
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
+	</div>
+	<% end %>      
+	<% end %>
+      </div>
+
+      <div class="visible-phone">
+	<% if @operations_check.mail_check.passed.nil? %> 
+	<%= form_for([@operations_check, @operations_check.build_mail_check]) do |f| %>
+	<div class="control-group">
+	  <h5>Ticket Number</h5>
+          <div class="controls">
+            <%= f.number_field :ticket, :style => 'width: 100px' %>
+	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
+	  </div>
+	</div>
+	<br/>
+	<div class="actions">
+	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
+	</div>
+	<% end %>      
+	<% end %>
+      </div>
+    </div>
+    <!-- END packages check tab -->
+
   </div>
 </div> 
 

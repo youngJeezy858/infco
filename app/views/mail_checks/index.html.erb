@@ -1,0 +1,27 @@
+<h1>Listing mail_checks</h1>
+
+<table>
+  <tr>
+    <th>Passed</th>
+    <th>Ticket</th>
+    <th>Operations check</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mail_checks.each do |mail_check| %>
+  <tr>
+    <td><%= mail_check.passed %></td>
+    <td><%= mail_check.ticket %></td>
+    <td><%= mail_check.operations_check %></td>
+    <td><%= link_to 'Show', mail_check %></td>
+    <td><%= link_to 'Edit', edit_mail_check_path(mail_check) %></td>
+    <td><%= link_to 'Destroy', mail_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mail check', new_mail_check_path %>

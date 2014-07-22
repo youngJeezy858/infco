@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h1><%= @virtual_box_check.name %>'s VB Check</h1> 
+</div>
+
+<% unless notice.nil? %>
+<div class="alert">
+  <p id="notice"><%= notice %></p>
+</div>
+<% end %>
+
+<p>
+  Check was completed on 
+  <%= @virtual_box_check.date.strftime("%B %d, %Y") %>.
+</p>
+
+<p>
+  Please see RT3:<%= @virtual_box_check.ticket %> for more
+  information.
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Edit', edit_virtual_box_check_path(@virtual_box_check), :class => 'btn' %>
+  <%= link_to 'Back', virtual_box_checks_path, :class => 'btn' %>
+</div>

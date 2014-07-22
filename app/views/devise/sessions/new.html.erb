@@ -1,0 +1,41 @@
+<div class="page-header">
+  <h1>Sign in</h1>
+</div>
+
+<% unless alert.nil? %>
+<div class="alert">
+  <p id="alert"><%= alert %></p>
+</div>
+<% end %>
+
+<% unless notice.nil? %>
+<div class="alert">
+  <p id="notice"><%= notice %></p>
+</div>
+<% end %>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="controls">
+    <%= f.label :login %>
+    <div class="control-group">
+      <%= f.text_field :login, autofocus: true %>
+    </div>
+  </div>
+
+  <div class="controls">
+    <%= f.label :password %>
+    <div class="control-group">
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+  <div class="controls">
+    <%= f.check_box :remember_me, :style => 'margin: 0px 5px 4px 10px' %> Remeber Me
+  </div>
+  <% end -%>
+
+  <div class="form-actions"><%= f.submit "Sign in", :class => 'btn' %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>

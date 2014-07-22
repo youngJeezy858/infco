@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  ticket: 1
+  date: 2014-07-22
+
+two:
+  name: MyString
+  ticket: 1
+  date: 2014-07-22

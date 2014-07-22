@@ -1,0 +1,29 @@
+<%= form_for(@mail_check) do |f| %>
+  <% if @mail_check.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mail_check.errors.count, "error") %> prohibited this mail_check from being saved:</h2>
+
+      <ul>
+      <% @mail_check.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :passed %><br />
+    <%= f.check_box :passed %>
+  </div>
+  <div class="field">
+    <%= f.label :ticket %><br />
+    <%= f.number_field :ticket %>
+  </div>
+  <div class="field">
+    <%= f.label :operations_check %><br />
+    <%= f.text_field :operations_check %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

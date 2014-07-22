@@ -4,7 +4,7 @@ class ReloudChecksController < ApplicationController
   # GET /reloud_checks
   # GET /reloud_checks.json
   def index
-    @reloud_checks = ReloudCheck.all
+    @reloud_checks = ReloudCheck.search(params[:search])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,7 +45,7 @@ class ReloudChecksController < ApplicationController
   def create
     @reloud_check = ReloudCheck.new(reloud_check_params)
     @reloud_check.date = Date.today
-    @reloud_check.owner = "kfrank"
+    @reloud_check.owner = "fmurray"
 
     respond_to do |format|
       if @reloud_check.save

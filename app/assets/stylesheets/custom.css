@@ -27,3 +27,8 @@ select.collection-select {
 select.date-select {
     width: 100px; 
 }
+
+.small-ul > li > a {
+    font-size: 14px;
+    padding: 10px 8px 10px !important;
+}
