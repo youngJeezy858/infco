@@ -39,8 +39,7 @@ class OperationsChecksController < ApplicationController
   def new
     @operations_check = OperationsCheck.new
     @operations_check.date = DateTime.now
-    @operations_check.owner = "fmurray"
-    ## @internal_check.owner = current_user.login 
+    @operations_check.owner = current_user.login
     @operations_check.save
     redirect_to @operations_check, notice: 'Operations check was successfully created.'
   end
@@ -97,9 +96,9 @@ class OperationsChecksController < ApplicationController
   def sign_off
     @operations_check = OperationsCheck.find(params[:id])
     unless @operations_check.complete?
-      @operations_check.signed_off_by = "kfrank"
+      @operations_check.signed_off_by = current_user.login
       @operations_check.save
-      redirect_to @operations_check, notice: "kfrank has confirmed this check was completed"
+      redirect_to @operations_check, notice: "#{current_user.login} has confirmed this check was completed"
     else
       redirect_to(@operations_check,
                   notice: "Sign off failed - check is not complete! Commence frying!!!")

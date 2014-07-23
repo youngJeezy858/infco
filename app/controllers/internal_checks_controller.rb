@@ -36,9 +36,8 @@ class InternalChecksController < ApplicationController
   def new
     @internal_check = InternalCheck.new
     @internal_check.date = Date.today
-    @internal_check.owner = "kfrank"
     @internal_check.passed = true
-    ## @internal_check.owner = current_user.login
+    @internal_check.owner = current_user.login
     @internal_check.save
     redirect_to @internal_check, notice: 'Internal check was successfully created.' 
   end
@@ -96,9 +95,9 @@ class InternalChecksController < ApplicationController
 
   def sign_off
     @internal_check = InternalCheck.find(params[:id])
-    @internal_check.signed_off_by = "kfrank"
+    @internal_check.signed_off_by = current_user.login
     @internal_check.save
-    redirect_to @internal_check, notice: "kfrank has confirmed this check was completed"
+    redirect_to @internal_check, notice: "current_user.login has confirmed this check was completed"
   end
 
 end

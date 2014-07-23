@@ -2,17 +2,30 @@
 
 ==== dev environment
 
-$ sudo apt-get install ruby-rails-3.2 sqlite3 libsqlite3-dev
+$ sudo apt-get install ruby-rails-3.2 mysql-client libmysqlclient-dev
 $ bundle install
 $ rake db:migrate
 $ rails s
 
 ==== production environment
 
+$ apt-get install mysql-client libmysqlclient-dev
+$ mysql -u lcseesystems -h [mysql hostname] -P 3306 -p
+ **** use systems password to connect ****
+> create database infco_production;
+> grant all on infco_production.* to [username]@[ip_of_appserver] identified by '[password]';
+> flush privileges;
+> exit
+
 - make apache configs for app (see lcsee-aws-rails-appserver)
 - clone package and move to /railsapps dir
 - from app dir
 
+$ mv doc/database.yml-template config/database.yml
+$ chmod 600 config/database.yml
+$ chown root:root config/database.yml
+$ emacs config/database.yml
+- change user and pass to what you set it as in mySQL
 $ bundle install
 $ bundle exec rake assets:precompile
 $ rake db:migrate RAILS_ENV=production
