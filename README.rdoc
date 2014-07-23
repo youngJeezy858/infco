@@ -23,9 +23,9 @@ $ mysql -u lcseesystems -h [mysql hostname] -P 3306 -p
 
 $ mv doc/database.yml-template config/database.yml
 $ chmod 600 config/database.yml
-$ chown root:root config/database.yml
 $ emacs config/database.yml
 - change user and pass to what you set it as in mySQL
+$ chown -R www-data:www-data ./
 $ bundle install
 $ bundle exec rake assets:precompile
 $ rake db:migrate RAILS_ENV=production
