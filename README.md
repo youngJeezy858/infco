@@ -1,6 +1,6 @@
-== Welcome to INF-CO on rails 
+# Welcome to INF-CO on rails 
 
-==== Intro
+## Intro
 
 This is a RoR app used at LCSEE Systems to conduct infrastructure
 checks (INF-CO). 
@@ -20,22 +20,24 @@ passed or failed to this app.  INF-CO on rails is supported on mobile
 and tablets devices as well.
 
 
-==== Setting up the dev environment on Ubuntu
+## Setting up the dev environment on Ubuntu
 
 NOTE: You will need to have a functioning LDAP for the app to work
 correctly on production. The Github version of this app has all the
 LDAP functionallity commented out since most people don't have a
 working LDAP server handy.
 
-1. You will need these 4 packages
+#### You will need these 4 packages
 
 ```
 $ sudo apt-get install ruby-rails-3.2 mysql-server mysql-client libmysqlclient-dev
 ```
 
-2. Provision the DB
+#### Provision the DB
 
+```
 $ mysql
+```
 
 ```
 > create database infco_dev;
@@ -44,7 +46,7 @@ $ mysql
 > exit
 ```
 
-3. Edit DB configs from app's base dir
+#### Edit DB configs from app's base dir
 
 ```
 $ cp doc/database.yml config/
@@ -53,17 +55,17 @@ $ emacs config/database.yml
 
 - insert the password you chose from step 2
 
-4. Install gems and populate DB 
+#### Install gems and populate DB 
 
 ```
 $ bundle install
 $ rake db:migrate
 ```
 
-5. Start server
+#### Start server
 
 ```
 $ rails s
 ```
 
-6. View from web browser at localhost:3000 
+#### View from web browser at localhost:3000 
