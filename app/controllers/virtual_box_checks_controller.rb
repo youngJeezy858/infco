@@ -45,7 +45,8 @@ class VirtualBoxChecksController < ApplicationController
   # POST /virtual_box_checks.json
   def create
     @virtual_box_check = VirtualBoxCheck.new(virtual_box_check_params)
-    @virtual_box_check.name = current_user.login
+#    @virtual_box_check.name = current_user.login
+    @virtual_box_check.name = "kfrank"
     @virtual_box_check.date = Date.today
 
     respond_to do |format|

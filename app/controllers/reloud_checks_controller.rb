@@ -45,7 +45,8 @@ class ReloudChecksController < ApplicationController
   def create
     @reloud_check = ReloudCheck.new(reloud_check_params)
     @reloud_check.date = Date.today
-    @reloud_check.owner = current_user.login
+#    @reloud_check.owner = current_user.login
+    @reloud_check.owner = "kfrank"
 
     respond_to do |format|
       if @reloud_check.save
