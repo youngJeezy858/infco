@@ -2,7 +2,17 @@
 
 ==== dev environment
 
-$ sudo apt-get install ruby-rails-3.2 mysql-client libmysqlclient-dev
+$ sudo apt-get install ruby-rails-3.2 mysql-server mysql-client libmysqlclient-dev
+$ mysql
+> create database infco_dev;
+> grant all on infco_dev.* to root@localhost identified by '[password]';
+> flush privileges;
+> exit
+
+FROM APP BASE DIR
+$ cp doc/database.yml config/
+$ emacs config/database.yml
+- make changes as necessary to dev env
 $ bundle install
 $ rake db:migrate
 $ rails s
@@ -21,7 +31,7 @@ $ mysql -u lcseesystems -h [mysql hostname] -P 3306 -p
 - clone package and move to /railsapps dir
 - from app dir
 
-$ mv doc/database.yml-template config/database.yml
+$ mv doc/database.yml config/database.yml
 $ chmod 600 config/database.yml
 $ emacs config/database.yml
 - change user and pass to what you set it as in mySQL

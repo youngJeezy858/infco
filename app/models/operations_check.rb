@@ -10,7 +10,6 @@ class OperationsCheck < ActiveRecord::Base
   has_one :packages_check
   has_one :mail_check
   attr_accessible :date, :string, :signed_off_by
-  
 
   def complete?
     labs_unchecked = Lab.select("name").map(&:name) -

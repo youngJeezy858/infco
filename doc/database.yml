@@ -6,10 +6,9 @@
 development:
   adapter: mysql2
   database: infco_dev
-  username: [insert username]
-  password: [insert password]
-  host: mysqldev.c4u29ntvccem.us-east-1.rds.amazonaws.com
-  port: 3306
+  username: root
+  password: muffin
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

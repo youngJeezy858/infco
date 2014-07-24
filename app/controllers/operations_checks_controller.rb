@@ -95,13 +95,16 @@ class OperationsChecksController < ApplicationController
 
   def sign_off
     @operations_check = OperationsCheck.find(params[:id])
-    unless @operations_check.complete?
+    if @operations_check.owner == current_user.login
+      redirect_to(@operations_check,
+                  notice: "Sign off failed - Cannot sign off on a check you created!!!")
+    elsif @operations_check.complete?
+      redirect_to(@operations_check,
+                  notice: "Sign off failed - check is not complete! Commence frying!!!")
+    else
       @operations_check.signed_off_by = current_user.login
       @operations_check.save
       redirect_to @operations_check, notice: "#{current_user.login} has confirmed this check was completed"
-    else
-      redirect_to(@operations_check,
-                  notice: "Sign off failed - check is not complete! Commence frying!!!")
     end
   end
 
