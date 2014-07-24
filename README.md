@@ -74,15 +74,15 @@ $ rails s
 
 ## Screenshots
 
-![Alt text](/app/assests/images/internal_check.png?raw=true "internal check")
+![Alt text](/app/assests/images/internal_check.png "internal check")
 
-![Alt text](/app/assests/images/ops.png?raw=true "operations check")
+![Alt text](/app/assests/images/ops.png "operations check")
 
-![Alt text](/app/assests/images/opscheck_printer.png?raw=true "ops printer check")
+![Alt text](/app/assests/images/opscheck_printer.png "ops printer check")
 
 #### Mobile Screenshots
 
-![Alt text](/app/assests/images/opscheck_mobile.png?raw=true "ops mobile check")
+![Alt text](/app/assests/images/opscheck_mobile.png "ops mobile check")
 
-![Alt text](/app/assests/images/opscheck_printer_mobile.png?raw=true "ops mobile printer check")
+![Alt text](/app/assests/images/opscheck_printer_mobile.png "ops mobile printer check")
 
