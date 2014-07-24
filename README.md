@@ -69,3 +69,20 @@ $ rails s
 ```
 
 #### View from web browser at localhost:3000 
+
+
+
+## Screenshots
+
+![Alt text](/app/assests/images/internal_check.png?raw=true "internal check")
+
+![Alt text](/app/assests/images/ops.png?raw=true "operations check")
+
+![Alt text](/app/assests/images/opscheck_printer.png?raw=true "ops printer check")
+
+#### Mobile Screenshots
+
+![Alt text](/app/assests/images/opscheck_mobile.png?raw=true "ops mobile check")
+
+![Alt text](/app/assests/images/opscheck_printer_mobile.png?raw=true "ops mobile printer check")
+
