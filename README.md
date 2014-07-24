@@ -76,13 +76,21 @@ $ rails s
 
 ![Alt text](/app/assets/images/internal_check.png "internal check")
 
+====
+
 ![Alt text](/app/assets/images/ops.png "operations check")
 
+====
+
 ![Alt text](/app/assets/images/opscheck_printer.png "ops printer check")
+
+====
 
 #### Mobile Screenshots
 
 ![Alt text](/app/assets/images/opscheck_mobile.png "ops mobile check")
+
+====
 
 ![Alt text](/app/assets/images/opscheck_printer_mobile.png "ops mobile printer check")
 
