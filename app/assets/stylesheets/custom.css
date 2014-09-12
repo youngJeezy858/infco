@@ -20,6 +20,17 @@ input.lab-check-box-phone {
     margin: 0px 40px 10px 40px;
 }
 
+.ops-check-number-field > input {
+    width: 100px; 
+    margin: 5px 0;
+}
+
+.ops-check-check-box > input {
+    width: 25px;
+    height: 25px; 
+    margin: 7px 0;
+}
+
 select.collection-select {
     width: 180px; 
 }
@@ -35,4 +46,9 @@ select.date-select {
 
 .small-header {
     margin: 10px 0px 20px;
+}
+
+.input-divider {
+    border-bottom: 1px solid #eeeeee; 
+    margin-bottom: 5px;
 }

@@ -39,12 +39,14 @@
     <% @reloud_checks.each do |reloud_check| %>
     <tr>
       <td><%= reloud_check.name %></td>
-      <td><%= reloud_check.date %></td>
+      <td><%= reloud_check.created_at.strftime("%m-%d-%Y") %></td>
       <td><%= reloud_check.owner %></td>
       <td>
+	<% if reloud_check.owner == current_user.login %>
 	<%= link_to 'Destroy', reloud_check, 
 	    method: :delete, data: { confirm: 'Are you sure?' },
 	    :class => 'btn btn-mini btn-danger' %>
+	<% end %>
       </td>
     </tr>
     <% end %>

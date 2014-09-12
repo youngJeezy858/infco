@@ -1,0 +1,17 @@
+<div class="visible-phone">
+  <% if operations_check.mail_check.passed.nil? %>
+  <%= form_for([operations_check, operations_check.build_mail_check]) do |f| %>
+  <div class="control-group">
+    <h5>Ticket Number</h5>
+    <div class="controls">
+      <%= f.number_field :ticket, :style => 'width: 100px' %>
+      <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
+    </div>
+  </div>
+  <br/>
+  <div class="actions">
+    <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
+  </div>
+  <% end %>
+  <% end %>
+</div>

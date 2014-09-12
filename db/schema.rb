@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140722192526) do
+ActiveRecord::Schema.define(:version => 20140728173523) do
 
   create_table "automount_checks", :force => true do |t|
     t.string   "name"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(:version => 20140722192526) do
   end
 
   create_table "internal_checks", :force => true do |t|
-    t.date     "date"
     t.string   "owner"
     t.string   "signed_off_by"
     t.boolean  "passed"
@@ -107,6 +106,13 @@ ActiveRecord::Schema.define(:version => 20140722192526) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "loud_checks", :force => true do |t|
+    t.string   "name"
+    t.integer  "ticket"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "machines", :force => true do |t|
     t.string   "name"
     t.integer  "lab_id"
@@ -152,7 +158,6 @@ ActiveRecord::Schema.define(:version => 20140722192526) do
   create_table "operations_checks", :force => true do |t|
     t.string   "owner"
     t.string   "signed_off_by"
-    t.datetime "date"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
@@ -183,7 +188,6 @@ ActiveRecord::Schema.define(:version => 20140722192526) do
 
   create_table "reloud_checks", :force => true do |t|
     t.string   "name"
-    t.date     "date"
     t.string   "owner"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -244,14 +248,6 @@ ActiveRecord::Schema.define(:version => 20140722192526) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
-
-  create_table "virtual_box_checks", :force => true do |t|
-    t.string   "name"
-    t.integer  "ticket"
-    t.date     "date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "weekly_schedules", :force => true do |t|
     t.string   "name"

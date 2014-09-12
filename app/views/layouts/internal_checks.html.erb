@@ -5,7 +5,8 @@
       <div class="sidebar-nav-fixed">
 	<ul class="nav nav-list">
 	  <h5>CREATE</h5>
-	  <li><%= link_to 'Daily Check', new_internal_check_path %></li>
+	  <li><%= link_to 'Daily Check', new_internal_check_path, 
+		  data: { confirm: 'Are you sure you want to start a new internal check?' } %></li>
 	  <li><%= link_to 'ReLOUD', new_reloud_check_path %></li>
 	  <li class="divider"></li>
 	  <h5>ARCHIVES</h5>

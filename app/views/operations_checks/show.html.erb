@@ -1,19 +1,15 @@
 <div class="hidden-phone">
   <div class="page-header">
-    <h1><%= @operations_check.date.strftime("%Y-%m-%d %I:%M %p") %> : <%= @operations_check.owner %></h1>
+    <h1><%= @operations_check.created_at.strftime("%Y-%m-%d %I:%M %p") %> : 
+      <%= @operations_check.owner %></h1>
   </div>
 </div>
 <div class="visible-phone">
   <div class="page-header">
-    <h1><%= @operations_check.date.strftime("%m-%d %p") %> : <%= @operations_check.owner %></h1>
+    <h1><%= @operations_check.created_at.strftime("%m-%d %p") %> :
+      <%= @operations_check.owner %></h1>
   </div>
 </div>
-
-<% unless notice.nil? %>
-<div class="alert">
-  <p id="notice"><%= notice %></p>
-</div>
-<% end %>
 
 <div class="tabbable">
   <ul class="nav nav-tabs">
@@ -57,6 +53,7 @@
   </ul>
   
   <div class="tab-content">
+    
     <!-- BEGIN lab checks tab --> 
     <div class="<%= if (params[:tab] == 'labs' || !params[:tab])
 		then 'tab-pane active' else 'tab-pane' end %>" id="labs">
@@ -73,203 +70,13 @@
 	</div>
       </div>
 
-      <div class="hidden-phone">
-	<% unless @operations_check.lab_checks.empty? %>
-	<div class="ops-check-divider">
-	  <table class="table table-striped">
-	    <thead>
-	      <tr>
-		<th>Name</th>
-		<th>M1</th>
-		<th>Ticket</th>
-		<th>M2</th>
-		<th>Ticket</th>
-		<th>M3</th>
-		<th>Ticket</th>
-		<th></th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <% @operations_check.lab_checks.each do |lab_check| %>
-	      <% unless lab_check.id.nil? %>
-	      <tr>
-		<td><%= lab_check.lab_name %></td>
-		<td style="<%= if lab_check.machine1_passed? then
-			   'color: green' else 'color: red' end %>">
-		  <%= lab_check.machine1_name %></td>
-		<td><%= lab_check.machine1_ticket %></td>
-		<td style="<%= if lab_check.machine2_passed? then 
-			   'color: green' else 'color: red' end %>">
-                  <%= lab_check.machine2_name %></td>
-		<td><%= lab_check.machine2_ticket %></td>
-		<td style="<%= if lab_check.machine3_passed? then 
-			   'color: green' else 'color: red' end %>">
-                  <%= lab_check.machine3_name %></td>
-		<td><%= lab_check.machine3_ticket %></td>
-		<td><%= link_to 'Remove',
-			operations_check_lab_check_path(@operations_check,
-			lab_check), method: :delete, class: 'btn
-			btn-mini btn-danger' %></td>
-	      </tr>
-	      <% end %> <% end %>
-	    </tbody>
-	  </table>
-	</div>
-	<% end %>
-
-	<% @labs.each do |lab| %>
-	<% next if @operations_check.lab_checks.select("lab_name").map(&:lab_name).include? lab.name %>
-	<%= form_for([@operations_check, @operations_check.lab_checks.build]) do |f| %>
-	<h3 style="margin-bottom: 0px"><%= lab.name %></h3>
-	<div class="row">
-	  <%= f.hidden_field :lab_name %>
-	  <%= hidden_field_tag 'lab_name', lab.name %>
-	  <div class="span4">
-	    <div class="control-group">
-	      <h5>Machine 1</h5>
-	      <div class="controls">
-		<%= f.collection_select(:machine1_name, lab.machines, :name, :name, 
-		    {}, { :class => 'collection-select' }) %>
-		<%= f.check_box :machine1_passed, :class => 'lab-check-box'  %>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="span4">
-	    <div class="control-group">
-	      <h5>Machine 2</h5>
-	      <div class="controls">
-		<%= f.collection_select(:machine2_name, lab.machines, :name, :name,
-		    {}, { :class => 'collection-select' }) %>
-		<%= f.check_box :machine2_passed, :class => 'lab-check-box'  %>
-	      </div>
-	    </div>	
-	  </div>
-	  <div class="span4">
-	    <div class="control-group">
-	      <h5>Machine 3</h5>
-	      <div class="controls">
-		<%= f.collection_select(:machine3_name, lab.machines, :name, :name,
-		    {}, { :class => 'collection-select' })%>
-		<%= f.check_box :machine3_passed, :class => 'lab-check-box'  %>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	<div class="row">
-	  <div class="span4">
-	    <div class="control-group">
-              <h5>Ticket Number</h5>
-              <div class="controls">
-		<%= f.number_field :machine1_ticket, :style => 'width: 100px' %>
-              </div>
-            </div>
-	  </div>
-	  <div class="span4">
-	    <div class="control-group">
-              <h5>Ticket Number</h5>
-              <div class="controls">
-		<%= f.number_field :machine2_ticket, :style => 'width: 100px' %>
-              </div>
-            </div>
-	  </div>
-	  <div class="span4">
-	    <div class="control-group">
-              <h5>Ticket Number</h5>
-              <div class="controls">
-		<%= f.number_field :machine3_ticket, :style => 'width: 100px' %>
-              </div>
-            </div>
-	  </div>
-	</div>
-	<div class="actions" style="padding-bottom: 10px;
-				    border-bottom: 1px solid #eeeeee">
-          <%= f.submit "Create Check", :class => 'btn btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
-
-      <div class="visible-phone">
-	<% unless @operations_check.lab_checks.empty? %>
-	<div class="ops-check-divider">
-	  <table class="table table-striped">
-	    <thead>
-	      <tr>
-		<th>Name</th>
-		<th>M1</th>
-		<th>M2</th>
-		<th>M3</th>
-		<th></th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <% @operations_check.lab_checks.each do |lab_check| %>
-	      <% unless lab_check.id.nil? %>
-	      <tr>
-		<td><%= lab_check.lab_name %></td>
-		<td style="<%= if lab_check.machine1_passed? then
-			   'color: green' else 'color: red' end %>">
-		  <%= lab_check.machine1_name.scan(/\d+$/).last %></td>
-		<td style="<%= if lab_check.machine2_passed? then 
-			   'color: green' else 'color: red' end %>">
-                  <%= lab_check.machine2_name.scan(/\d+$/).last %></td>
-		<td style="<%= if lab_check.machine3_passed? then 
-			   'color: green' else 'color: red' end %>">
-                  <%= lab_check.machine3_name.scan(/\d+$/).last %></td>
-		<td><%= link_to 'Remove',
-			operations_check_lab_check_path(@operations_check,
-			lab_check), method: :delete, class: 'btn
-			btn-mini btn-danger' %></td>
-	      </tr>
-	      <% end %> 
-	      <% end %>
-	    </tbody>
-	  </table>
-	</div>
-	<% end %>
-	
-	<% @labs.each do |lab| %>
-	<% next if @operations_check.lab_checks.select("lab_name").map(&:lab_name).include? lab.name %>
-	<%= form_for([@operations_check, @operations_check.lab_checks.build]) do |f| %>
-	<h3 style="margin-bottom: 0px"><%= lab.name %></h3>
-	<%= f.hidden_field :lab_name %>
-	<%= hidden_field_tag 'lab_name', lab.name %>
-	<div class="control-group">
-	  <h5>Machine 1</h5>
-	  <div class="controls">
-	    <%= f.collection_select(:machine1_name, lab.machines, :name, :name, 
-		{}, { :class => 'collection-select' }) %>
-	    <%= f.check_box :machine1_passed, :class => 'lab-check-box-phone' %>
-	    <%= f.number_field :machine1_ticket, :style => 'width: 100px' %>
-	  </div>
-	</div>
-	<div class="control-group">
-	  <h5>Machine 2</h5>
-	  <div class="controls">
-	    <%= f.collection_select(:machine2_name, lab.machines, :name, :name,
-		{}, { :class => 'collection-select' }) %>
-	    <%= f.check_box :machine2_passed, :class => 'lab-check-box-phone' %>
-	    <%= f.number_field :machine2_ticket, :style => 'width: 100px' %>
-	  </div>
-	</div>
-	<div class="control-group">
-	  <h5>Machine 3</h5>
-	  <div class="controls">
-	    <%= f.collection_select(:machine3_name, lab.machines, :name, :name,
-		{}, { :class => 'collection-select' })%>
-	    <%= f.check_box :machine3_passed, :class => 'lab-check-box-phone' %>
-	    <%= f.number_field :machine3_ticket, :style => 'width: 100px' %>
-	  </div>
-	</div>
-	<br/>
-	<div class="actions" style="padding-bottom: 10px;
-				    border-bottom: 1px solid #eeeeee">
-          <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'lab_checks/desktop_create', 
+	  :locals => { :operations_check => @operations_check, 
+                       :labs => @labs, 
+                       :labs_unchecked => @labs_unchecked } %>
+      <%= render partial: 'lab_checks/mobile_create', 
+	  :locals => { :operations_check => @operations_check, 
+                       :labs => @labs } %>	
     </div>
     <!-- END lab checks tab -->
     
@@ -292,78 +99,16 @@
         </div>
       </div>
       
-      <% unless @operations_check.printer_checks.empty? %>
-      <div class="ops-check-divider">
-	<table class="table table-striped">
-	  <thead>
-	    <tr>
-	      <th>Name</th>
-	      <th>Ticket</th>
-	      <th></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <% @operations_check.printer_checks.each do |printer_check| %>
-	    <% unless printer_check.id.nil? %>
-	    <tr>
-	      <td style="<%= if printer_check.passed? then 
-			 'color: green' else 'color: red' end %>">
-                <%= printer_check.name %></td>
-	      <td><%= printer_check.ticket %></td>
-	      <td><%= link_to 'Remove', 
-		      operations_check_printer_check_path(@operations_check, printer_check), 
-		      method: :delete, class: 'btn btn-mini btn-danger' %></td>
-            </tr>
-	    <% end %>
-	    <% end %>
-	  </tbody>
-	</table>
-      </div>
-      <% end %>
+      <%= render partial: 'printer_checks/display',
+          :locals => { :operations_check => @operations_check } %>
       
-      <div class="hidden-phone">
-      <% unless @printers.empty? %>
-      <%= form_for([@operations_check, @operations_check.printer_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>Printer Name</h5>
-	  <div class="controls">
-            <%= f.collection_select :name, @printers, :to_s, :to_s,
-		{}, { :class => 'collection-select' } %>
-	    <%= f.check_box :passed, :class => 'lab-check-box' %>
-	  </div>
-	</div>	
-	<div class="control-group">
-          <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-          </div>
-	</div>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
-
-      <div class="visible-phone">
-	<% unless @printers.empty? %>
-	<%= form_for([@operations_check, @operations_check.printer_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>Printer Name</h5>
-	  <div class="controls">
-            <%= f.collection_select :name, @printers, :to_s, :to_s,
-		{}, { :class => 'collection-select' } %>
-	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
-	    <%= f.number_field :ticket, :style => 'width: 100px' %>
-	  </div>
-	</div>
-	<br/>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'printer_checks/desktop_create',
+          :locals => { :operations_check => @operations_check,
+                       :printers => @printers } %>
+      
+      <%= render partial: 'printer_checks/mobile_create',
+          :locals => { :operations_check => @operations_check,
+                       :printers => @printers } %>
     </div>
     <!-- END printer checks tab -->
 
@@ -383,77 +128,16 @@
         </div>
       </div>
 
-      <% unless @operations_check.automount_checks.empty? %>
-      <div class="ops-check-divider">
-	<table class="table table-striped">
-          <thead>
-            <tr>
-	      <th>Name</th>
-	      <th>Ticket</th>
-	      <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @operations_check.automount_checks.each do |automount_check| %>
-            <% unless automount_check.id.nil? %>
-            <tr>
-	      <td style="<%= if automount_check.passed? then
-			 'color: green' else 'color: red' end %>">
-                <%= automount_check.name %></td>
-	      <td><%= automount_check.ticket %></td>
-	      <td><%= link_to 'Remove',
-		      operations_check_automount_check_path(@operations_check, automount_check),
-		      method: :delete, class: 'btn btn-mini btn-danger' %></td>
-            </tr>
-	    <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <% end %>
+      <%= render partial: 'automount_checks/display',
+          :locals => { :operations_check => @operations_check } %>
 
-      <div class="hidden-phone">
-	<% unless @automounts.empty? %>
-	<%= form_for([@operations_check, @operations_check.automount_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>Automount Name</h5>
-          <div class="controls">
-            <%= f.collection_select :name, @automounts, :to_s, :to_s %>
-	    <%= f.check_box :passed, :class => 'lab-check-box' %>
-          </div>
-	</div>
-	<div class="control-group">
-          <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-          </div>
-	</div>
-	<div class="actions">
-          <%= f.submit "Create Check", :class => 'btn btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'automount_checks/desktop_create',
+          :locals => { :operations_check => @operations_check,
+                       :automounts => @automounts } %>
 
-      <div class="visible-phone">
-	<% unless @automounts.empty? %>
-	<%= form_for([@operations_check, @operations_check.automount_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>Automount Name</h5>
-          <div class="controls">
-            <%= f.collection_select :name, @automounts, :to_s, :to_s,
-		{}, { :class => 'collection-select' } %>
-	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-          </div>
-	</div>
-	<br/>
-	<div class="actions">
-          <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'automount_checks/mobile_create',
+          :locals => { :operations_check => @operations_check,
+                       :automounts => @automounts } %>
     </div>
     <!-- END automounts checks tab -->
 
@@ -474,77 +158,16 @@
         </div>
       </div>
       
-      <% unless @operations_check.nagios_checks.empty? %>
-      <div class="ops-check-divider">
-	<table class="table table-striped">
-          <thead>
-	    <tr>
-	      <th>Name</th>
-	      <th>Ticket</th>
-	      <th></th>
-	    </tr>
-          </thead>
-          <tbody>
-	    <% @operations_check.nagios_checks.each do |nagios_check| %>
-	    <% unless nagios_check.id.nil? %>
-	    <tr>
-	      <td style="<%= if nagios_check.passed? then 
-			 'color: green' else 'color: red' end %>">
-                <%= nagios_check.name %></td>
-	      <td><%= nagios_check.ticket %></td>
-	      <td><%= link_to 'Remove',
-		      operations_check_nagios_check_path(@operations_check, nagios_check),
-		      method: :delete, class: 'btn btn-mini btn-danger' %></td>
-	    </tr>
-	    <% end %>
-	    <% end %>
-          </tbody>
-        </table>
-      </div>
-      <% end %>
+      <%= render partial: 'nagios_checks/display',
+          :locals => { :operations_check => @operations_check } %>
 
-      <div class="hidden-phone">
-	<% unless @nagios_entries.empty? %>
-	<%= form_for([@operations_check, @operations_check.nagios_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>Name</h5>
-          <div class="controls">
-            <%= f.collection_select :name, @nagios_entries, :to_s, :to_s %>
-	    <%= f.check_box :passed, :class => 'lab-check-box' %>
-	  </div>
-	</div>
-	<div class="control-group">
-	  <h5>Ticket Number</h5>
-	  <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-	  </div>
-	</div>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'nagios_checks/desktop_create',
+          :locals => { :operations_check => @operations_check,
+                       :nagios_entries => @nagios_entries } %>
 
-      <div class="visible-phone">
-	<% unless @nagios_entries.empty? %>
-	<%= form_for([@operations_check, @operations_check.nagios_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>Name</h5>
-          <div class="controls">
-            <%= f.collection_select :name, @nagios_entries, :to_s, :to_s,
-		{}, { :class => 'collection-select' } %>
-	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
-	    <%= f.number_field :ticket, :style => 'width: 100px' %>
-	  </div>
-	</div>
-	<br/>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'nagios_checks/mobile_create',
+          :locals => { :operations_check => @operations_check,
+                       :nagios_entries => @nagios_entries } %>
     </div>
     <!-- END nagios checks tab -->
 
@@ -567,68 +190,15 @@
             <br/>
         </div>
       </div>
-      
-      <% unless @operations_check.rt_check.nil? %>
-      <div class="ops-check-divider">
-	<table class="table table-striped">
-          <thead>
-	    <tr>
-	      <th>Name</th>
-	      <th>Ticket</th>
-	      <th></th>
-	    </tr>
-          </thead>
-          <tbody>
-	    <tr>
-	      <td style="<%= if @operations_check.rt_check.passed? then 
-			 'color: green' else 'color: red' end %>">
-                <%= @operations_check.rt_check.name %></td>
-	      <td><%= @operations_check.rt_check.ticket %></td>
-	      <td><%= link_to 'Remove', operations_check_rt_check_path(@operations_check, @operations_check.rt_check), method: :delete, class: 'btn btn-mini btn-danger' %></td>
-	    </tr>
-          </tbody>
-        </table>
-      </div>
-      <% end %>
 
-      <div class="hidden-phone">
-	<% if @operations_check.rt_check.nil? %> 
-	<%= form_for([@operations_check, @operations_check.build_rt_check]) do |f| %>
-	<%= f.hidden_field :name %>
-	<%= hidden_field_tag 'name', 'rt002' %>
-	<div class="control-group">
-	  <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-	    <%= f.check_box :passed, :class => 'lab-check-box' %>
-	  </div>
-	</div>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
-	</div>
-	<% end %>      
-	<% end %>
-      </div>
+      <%= render partial: 'rt_checks/display',
+          :locals => { :operations_check => @operations_check } %>
 
-      <div class="visible-phone">
-	<% if @operations_check.rt_check.name.nil? %> 
-	<%= form_for([@operations_check, @operations_check.build_rt_check]) do |f| %>
-	<%= f.hidden_field :name %>
-	<%= hidden_field_tag 'name', 'rt002' %>
-	<div class="control-group">
-	  <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
-	  </div>
-	</div>
-	<br/>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
-	</div>
-	<% end %>      
-	<% end %>
-      </div>
+      <%= render partial: 'rt_checks/desktop_create',
+          :locals => { :operations_check => @operations_check } %>
+
+      <%= render partial: 'rt_checks/mobile_create',
+          :locals => { :operations_check => @operations_check } %>
     </div>
     <!-- END request tracker check tab -->
 
@@ -651,77 +221,16 @@
         </div>
       </div>
 
-      <% unless @operations_check.load_balancer_checks.empty? %>
-      <div class="ops-check-divider">
-	<table class="table table-striped">
-	  <thead>
-	    <tr>
-	      <th>Name</th>
-	      <th>Ticket</th>
-	      <th></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <% @operations_check.load_balancer_checks.each do |load_balancer_check| %>
-	    <% unless load_balancer_check.id.nil? %>
-	    <tr>
-	      <td style="<%= if load_balancer_check.passed? then 
-			 'color: green' else 'color: red' end %>">
-                <%= load_balancer_check.name %></td>
-	      <td><%= load_balancer_check.ticket %></td>
-	      <td><%= link_to 'Remove', 
-		      operations_check_load_balancer_check_path(@operations_check, load_balancer_check),
-		      method: :delete, class: 'btn btn-mini btn-danger' %></td>
-            </tr>
-	    <% end %>
-	    <% end %>
-	  </tbody>
-	</table>
-      </div>
-      <% end %>
-      
-      <div class="hidden-phone">
-	<% unless @load_balancers.empty? %>
-	<%= form_for([@operations_check, @operations_check.load_balancer_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>Load Balancer Name</h5>
-	  <div class="controls">
-            <%= f.collection_select :name, @load_balancers, :to_s, :to_s %>
-	    <%= f.check_box :passed, :class => 'lab-check-box' %>
-	  </div>
-	</div>	
-	<div class="control-group">
-          <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-          </div>
-	</div>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'load_balancer_checks/display',
+          :locals => { :operations_check => @operations_check } %>
 
-      <div class="visible-phone">
-	<% unless @load_balancers.empty? %>
-	<%= form_for([@operations_check, @operations_check.load_balancer_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>Load Balancer Name</h5>
-	  <div class="controls">
-            <%= f.collection_select :name, @load_balancers, :to_s, :to_s,
-		{}, { :class => 'collection-select' } %>
-	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
-	    <%= f.number_field :ticket, :style => 'width: 100px' %>
-          </div>
-	</div>	
-	<br/>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'load_balancer_checks/desktop_create',
+          :locals => { :operations_check => @operations_check,
+                       :load_balancers => @load_balancers } %>
+
+      <%= render partial: 'load_balancer_checks/mobile_create',
+          :locals => { :operations_check => @operations_check,
+                       :load_balancers => @load_balancers } %>      
     </div>
     <!-- END load_balancers check tab -->
 
@@ -744,77 +253,16 @@
         </div>
       </div>
 
-      <% unless @operations_check.ldap_checks.empty? %>
-      <div class="ops-check-divider">
-	<table class="table table-striped">
-          <thead>
-            <tr>
-	      <th>Name</th>
-	      <th>Ticket</th>
-	      <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @operations_check.ldap_checks.each do |ldap_check| %>
-            <% unless ldap_check.id.nil? %>
-            <tr>
-	      <td style="<%= if ldap_check.passed? then
-			 'color: green' else 'color: red' end %>">
-                <%= ldap_check.name %></td>
-	      <td><%= ldap_check.ticket %></td>
-	      <td><%= link_to 'Remove',
-		      operations_check_ldap_check_path(@operations_check, ldap_check),
-		      method: :delete, class: 'btn btn-mini btn-danger' %></td>
-            </tr>
-	    <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <% end %>
+      <%= render partial: 'ldap_checks/display',
+          :locals => { :operations_check => @operations_check } %>
 
-      <div class="hidden-phone">
-	<% unless @ldap_entries.empty? %>
-	<%= form_for([@operations_check, @operations_check.ldap_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>LDAP Server Name</h5>
-          <div class="controls">
-            <%= f.collection_select :name, @ldap_entries, :to_s, :to_s %>
-	    <%= f.check_box :passed, :class => 'lab-check-box' %>
-          </div>
-	</div>
-	<div class="control-group">
-          <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-          </div>
-	</div>
-	<div class="actions">
-          <%= f.submit "Create Check", :class => 'btn btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'ldap_checks/desktop_create',
+          :locals => { :operations_check => @operations_check,
+                       :ldap_entries => @ldap_entries } %>
 
-      <div class="visible-phone">
-	<% unless @ldap_entries.empty? %>
-	<%= form_for([@operations_check, @operations_check.ldap_checks.build]) do |f| %>
-	<div class="control-group">
-	  <h5>LDAP Server Name</h5>
-          <div class="controls">
-            <%= f.collection_select :name, @ldap_entries, :to_s, :to_s,
-		{}, { :class => 'collection-select' } %>
-	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-          </div>
-	</div>
-	<br/>
-	<div class="actions">
-          <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
-	</div>
-	<% end %>
-	<% end %>
-      </div>
+      <%= render partial: 'ldap_checks/mobile_create',
+          :locals => { :operations_check => @operations_check,
+                       :ldap_entries => @ldap_entries } %>      
     </div>
     <!-- END ldap checks tab -->
     
@@ -838,67 +286,14 @@
         </div>
       </div>
 
-      <% unless @operations_check.packages_check.nil? %>
-      <div class="ops-check-divider">
-	<table class="table table-striped">
-          <thead>
-	    <tr>
-	      <th>Name</th>
-	      <th>Ticket</th>
-	      <th></th>
-	    </tr>
-          </thead>
-          <tbody>
-	    <tr>
-	      <td style="<%= if @operations_check.packages_check.passed? then 
-			 'color: green' else 'color: red' end %>">
-                <%= @operations_check.packages_check.name %></td>
-	      <td><%= @operations_check.packages_check.ticket %></td>
-	      <td><%= link_to 'Remove', operations_check_packages_check_path(@operations_check, @operations_check.packages_check), method: :delete, class: 'btn btn-mini btn-danger' %></td>
-	    </tr>
-          </tbody>
-        </table>
-      </div>
-      <% end %>
+      <%= render partial: 'packages_checks/display',
+          :locals => { :operations_check => @operations_check } %>
 
-      <div class="hidden-phone">
-	<% if @operations_check.packages_check.nil? %> 
-	<%= form_for([@operations_check, @operations_check.build_packages_check]) do |f| %>
-	<%= f.hidden_field :name %>
-	<%= hidden_field_tag 'name', 'Packages' %>
-	<div class="control-group">
-	  <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-	    <%= f.check_box :passed, :class => 'lab-check-box' %>
-	  </div>
-	</div>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
-	</div>
-	<% end %>      
-	<% end %>
-      </div>
+      <%= render partial: 'packages_checks/desktop_create',
+          :locals => { :operations_check => @operations_check } %>
 
-      <div class="visible-phone">
-	<% if @operations_check.packages_check.name.nil? %> 
-	<%= form_for([@operations_check, @operations_check.build_packages_check]) do |f| %>
-	<%= f.hidden_field :name %>
-	<%= hidden_field_tag 'name', 'Packages' %>
-	<div class="control-group">
-	  <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
-	  </div>
-	</div>
-	<br/>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
-	</div>
-	<% end %>      
-	<% end %>
-      </div>
+      <%= render partial: 'packages_checks/mobile_create',
+          :locals => { :operations_check => @operations_check } %>
     </div>
     <!-- END packages check tab -->
 
@@ -916,62 +311,14 @@
         </div>
       </div>
 
-      <% unless @operations_check.mail_check.nil? %>
-      <div class="ops-check-divider">
-	<table class="table table-striped">
-          <thead>
-	    <tr>
-	      <th>Name</th>
-	      <th>Ticket</th>
-	      <th></th>
-	    </tr>
-          </thead>
-          <tbody>
-	    <tr>
-	      <td style="<%= if @operations_check.mail_check.passed? then 
-			 'color: green' else 'color: red' end %>">Mail</td>
-	      <td><%= @operations_check.mail_check.ticket %></td>
-	      <td><%= link_to 'Remove', operations_check_mail_check_path(@operations_check, @operations_check.mail_check), method: :delete, class: 'btn btn-mini btn-danger' %></td>
-	    </tr>
-          </tbody>
-        </table>
-      </div>
-      <% end %>
+      <%= render partial: 'mail_checks/display',
+          :locals => { :operations_check => @operations_check } %>
 
-      <div class="hidden-phone">
-	<% if @operations_check.mail_check.nil? %> 
-	<%= form_for([@operations_check, @operations_check.build_mail_check]) do |f| %>
-	<div class="control-group">
-	  <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-	    <%= f.check_box :passed, :class => 'lab-check-box' %>
-	  </div>
-	</div>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-primary' %>
-	</div>
-	<% end %>      
-	<% end %>
-      </div>
+      <%= render partial: 'mail_checks/desktop_create',
+          :locals => { :operations_check => @operations_check } %>
 
-      <div class="visible-phone">
-	<% if @operations_check.mail_check.passed.nil? %> 
-	<%= form_for([@operations_check, @operations_check.build_mail_check]) do |f| %>
-	<div class="control-group">
-	  <h5>Ticket Number</h5>
-          <div class="controls">
-            <%= f.number_field :ticket, :style => 'width: 100px' %>
-	    <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
-	  </div>
-	</div>
-	<br/>
-	<div class="actions">
-	  <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
-	</div>
-	<% end %>      
-	<% end %>
-      </div>
+      <%= render partial: 'mail_checks/mobile_create',
+          :locals => { :operations_check => @operations_check } %>
     </div>
     <!-- END packages check tab -->
 
@@ -986,9 +333,11 @@
 	sign_off_operations_check_path(@operations_check), 
 	:class => 'btn btn-success' %>
     <% end %>
+    <% if @operations_check.owner == current_user.login %> 
     <%= link_to 'Destroy', @internal_check,
 	method: :delete, data: { confirm: 'Are you sure you want to delete this check?' },
 	class: 'btn btn-danger' %>
+    <% end %>
   </div>
   <div class="visible-phone">
     <br/>
@@ -998,8 +347,10 @@
 	sign_off_operations_check_path(@operations_check), 
 	:class => 'btn btn-block btn-success' %>
     <% end %><br/>
+    <% if @operations_check.owner == current_user.login %>
     <%= link_to 'Destroy', @internal_check,
 	method: :delete, data: { confirm: 'Are you sure you want to delete this check?' },
 	class: 'btn btn-block btn-danger' %><br/>
+    <% end %>
   </div>
 </div>

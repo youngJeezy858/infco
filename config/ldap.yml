@@ -2,33 +2,24 @@
 # Uncomment out the merging for each environment that you'd like to include.
 # You can also just copy and paste the tree (do not include the "authorizations") to each
 # environment if you need something different per enviornment.
+
 authorizations: &AUTHORIZATIONS
-  group_base: ou=groups,dc=test,dc=com
-  ## Requires config.ldap_check_group_membership in devise.rb be true
-  # Can have multiple values, must match all to be authorized
+  group_base: ou=Groups,dc=lcseecloud,dc=net
   required_groups:
-    # If only a group name is given, membership will be checked against "uniqueMember"
-    - cn=admins,ou=groups,dc=test,dc=com
-    - cn=users,ou=groups,dc=test,dc=com
-    # If an array is given, the first element will be the attribute to check against, the second the group name
-    - ["moreMembers", "cn=users,ou=groups,dc=test,dc=com"]
-  ## Requires config.ldap_check_attributes in devise.rb to be true
-  ## Can have multiple attributes and values, must match all to be authorized
-  require_attribute:
-    objectClass: inetOrgPerson
-    authorizationRole: postsAdmin
+    - ["memberUid", "cn=sysstaff,ou=Group,dc=lcseecloud,dc=net"]	
+
 
 ## Environment
 
 development:
-  host: hostname
-  port: 389
-  attribute: uid
-  base: ou=people,dc=some,dc=dc
+  host: 
+  port: 
+  attribute: 
+  base: 
 #  admin_user: cn=admin,dc=test,dc=com
 #  admin_password: admin_password
   ssl: false
-  # <<: *AUTHORIZATIONS
+  <<: *AUTHORIZATIONS
 
 test:
   host: localhost
@@ -41,11 +32,11 @@ test:
   # <<: *AUTHORIZATIONS
 
 production:
-  host: hostname
-  port: 389
-  attribute: cn
-  base: ou=people,dc=some,dc=dc
-#  admin_user: cn=admin,dc=test,dc=com
+  host: 
+  port: 
+  attribute: 
+  base: 
+#  admin_user: 
 #  admin_password: admin_password
   ssl: false
-  # <<: *AUTHORIZATIONS
+  <<: *AUTHORIZATIONS

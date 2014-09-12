@@ -1,0 +1,19 @@
+<div class="visible-phone">
+  <% if operations_check.rt_check.name.nil? %>
+  <%= form_for([operations_check, operations_check.build_rt_check]) do |f| %>
+  <%= f.hidden_field :name %>
+  <%= hidden_field_tag 'name', 'rt002' %>
+  <div class="control-group">
+    <h5>Ticket Number</h5>
+    <div class="controls">
+      <%= f.number_field :ticket, :style => 'width: 100px' %>
+      <%= f.check_box :passed, :class => 'lab-check-box-phone' %>
+    </div>
+  </div>
+  <br/>
+  <div class="actions">
+    <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
+  </div>
+  <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,82 @@
+<div class="visible-phone">
+  <% unless operations_check.lab_checks.empty? %>
+  <div class="ops-check-divider">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>M1</th>
+          <th>M2</th>
+          <th>M3</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% operations_check.lab_checks.each do |lab_check| %>
+        <% unless lab_check.id.nil? %>
+        <tr>
+          <td><%= lab_check.lab_name %></td>
+          <td style="<%= if lab_check.machine1_passed? then
+                     'color: green' else 'color: red' end %>">
+            <%= lab_check.machine1_name.scan(/\d+$/).last %></td>
+          <td style="<%= if lab_check.machine2_passed? then
+                     'color: green' else 'color: red' end %>">
+            <%= lab_check.machine2_name.scan(/\d+$/).last %></td>
+          <td style="<%= if lab_check.machine3_passed? then 
+                     'color: green' else 'color: red' end %>">
+            <%= lab_check.machine3_name.scan(/\d+$/).last %></td>
+          <% if @operations_check.owner == current_user.login %>
+          <td><%= link_to 'Remove',
+                  operations_check_lab_check_path(operations_check,
+                  lab_check), method: :delete, class: 'btn
+                  btn-mini btn-danger' %></td>
+          <% end %>
+        </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
+  
+  <% labs.each do |lab| %>
+  <% next if operations_check.lab_checks.select("lab_name").map(&:lab_name).include? lab.name %>
+  <%= form_for([operations_check, operations_check.lab_checks.build]) do |f| %>
+  <h3 style="margin-bottom: 0px"><%= lab.name %></h3>
+  <%= f.hidden_field :lab_name %>
+  <%= hidden_field_tag 'lab_name', lab.name %>
+  <div class="control-group">
+    <h5>Machine 1</h5>
+    <div class="controls">
+      <%= f.collection_select(:machine1_name, lab.machines, :name, :name,
+          {}, { :class => 'collection-select' }) %>
+      <%= f.check_box :machine1_passed, :class => 'lab-check-box-phone' %>
+      <%= f.number_field :machine1_ticket, :style => 'width: 100px' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <h5>Machine 2</h5>
+    <div class="controls">
+      <%= f.collection_select(:machine2_name, lab.machines, :name, :name,
+          {}, { :class => 'collection-select' }) %>
+      <%= f.check_box :machine2_passed, :class => 'lab-check-box-phone' %>
+      <%= f.number_field :machine2_ticket, :style => 'width: 100px' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <h5>Machine 3</h5>
+    <div class="controls">
+      <%= f.collection_select(:machine3_name, lab.machines, :name, :name,
+          {}, { :class => 'collection-select' })%>
+      <%= f.check_box :machine3_passed, :class => 'lab-check-box-phone' %>
+      <%= f.number_field :machine3_ticket, :style => 'width: 100px' %>
+    </div>
+  </div>
+  <br/>
+  <div class="actions" style="padding-bottom: 10px;                                            
+                              border-bottom: 1px solid #eeeeee">
+    <%= f.submit "Create Check", :class => 'btn btn-block btn-primary' %>
+  </div>
+  <% end %>
+  <% end %>
+</div>

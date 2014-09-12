@@ -1,0 +1,27 @@
+<% unless operations_check.rt_check.nil? %>
+<div class="ops-check-divider">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Ticket</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="<%= if operations_check.rt_check.passed? then                              
+                   'color: green' else 'color: red' end %>">
+          <%= operations_check.rt_check.name %></td>
+        <td><%= link_to_rt operations_check.rt_check.ticket,
+                {:class => "btn btn-mini"} %></td>
+        <% if operations_check.owner == current_user.login %>
+        <td><%= link_to 'Remove', 
+		operations_check_rt_check_path(operations_check, operations_check.rt_check), 
+		method: :delete, class: 'btn btn-mini btn-danger' %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<% end %>

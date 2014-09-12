@@ -42,4 +42,4 @@ gem 'jquery-rails'
 
 gem 'strong_parameters'
 gem 'devise'
-gem 'devise_ldap_authenticatable'
+gem 'devise_ldap_authenticatable', :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"

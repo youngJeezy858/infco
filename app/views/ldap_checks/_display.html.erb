@@ -1,0 +1,30 @@
+<% unless operations_check.ldap_checks.empty? %>
+<div class="ops-check-divider">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Ticket</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% operations_check.ldap_checks.each do |ldap_check| %>
+      <% unless ldap_check.id.nil? %>
+      <tr>
+        <td style="<%= if ldap_check.passed? then                                               
+                   'color: green' else 'color: red' end %>">
+          <%= ldap_check.name %></td>
+        <td><%= link_to_rt ldap_check.ticket, {:class => "btn btn-mini"} %></td>
+        <% if operations_check.owner == current_user.login %>
+        <td><%= link_to 'Remove',
+                operations_check_ldap_check_path(operations_check, ldap_check),
+                method: :delete, class: 'btn btn-mini btn-danger' %></td>
+        <% end %>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>

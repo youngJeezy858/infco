@@ -44,9 +44,7 @@ class ReloudChecksController < ApplicationController
   # POST /reloud_checks.json
   def create
     @reloud_check = ReloudCheck.new(reloud_check_params)
-    @reloud_check.date = Date.today
-#    @reloud_check.owner = current_user.login
-    @reloud_check.owner = "kfrank"
+    @reloud_check.owner = current_user.login
 
     respond_to do |format|
       if @reloud_check.save
@@ -94,6 +92,6 @@ class ReloudChecksController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def reloud_check_params
-      params.require(:reloud_check).permit(:date, :name, :owner)
+      params.require(:reloud_check).permit(:name, :owner)
     end
 end

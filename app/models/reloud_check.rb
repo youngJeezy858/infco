@@ -1,6 +1,6 @@
 class ReloudCheck < ActiveRecord::Base
-  default_scope :order => 'reloud_checks.date ASC'
-  attr_accessible :date, :name, :owner
+  default_scope :order => 'created_at ASC'
+  attr_accessible :name, :owner
 
   def self.search(owner)
     if owner

@@ -86,6 +86,20 @@ class LoadBalancerChecksController < ApplicationController
     end
   end
 
+  def mass_create
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    params[:checks].each do |i, values|
+      @load_balancer_check = @operations_check.load_balancer_checks.create(values)
+      unless @load_balancer_check.save
+        redirect_to operations_check_path(@operations_check.id, tab:"load_balancers"),
+          notice: "Commit failed for #{values[:name]}- You need to give a ticket number if the check failed!"
+        return
+      end
+    end
+    redirect_to operations_check_path(@operations_check.id, tab:"load_balancers"),
+       notice: 'Load balancer checks were successfully created.'
+  end
+
   private
 
     # Use this method to whitelist the permissible parameters. Example:

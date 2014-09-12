@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h1>LOUD Checks</h1>
+</div>
+
+<p>
+  This check should be done once a week by each tech. It doesn't
+  matter which day as long as it gets done every week. To execute this check:
+</p>
+<ol>
+  <li><p>Create a ticket in RT</p></li>
+  <li><p>Go to loud.lcsee.wvu.edu</p></li>
+  <li><p>Download a LOUD ISO</p></li>
+  <li><p>Install the ISO on Virtual Box</p></li>
+  <li><p>Record which one you downloaded</p></li>
+  <li><p>Install the ISO on Virtual Box</p></li>
+  <li><p>Once LOUD is installed, take a screenshot of the time and date</p></li>
+  <li><p>Record picture in ticket</p></li>
+  <li><p>Record ticket number here</p></li>
+<br/>
+
+<table class="table table-striped">
+  <h3>
+    Showing <%= @week.at_beginning_of_week.strftime("%b %e") %> - 
+    <%= @week.at_end_of_week.strftime("%b %e") %> 
+    <%= link_to image_tag("left_arrow_small.png"), 
+	loud_checks_path(:week => @week - 1.week) %>  
+    <% unless Date.today == @week %>
+    <%= link_to image_tag("right_arrow_small.png"), 
+	loud_checks_path(:week => @week + 1.week) %>
+    <% end %>
+  </h3>
+  <thead>
+    <tr>
+      <th>Tech Name</th>
+      <th>Date</th>
+      <th>Ticket</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @loud_checks.each do |loud_check| %>
+    <tr>
+      <td><%= loud_check.name %></td>
+      <td><%= loud_check.created_at.strftime("%m-%d-%Y") %></td>
+      <td><%= link_to_rt loud_check.ticket, {:class => "btn btn-mini"} %></td>
+      <td><%= link_to 'Show', loud_check, :class => 'btn btn-mini' %></td>
+      <td><%= link_to 'Edit', edit_loud_check_path(loud_check),
+	      :class => 'btn btn-mini' %></td>
+      <td>
+	<% if loud_check.name == current_user.login %>
+	<%= link_to 'Destroy', loud_check, method: :delete, 
+	      data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
+	<% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="form-actions">
+  <%= link_to 'New LOUD check', new_loud_check_path, :class => 'btn btn-primary' %>
+</div>

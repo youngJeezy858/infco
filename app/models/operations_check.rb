@@ -1,5 +1,5 @@
 class OperationsCheck < ActiveRecord::Base
-  default_scope :order => 'date DESC'
+  default_scope :order => 'created_at DESC'
   has_many :lab_checks 
   has_many :printer_checks
   has_many :automount_checks
@@ -9,7 +9,7 @@ class OperationsCheck < ActiveRecord::Base
   has_one :rt_check
   has_one :packages_check
   has_one :mail_check
-  attr_accessible :date, :string, :signed_off_by
+  attr_accessible :string, :signed_off_by
 
   def complete?
     labs_unchecked = Lab.select("name").map(&:name) -

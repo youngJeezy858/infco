@@ -18,17 +18,42 @@ Infco::Application.routes.draw do
 
   resources :operations_checks do
     get 'sign_off', on: :member
-    resources :lab_checks
-    resources :packages_checks
-    resources :ldap_checks
-    resources :load_balancer_checks
+    resources :lab_checks do 
+      collection do
+        post 'mass_create'
+      end
+    end
+    resources :ldap_checks do
+      collection do
+        post 'mass_create'
+      end
+    end
+    resources :load_balancer_checks do
+      collection do
+        post 'mass_create'
+      end
+    end
     resources :rt_checks
-    resources :nagios_checks
-    resources :automount_checks
-    resources :printer_checks
+    resources :nagios_checks do
+      collection do
+        post 'mass_create'
+      end
+    end
+    resources :automount_checks do
+      collection do
+        post 'mass_create'
+      end
+    end
+    resources :printer_checks do
+      collection do
+        post 'mass_create'
+      end
+    end
     resources :mail_checks
+    resources :packages_checks
   end
-  resources :virtual_box_checks
+  resources :loud_checks
+#  match '/printer_checks', to: "printer_check#mass_create", :via => 'post', as: 'mass_create'
 
   resources :admin_tools
   resources :reloud_entries

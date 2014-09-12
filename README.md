@@ -12,105 +12,55 @@ server disk space, and keeping the machines in the office up-to-date
 (reLOUDs).  These checks are necessary to be positive that our
 infrastructure is performing as expected.
 
-Entries for each check (ie - printers, labs, backups) are entered via
-the admin tools tab.
+Entries for each check (ie - printers, labs, backups) are imported via
+json files using a rake command (rake import) at deployment.  If
+entries need to be added post-deployment techs can create entries from
+the app itself.
 
 Technicians will conduct their checks and report whether the check
-passed or failed to this app.  INF-CO on rails is supported on mobile
-and tablets devices as well.
+passed or failed to this app.  If a check fails then the tech will
+report a request tracker ticket number to the issue and a link to said
+ticket will be generated.  INF-CO on rails is supported on mobile and
+tablets devices as well.
 
-
-## Setting up the dev environment on Ubuntu
-
-NOTE: You will need to have a functioning LDAP for the app to work
-correctly on production. The Github version of this app has all the
-LDAP functionallity commented out since most people don't have a
-working LDAP server handy.
-
-#### You will need these 4 packages
-
-```
-$ sudo apt-get install ruby-rails-3.2 mysql-server mysql-client libmysqlclient-dev
-```
-
-#### Provision the DB
-
-```
-$ mysql
-```
-
-```
-> create database infco_dev;
-> grant all on infco_dev.* to root@localhost identified by '[password]';
-> flush privileges;
-> exit
-```
-
-#### Edit DB configs from app's base dir
-
-```
-$ cp doc/database.yml config/
-$ emacs config/database.yml
-```
-
-- insert the password you chose from step 2
-
-#### Install gems and populate DB 
-
-```
-$ bundle install
-$ rake db:migrate
-```
-
-#### Start server
-
-```
-$ rails s
-```
-
-#### View from web browser at localhost:3000 
+#### *Note* 
+The configs for devise and the mysql database have been
+neutered so you will need to provide your own for this app to function
+properly.
 
 
 
 ## Screenshots
 
-
-
 ![Alt text](/app/assets/images/internal_check.png "internal check")
 
+====
 
+![Alt text](/app/assets/images/admin_tools.png "admin tools")
 
 ====
 
-
-
-![Alt text](/app/assets/images/ops.png "operations check")
-
-
+![Alt text](/app/assets/images/LOUD_checks_index.png "loud checks")
 
 ====
 
-
-
-![Alt text](/app/assets/images/opscheck_printer.png "ops printer check")
-
-
+![Alt text](/app/assets/images/schedule.png "schedule")
 
 ====
 
+![Alt text](/app/assets/images/operations_checks_index.png "ops checks index")
 
+====
+
+![Alt text](/app/assets/images/operations_check.png "ops checks")
+
+====
 
 #### Mobile Screenshots
 
-
-
-![Alt text](/app/assets/images/opscheck_mobile.png "ops mobile check")
-
-
+![Alt text](/app/assets/images/operations_check_mobile.png "ops mobile check")
 
 ====
 
-
-
-![Alt text](/app/assets/images/opscheck_printer_mobile.png "ops mobile printer check")
+![Alt text](/app/assets/images/internal_checks_mobile.png "internal mobile")
 

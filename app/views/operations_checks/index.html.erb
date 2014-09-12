@@ -26,24 +26,20 @@
 	:class => 'btn btn-block btn-primary' %>
     </br>
 
-    <div class="row">
-      <div class="row">
-	<h3>
-          <% if params[:search].nil? %>
-          Latest Archives
-          <% else %>
-          <%= if params[:search] == 'all' then 'All Archives' 
-	      else "Archives for #{params[:search]}" end %>
-          <% end %>
-	</h3>
-        <%= form_tag operations_checks_path, :method => 'get' do %>
-        <%= text_field_tag :search, params[:search],
-            :style => 'margin-top: 10px; width: 150px' %>
-        <%= submit_tag "Search", :name => nil, :class => 'btn' %>
-        <%= link_to 'View All', operations_checks_path(:search => 'all'), :class => 'btn' %>
-        <% end %>
-      </div>
-    </div>
+    <h3>
+      <% if params[:search].nil? %>
+      Latest Archives
+      <% else %>
+      <%= if params[:search] == 'all' then 'All Archives'
+          else "Archives for #{params[:search]}" end %>
+      <% end %>
+    </h3>
+    <%= form_tag operations_checks_path, :method => 'get' do %>
+    <%= text_field_tag :search, params[:search],
+        :style => 'margin-top: 10px; width: 100%; padding: 4px 0px' %>
+    <%= submit_tag "Search", :name => nil, :class => 'btn btn-block' %>
+    <%= link_to 'View All', operations_checks_path(:search => 'all'), :class => 'btn btn-block' %>
+    <% end %>
     <table class="table table-striped">
       <thead>
 	<tr>
@@ -56,7 +52,7 @@
 	<% @operations_checks.each do |operations_check| %>
 	<tr>
 	  <td><%= operations_check.owner %></td>
-	  <td><%= operations_check.date.strftime("%Y-%m-%d %p") %></td>
+	  <td><%= operations_check.created_at.strftime("%m-%d-%Y %p") %></td>
 	  <td><%= link_to 'Show', operations_check, :class => 'btn btn-mini' %></td>
 	</tr>
 	<% end %>
@@ -118,7 +114,7 @@
 	<% @operations_checks.each do |operations_check| %>
 	<tr>
 	  <td><%= operations_check.owner %></td>
-	  <td><%= operations_check.date.strftime("%Y-%m-%d %I:%M %p") %></td>
+	  <td><%= operations_check.created_at.strftime("%m-%d-%Y %I:%M %p") %></td>
 	  <% if operations_check.failures? %>
 	  <td style="color: green">NO</td>
 	  <% else %>
@@ -131,9 +127,13 @@
 	  <% end %>
 	  <td><%= operations_check.signed_off_by %></td>
 	  <td><%= link_to 'Show', operations_check, :class => 'btn btn-mini' %></td>
-	  <td><%= link_to 'Destroy', operations_check, 
-		  method: :delete, data: { confirm: 'Are you sure?' }, 
-		  :class => 'btn btn-mini btn-danger' %></td>
+	  <td>
+	    <% if operations_check.owner == current_user.login %>
+	    <%= link_to 'Destroy', operations_check, 
+		  method: :delete, data: { confirm: "Are you sure you want to destroy your check from #{operations_check.created_at.strftime("%Y-%m-%d %I:%M %p")}?" }, 
+		  :class => 'btn btn-mini btn-danger' %>
+	    <% end %>
+	  </td>
 	</tr>
 	<% end %>
       </tbody>

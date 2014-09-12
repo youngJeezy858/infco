@@ -86,6 +86,20 @@ class NagiosChecksController < ApplicationController
     end
   end
 
+  def mass_create
+    @operations_check = OperationsCheck.find(params[:operations_check_id])
+    params[:checks].each do |i, values|
+      @nagios_check = @operations_check.nagios_checks.create(values)
+      unless @nagios_check.save
+        redirect_to operations_check_path(@operations_check.id, tab:"nagios"),
+          notice: "Commit failed for #{values[:name]}- You need to give a ticket number if the check failed!"
+        return
+      end
+    end
+    redirect_to operations_check_path(@operations_check.id, tab:"nagios"),
+       notice: 'nagios checks were successfully created.'
+  end
+
   private
     # Use this method to whitelist the permissible parameters. Example:
     # params.require(:person).permit(:name, :age)

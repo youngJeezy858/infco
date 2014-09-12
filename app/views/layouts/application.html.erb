@@ -17,67 +17,97 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
 	</a>
-	<a class="brand" href="/">Infrastructure Checks</a>
-	<div class="nav-collapse collapse">
+	<%= link_to "Infrastructure Checks", root_path, :class => 'brand' %>
+	<div class="hidden-phone nav-collapse collapse">
           <ul class="small-ul nav">
-	    <li class="<%= 'active' if params[:controller] == 'welcome' %>">
-	      <%= link_to "Home", root_path %>
-	    </li>
-	    <li class="<%= 'active' if params[:controller] =~ /admin_tools|backup_entries|space_entries|reloud_entries/ %>">
-	      <%= link_to "Admin Tools", admin_tools_path %>
-	    </li>
-	    <li class="dropdown <%= 'active' if params[:controller] =~ /operations_checks|virtual_box_checks/ %>">
-	      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		Operations
-		<b class="caret"></b>
-	      </a>
-	      <ul class="dropdown-menu">
-		<li><%= link_to "Daily Checks", operations_checks_path %></li>
-		<li><%= link_to "Virtual Box Checks", virtual_box_checks_path %></li>
-	      </ul>
-	    </li>
-	    <li class="<%= 'active' if params[:controller] =~ /internal_checks|reloud_checks/ %>">
-	      <%= link_to "Internal", internal_checks_path %>
-	    </li>
-	    <li class="<%= 'active' if params[:controller] == 'schedule' %>">
-	      <%= link_to "Schedule", schedule_index_path %>
-	    </li>
-	  </ul>
-	</div>
-	<% if 1 %>
-	<!-- LDAP AUTH
-	<% if user_signed_in? %>
-	<div class="hidden-phone">
-	  <ul class="small-ul nav pull-right">
-	    <li style="color: #999999">
-	      <%= link_to "Sign out #{current_user.login}", destroy_user_session_path, 
-		  :method => :delete %> 
-	    </li>
-	  </ul>
-	</div>
-	<div class="visible-phone">
-	  <ul class="nav">
-	    <li style="color: #999999; padding: 10px 15px 10px">Signed in as <%= current_user.login %></li>
-	  </ul>
-	  <ul class="nav pull-right">
-	    <li><%= link_to "Sign out", destroy_user_session_path, 
-		    :method => :delete %></li>
-	  </ul>
-	</div>
-	<% else %>
-	<ul class="nav pull-right">
-	  <li><%= link_to "Sign in", new_user_session_path %></li>
-	</ul>
-	</end>
-	<% end %>
-	-->
-	<% end %>
+            <li class="<%= 'active' if params[:controller] == 'welcome' %>">
+              <%= link_to "Home", root_path %>
+            </li>
+            <li class="<%= 'active' if params[:controller] =~ /admin_tools|backup_entries|space_entries|reloud_entries/ %>">
+              <%= link_to "Admin Tools", admin_tools_path %>
+            </li>
+            <li class="dropdown <%= 'active' if 
+		       params[:controller] =~ /operations_checks|loud_checks/ %>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Operations
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Daily Checks", operations_checks_path %></li>
+                <li><%= link_to "LOUD Checks", loud_checks_path %></li>
+              </ul>
+            </li>
+            <li class="<%= 'active' if params[:controller] =~ /internal_checks|reloud_checks/ %>">
+              <%= link_to "Internal", internal_checks_path %>
+            </li>
+            <li class="<%= 'active' if params[:controller] == 'schedule' %>">
+              <%= link_to "Schedule", schedule_index_path %>
+            </li>
+          </ul>
+	  <% if user_signed_in? %>
+          <ul class="small-ul nav pull-right">
+            <li>
+              <%= link_to "Sign out #{current_user.login}", destroy_user_session_path,
+                  :method => :delete %>
+            </li>
+          </ul>
+          <% else %>
+          <ul class="nav pull-right">
+            <li><%= link_to "Sign in", new_user_session_path %></li>
+          </ul>
+          <% end %>
+        </div>
+
+
+	<div class="visible-phone nav-collapse collapse">
+          <ul class="small-ul nav">
+            <li class="<%= 'active' if params[:controller] == 'welcome' %>">
+              <%= link_to "Home", root_path %>
+            </li>
+            <li class="<%= 'active' if params[:controller] =~ /admin_tools|backup_entries|space_entr\
+ies|reloud_entries/ %>">
+              <%= link_to "Admin Tools", admin_tools_path %>
+            </li>
+            <li class="<%= 'active' if params[:controller] == 'operations_checks' %>">
+              <%= link_to "Daily Ops Checks", operations_checks_path %>
+            </li>
+            <li class="<%= 'active' if params[:controller] == 'loud_checks' %>">
+              <%= link_to "LOUD Checks", loud_checks_path %>
+            </li>
+            <li class="<%= 'active' if params[:controller] =~ /internal_checks|reloud_checks/ %>">
+              <%= link_to "Internal", internal_checks_path %>
+            </li>
+            <li class="<%= 'active' if params[:controller] == 'schedule' %>">
+              <%= link_to "Schedule", schedule_index_path %>
+            </li>
+            <% if user_signed_in? %>
+            <li>
+              <%= link_to "Sign out #{current_user.login}", destroy_user_session_path,
+                  :method => :delete %>
+            </li>
+            <% else %>
+            <li><%= link_to "Sign in", new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
   <body>
     <div class="container-fluid">
+      <% if notice %>
+      <div class="alert">
+	<p id="notice"><%= notice %></p>
+      </div>
+      <% end %>
+
+      <% if alert %>
+      <div class="alert">
+	<p id="alert"><%= alert %></p>
+      </div>
+      <% end %>
+
       <div id="content"><%= content_for?(:content) ? yield(:content) : yield %></div>
     </div>
   </body>
